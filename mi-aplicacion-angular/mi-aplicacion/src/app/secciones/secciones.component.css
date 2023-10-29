@@ -9,14 +9,14 @@
 .secciones-botones button{
     width: 75%;
     height: calc(100vh - 80px);
-    padding: 20px;
+    padding: 10px;
     margin-bottom: 20px;
-    border: 2px solid black;
+    border: 1.5px solid black;
     border-radius: 0px;
     background-size: cover;
     color: white;
     cursor: pointer;
-    font-size: 16px; 
+    font-size: 19px; 
     font-weight: bold; 
     text-align: center; 
     text-transform: uppercase;
