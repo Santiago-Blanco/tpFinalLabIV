@@ -6,10 +6,12 @@ import { SeccionesComponent } from './secciones/secciones.component';
 const routes: Routes = [
   {path: '', component: SeccionesComponent},
  {path: 'equipos', component: EquiposComponent}
-];
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+ }
