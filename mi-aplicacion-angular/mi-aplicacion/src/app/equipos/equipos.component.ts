@@ -1,6 +1,8 @@
+
 import { Component, OnInit } from '@angular/core';
 import { TeamsService } from '../teams.service';
 import { Team } from '../types/Teams';
+
 
 
 @Component({
@@ -27,5 +29,4 @@ getAllTeams (){
     console.log(x);
   })
 }
-
 }
