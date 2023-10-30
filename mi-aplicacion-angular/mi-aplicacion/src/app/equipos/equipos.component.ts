@@ -1,15 +1,15 @@
 
+
 import { Component, OnInit } from '@angular/core';
 import { TeamsService } from '../teams.service';
 import { Team } from '../types/Teams';
-
-
 
 @Component({
   selector: 'app-equipos',
   templateUrl: './equipos.component.html',
   styleUrls: ['./equipos.component.css']
 })
+
 
 export class EquiposComponent implements OnInit {
 
@@ -29,4 +29,7 @@ getAllTeams (){
     console.log(x);
   })
 }
+
 }
+
+
