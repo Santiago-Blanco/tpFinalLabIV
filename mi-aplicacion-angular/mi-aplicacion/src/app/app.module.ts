@@ -6,11 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SeccionesComponent } from './secciones/secciones.component';
-import { ResultadosComponent } from './resultados/resultados.component';
-import { JugadoresComponent } from './jugadores/jugadores.component';
-import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.component';
+import { ResultadosComponent } from '../Componentes/resultados/resultados.component';
+import { JugadoresComponent } from '../Componentes/jugadores/jugadores.component';
+import { SobreNosotrosComponent } from '../Componentes/sobre-nosotros/sobre-nosotros.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { EquiposComponent } from './equipos/equipos.component';
+import { EquiposComponent } from '../Componentes/equipos/equipos.component';
 
 @NgModule({
   declarations: [

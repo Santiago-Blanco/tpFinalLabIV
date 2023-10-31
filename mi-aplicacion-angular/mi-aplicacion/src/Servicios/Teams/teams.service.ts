@@ -10,7 +10,7 @@ export class TeamsService {
   }
 
   getAllTeams() {
-    const datos = this.httpClient.get("")
+    const datos = this.httpClient.get("https://www.balldontlie.io/api/v1/teams")
     return datos
   }
 }
