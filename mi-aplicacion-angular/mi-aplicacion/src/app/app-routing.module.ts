@@ -6,6 +6,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { JugadoresComponent } from './jugadores/jugadores.component';
 import { ResultadosComponent } from './resultados/resultados.component';
 import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.component';
+import { RegisterLoginComponent } from './register-login/register-login.component';
 
 const routes: Routes = [
   { path: 'sections', component: SeccionesComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'players', component : JugadoresComponent},
   { path: 'results', component : ResultadosComponent},
   { path: 'aboutUs', component : SobreNosotrosComponent},
+  { path: 'registerLogin', component: RegisterLoginComponent},
   { path: '', redirectTo: '/sections', pathMatch: 'full'},
   { path: '**', component : PageNotFoundComponent},
 ]

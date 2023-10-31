@@ -11,6 +11,7 @@ import { JugadoresComponent } from './jugadores/jugadores.component';
 import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EquiposComponent } from './equipos/equipos.component';
+import { RegisterLoginComponent } from './register-login/register-login.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EquiposComponent } from './equipos/equipos.component';
     JugadoresComponent,
     SobreNosotrosComponent,
     PageNotFoundComponent,
-    EquiposComponent
+    EquiposComponent,
+    RegisterLoginComponent
   ],
   imports: [
     BrowserModule,
