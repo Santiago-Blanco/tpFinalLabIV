@@ -4,13 +4,14 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { SeccionesComponent } from './secciones/secciones.component';
+import { HeaderComponent } from '../Componentes/header/header.component';
+import { SeccionesComponent } from '../Componentes/secciones/secciones.component';
 import { ResultadosComponent } from '../Componentes/resultados/resultados.component';
 import { JugadoresComponent } from '../Componentes/jugadores/jugadores.component';
 import { SobreNosotrosComponent } from '../Componentes/sobre-nosotros/sobre-nosotros.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from '../Componentes/page-not-found/page-not-found.component';
 import { EquiposComponent } from '../Componentes/equipos/equipos.component';
+import { RegisterLoginComponent } from '../Componentes/register-login/register-login.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EquiposComponent } from '../Componentes/equipos/equipos.component';
     JugadoresComponent,
     SobreNosotrosComponent,
     PageNotFoundComponent,
-    EquiposComponent
+    EquiposComponent,
+    RegisterLoginComponent
   ],
   imports: [
     BrowserModule,

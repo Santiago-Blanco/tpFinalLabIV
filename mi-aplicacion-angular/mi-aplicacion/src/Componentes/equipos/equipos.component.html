@@ -1,8 +1,10 @@
-<ul>
-    <li *ngFor="let team of teams" class="team-item">
-      <div class="team-name">
-        {{ team.full_name }}
-      </div>
-      <button type="button">Agregar a favoritos</button>
-    </li>
-  </ul>
+<div class="teamsContainer">
+    <ul>
+        <li *ngFor="let team of teams" class="team-item">
+            <div class="team-name">
+                {{ team.full_name }}
+            </div>
+            <button type="button">Agregar a favoritos</button>
+        </li>
+    </ul>
+</div>
