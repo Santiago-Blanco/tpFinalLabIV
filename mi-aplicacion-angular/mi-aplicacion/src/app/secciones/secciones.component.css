@@ -4,6 +4,7 @@
     flex-direction: row;
     align-items: center;
     padding: 0px;
+    overflow-y: auto;
 } 
 
 .secciones-botones button{
@@ -11,8 +12,7 @@
     height: calc(100vh - 80px);
     padding: 10px;
     margin-bottom: 20px;
-    border: 1.5px solid white;
-    border: 1.5px solid black;
+    border: 2px solid white;
     border-radius: 0px;
     background-size: cover;
     color: white;
@@ -22,13 +22,13 @@
     text-align: center; 
     text-transform: uppercase;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    overflow-y: auto;
 }
 
 
 .button1 {
     background-image: url('EquiposImage.jpg');
     background-size: cover;
-
 }
 
 .button2 {
@@ -47,19 +47,11 @@
     background-size: cover;
 }
 
-
-
-
 .button1, .button2, .button3, .button4 {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
     cursor: pointer;
-
+    overflow-y: auto;
 }
-
-
-
-
-

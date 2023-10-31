@@ -13,23 +13,22 @@ import { Team } from '../types/Teams';
 
 export class EquiposComponent implements OnInit {
 
-const teams: Team[] = [];
+  public teams: Team[] = [];
 
-constructor (private EquiposService: TeamsService){}
+  constructor(private EquiposService: TeamsService) { }
 
-ngOnInit(): void {
-  this.getAllTeams();
-  
-}
+  ngOnInit(): void {
+    this.getAllTeams();
+
+  }
 
 
-getAllTeams (){
-  return this.EquiposService.getAllTeams().subscribe((x: Team[] | any)=> {
-    this.teams=x;
-    console.log(x);
-  })
-}
-
+  getAllTeams() {
+    return this.EquiposService.getAllTeams().subscribe((x: Team[] | any) => {
+      this.teams = x;
+      console.log(x);
+    })
+  }
 }
 
 
