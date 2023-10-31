@@ -11,6 +11,7 @@ export class SeccionesComponent {
   constructor(private route : ActivatedRoute) { }
 
   ngOnInit(){
+
   }
 }
 
