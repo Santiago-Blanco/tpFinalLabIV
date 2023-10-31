@@ -1,8 +1,8 @@
 
-
 import { Component, OnInit } from '@angular/core';
 import { TeamsService } from '../teams.service';
 import { Team } from '../types/Teams';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-equipos',
@@ -15,10 +15,11 @@ export class EquiposComponent implements OnInit {
 
   public teams: Team[] = [];
 
-  constructor(private EquiposService: TeamsService) { }
+  constructor(private EquiposService: TeamsService, private route : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getAllTeams();
+    console.log(this.route.paramMap)
 
   }
 

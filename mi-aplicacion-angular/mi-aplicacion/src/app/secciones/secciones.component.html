@@ -1,9 +1,8 @@
 <div class="secciones-botones">
-
-    <button  routerLink="/equipos" class="button1"> Equipos </button>
-    <button class="button2"> Jugadores </button>
-    <button class="button3"> Resultados </button>
-    <button class="button4"> Sobre Nosotros </button>
+    <button type="button" [routerLink]="['/teams']" routerLinkActive="active" class="button1"> Equipos </button>
+    <button class="button2" [routerLink]="['/players']" routerLinkActive="active"> Jugadores </button>
+    <button class="button3" [routerLink]="['/results']" routerLinkActive="active"> Resultados </button>
+    <button class="button4" [routerLink]="['/aboutUs']" routerLinkActive="active"> Sobre Nosotros </button>
 
 </div>
 

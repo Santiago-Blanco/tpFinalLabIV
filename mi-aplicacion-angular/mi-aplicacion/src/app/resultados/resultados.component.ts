@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-resultados',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./resultados.component.css']
 })
 export class ResultadosComponent {
-
+  constructor(private route: ActivatedRoute){ }
 }

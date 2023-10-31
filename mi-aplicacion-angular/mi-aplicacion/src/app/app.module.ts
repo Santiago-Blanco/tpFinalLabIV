@@ -9,7 +9,8 @@ import { SeccionesComponent } from './secciones/secciones.component';
 import { ResultadosComponent } from './resultados/resultados.component';
 import { JugadoresComponent } from './jugadores/jugadores.component';
 import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.component';
-///import { EquiposComponent } from './equipos/equipos.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { EquiposComponent } from './equipos/equipos.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SobreNosotrosComponent } from './sobre-nosotros/sobre-nosotros.componen
     ResultadosComponent,
     JugadoresComponent,
     SobreNosotrosComponent,
-    //EquiposComponent
+    PageNotFoundComponent,
+    EquiposComponent
   ],
   imports: [
     BrowserModule,
