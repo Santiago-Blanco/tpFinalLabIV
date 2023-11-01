@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EquiposComponent } from '../Componentes/equipos/equipos.component';
-import { SeccionesComponent } from '../Componentes/secciones/secciones.component';
-import { PageNotFoundComponent } from '../Componentes/page-not-found/page-not-found.component';
-import { JugadoresComponent } from '../Componentes/jugadores/jugadores.component';
-import { ResultadosComponent } from '../Componentes/resultados/resultados.component';
-import { SobreNosotrosComponent } from '../Componentes/sobre-nosotros/sobre-nosotros.component';
-import { RegisterLoginComponent } from '../Componentes/register-login/register-login.component';
+import { EquiposComponent } from './Componentes/equipos/equipos.component';
+import { SeccionesComponent } from './Componentes/secciones/secciones.component';
+import { PageNotFoundComponent } from './Componentes/page-not-found/page-not-found.component';
+import { JugadoresComponent } from './Componentes/jugadores/jugadores.component';
+import { ResultadosComponent } from './Componentes/resultados/resultados.component';
+import { SobreNosotrosComponent } from './Componentes/sobre-nosotros/sobre-nosotros.component';
+import { RegisterLoginComponent } from './Componentes/register-login/register-login.component';
 
 const routes: Routes = [
   { path: 'sections', component: SeccionesComponent },
