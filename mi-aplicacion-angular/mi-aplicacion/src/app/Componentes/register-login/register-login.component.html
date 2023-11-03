@@ -1,6 +1,21 @@
 
 <div class="register-login-container">
-    <button type="button" class="loginButton">Login</button>
-    <button type="button" class="registerButton">Register</button>
-</div>
 
+    <div class="menu" *ngIf="menuVisible">
+        <button type="button" class="loginButton" (click)="login()" style="width: 5rem; height: 5rem;">Login</button>
+        <button type="button" class="registerButton" (click)="register()" style="width: 5rem; height: 5rem;">Register</button>
+    </div>
+    
+
+
+    <div class="loginForm" *ngIf="loginVisible">
+        <button type="button" (click)="showMenu()">Back</button>
+        <input type="text" placeholder="asfgasfadsfasdf">
+
+    </div>
+
+    <div class="registerForm" *ngIf="registerVisible">
+        <button type="button" (click)="showMenu()">Back</button>
+
+    </div>
+</div>

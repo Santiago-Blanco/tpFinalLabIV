@@ -12,6 +12,7 @@ import { SobreNosotrosComponent } from './Componentes/sobre-nosotros/sobre-nosot
 import { PageNotFoundComponent } from './Componentes/page-not-found/page-not-found.component';
 import { EquiposComponent } from './Componentes/equipos/equipos.component';
 import { RegisterLoginComponent } from './Componentes/register-login/register-login.component';
+import { LoginRegisterService } from './Servicios/LoginRegister/login-register.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { RegisterLoginComponent } from './Componentes/register-login/register-lo
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [LoginRegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
