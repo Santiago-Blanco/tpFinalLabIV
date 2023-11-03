@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { TeamsService } from '../../Servicios/Teams/teams.service';
-import { Team } from '../../app/types/Teams';
+import { Team } from 'src/app/types/Teams';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
