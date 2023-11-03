@@ -1,0 +1,29 @@
+<div class="registerContainer">
+
+    <button type="button" [routerLink]="['../']" routerLinkActive="true">Back</button>
+
+    <div class="registerForm">
+        <form novalidate [formGroup]="registerForm">
+            <label>
+                <span>UserName</span>
+                <input type="text" placeholder="username" formControlName="userName">
+            </label>
+
+            <label>
+                <span>Email</span>
+                <input type="text" placeholder="Email" formControlName="email">
+            </label>
+
+            <label>
+                <span>Dni</span>
+                <input type="text" placeholder="dni" formControlName="dni">
+            </label>
+
+            <label>
+                <span>Password</span>
+                <input type="password" placeholder="password" formControlName="password">
+            </label>
+            
+        </form>
+    </div>
+</div>

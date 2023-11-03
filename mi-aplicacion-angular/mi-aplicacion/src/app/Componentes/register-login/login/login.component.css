@@ -1,0 +1,13 @@
+.loginContainer {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    position: absolute;
+    border: 2px solid white; 
+    padding-left: 20px;
+    background-image: url('src\app\Componentes\register-login\fondoLogin.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+}

@@ -13,32 +13,11 @@ import { LoginRegisterService } from 'src/app/Servicios/LoginRegister/login-regi
 export class RegisterLoginComponent {
   constructor(private route: ActivatedRoute, private LogRegService : LoginRegisterService) {  }
 
-  loginVisible = false;
-  registerVisible = false;
-  menuVisible = true;
-  
   users = new Array<User>;
 
   
-
   saveUsers(){
     this.LogRegService.saveUsers(this.users);
-  }
-  
-  login(){
-    this.loginVisible = true;
-    this.menuVisible = false;
-  }
-
-  register(){
-    this.registerVisible = true;
-    this.menuVisible = false;
-  }
-
-  showMenu(){
-    this.menuVisible = !this.menuVisible;
-    this.loginVisible = false;
-    this.registerVisible = false;
   }
 
 }

@@ -14,6 +14,9 @@ import { EquiposComponent } from './Componentes/equipos/equipos.component';
 import { RegisterLoginComponent } from './Componentes/register-login/register-login.component';
 import { LoginRegisterService } from './Servicios/LoginRegister/login-register.service';
 import { FavouriteListComponent } from './Componentes/favourite-list/favourite-list.component';
+import { RegisterComponent } from './Componentes/register-login/register/register.component';
+import { LoginComponent } from './Componentes/register-login/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,12 +29,15 @@ import { FavouriteListComponent } from './Componentes/favourite-list/favourite-l
     PageNotFoundComponent,
     EquiposComponent,
     RegisterLoginComponent,
-    FavouriteListComponent
+    FavouriteListComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [LoginRegisterService],
   bootstrap: [AppComponent]
