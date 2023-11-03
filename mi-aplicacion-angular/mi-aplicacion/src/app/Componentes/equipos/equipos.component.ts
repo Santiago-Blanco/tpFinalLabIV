@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TeamsService } from '../../Servicios/Teams/teams.service';
 import { Team } from 'src/app/types/Teams';
 import { ActivatedRoute } from '@angular/router';
+import { FavouriteListService } from 'src/app/Servicios/FavouriteList/favourite-list.service';
 
 @Component({
   selector: 'app-equipos',
@@ -15,7 +16,7 @@ export class EquiposComponent implements OnInit {
   public teamsList: Team[] = [];
   public favoriteList: Team [] = []
 
-  constructor(private EquiposService: TeamsService, private route: ActivatedRoute) { }
+  constructor(private favoriteListService: FavouriteListService,private EquiposService: TeamsService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getAllTeams();
@@ -33,7 +34,7 @@ export class EquiposComponent implements OnInit {
     const id = this.favoriteList.findIndex((t) => t.id === team.id);
     if (id !== -1) {
       this.favoriteList.splice(id, 1);
-      console.log(this.favoriteList)
+      
     } else {
       this.favoriteList.push(team);
       console.log(this.favoriteList)

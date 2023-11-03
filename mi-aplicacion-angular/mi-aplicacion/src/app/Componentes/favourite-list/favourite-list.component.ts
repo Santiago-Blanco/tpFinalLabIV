@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { Team } from 'src/app/types/Teams';
+import { FavouriteListService } from 'src/app/Servicios/FavouriteList/favourite-list.service';
 
 @Component({
   selector: 'app-favourite-list',
@@ -9,5 +10,11 @@ import { Team } from 'src/app/types/Teams';
 export class FavouriteListComponent {
   @Input() favoriteList: Team[] = []
 
+  constructor (private favoriteListServive: FavouriteListService){}
+
   
 }
+  
+
+
+

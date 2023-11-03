@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
+import { FavouriteListService } from './Servicios/FavouriteList/favourite-list.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,7 +40,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [LoginRegisterService],
+  providers: [LoginRegisterService, FavouriteListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

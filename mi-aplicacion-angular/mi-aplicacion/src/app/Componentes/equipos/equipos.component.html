@@ -15,8 +15,12 @@
     </ul>
     <ul>
         <li>
-            <button>tuviejaentanga</button>
+            <button [routerLink]="['/favourite-list']" routerLinkActive="active">Lista de favoritos</button>
         </li>
     </ul>
+    
     <app-favourite-list [favoriteList] ="favoriteList"></app-favourite-list>
-</div>
+
+    </div>
+
+  
