@@ -21,4 +21,25 @@
 
 button {
     margin: 5rem;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px #888888; 
+    transition: all 0.3s ease; 
 }
+  
+button:first-child {
+    margin-left: 0;
+}
+  
+button:hover {
+    background-color: #c41b1b; 
+}   
+  
+button:active {
+    background-color: #c41b1b; 
+}
+
+  
