@@ -1,10 +1,15 @@
 <div class="teamsContainer">
     <ul>
-        <li *ngFor="let team of teams" class="team-item">
+        <li *ngFor="let team of teamsList" class="team-item">
             <div class="team-name">
                 {{ team.full_name }}
             </div>
-            <img src="assets/ListaFavImage.jpg" alt="Agregar lista de favoritos" class="botonfav">
+            <ng-container *ngIf="team.Favorite; else notFavoriteImage">
+                <img src="../../../assets/EstrellaBlanca.jpg" alt="Agregar lista de favoritos" class="botonfav" (click)="addRemoveTeamList(team)">
+            </ng-container>
+            <ng-template #notFavoriteImage>
+                <img src="../../../assets/EstrellaNegra.jpg" alt="No en lista de favoritos" class="botonfav" (click)="addRemoveTeamList(team)">
+            </ng-template>
         </li>
     </ul>
 </div>

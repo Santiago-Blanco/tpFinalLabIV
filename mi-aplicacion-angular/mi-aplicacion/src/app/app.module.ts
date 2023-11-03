@@ -13,6 +13,7 @@ import { PageNotFoundComponent } from './Componentes/page-not-found/page-not-fou
 import { EquiposComponent } from './Componentes/equipos/equipos.component';
 import { RegisterLoginComponent } from './Componentes/register-login/register-login.component';
 import { LoginRegisterService } from './Servicios/LoginRegister/login-register.service';
+import { FavouriteListComponent } from './Componentes/favourite-list/favourite-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LoginRegisterService } from './Servicios/LoginRegister/login-register.s
     SobreNosotrosComponent,
     PageNotFoundComponent,
     EquiposComponent,
-    RegisterLoginComponent
+    RegisterLoginComponent,
+    FavouriteListComponent
   ],
   imports: [
     BrowserModule,
