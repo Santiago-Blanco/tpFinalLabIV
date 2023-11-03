@@ -1,10 +1,11 @@
+
 <div class="teamsContainer">
     <ul>
         <li *ngFor="let team of teamsList" class="team-item">
             <div class="team-name">
                 {{ team.full_name }}
             </div>
-            <ng-container *ngIf="team.Favorite; else notFavoriteImage">
+            <ng-container *ngIf="searchTeam(team); else notFavoriteImage">
                 <img src="../../../assets/EstrellaBlanca.jpg" alt="Agregar lista de favoritos" class="botonfav" (click)="addRemoveTeamList(team)">
             </ng-container>
             <ng-template #notFavoriteImage>
@@ -12,4 +13,10 @@
             </ng-template>
         </li>
     </ul>
+    <ul>
+        <li>
+            <button>tuviejaentanga</button>
+        </li>
+    </ul>
+    <app-favourite-list [favoriteList] ="favoriteList"></app-favourite-list>
 </div>

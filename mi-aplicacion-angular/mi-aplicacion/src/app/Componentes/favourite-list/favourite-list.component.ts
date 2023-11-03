@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Team } from 'src/app/types/Teams';
 
 @Component({
   selector: 'app-favourite-list',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./favourite-list.component.css']
 })
 export class FavouriteListComponent {
+  @Input() favoriteList: Team[] = []
 
+  
 }

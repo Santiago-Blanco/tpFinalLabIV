@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class EquiposComponent implements OnInit {
 
   public teamsList: Team[] = [];
-  public Favorite: Boolean = false
+  public favoriteList: Team [] = []
 
   constructor(private EquiposService: TeamsService, private route: ActivatedRoute) { }
 
@@ -30,14 +30,19 @@ export class EquiposComponent implements OnInit {
   }
 
   addRemoveTeamList(team: Team) {
-    const id = this.teamsList.findIndex((t) => t.id === team.id);
+    const id = this.favoriteList.findIndex((t) => t.id === team.id);
     if (id !== -1) {
-      this.teamsList.splice(id, 1);
-      this.Favorite = false;
+      this.favoriteList.splice(id, 1);
+      console.log(this.favoriteList)
     } else {
-      this.teamsList.push(team);
-      this.Favorite = true;
+      this.favoriteList.push(team);
+      console.log(this.favoriteList)
+
     }
+  }
+  
+  searchTeam(team: Team){
+    return this.favoriteList.some(t => t.id == team.id)
   }
 }
 
