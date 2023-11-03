@@ -7,6 +7,7 @@ import { JugadoresComponent } from './Componentes/jugadores/jugadores.component'
 import { ResultadosComponent } from './Componentes/resultados/resultados.component';
 import { SobreNosotrosComponent } from './Componentes/sobre-nosotros/sobre-nosotros.component';
 import { RegisterLoginComponent } from './Componentes/register-login/register-login.component';
+import { FavouriteListComponent } from './Componentes/favourite-list/favourite-list.component';
 
 const routes: Routes = [
   { path: 'sections', component: SeccionesComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'results', component : ResultadosComponent},
   { path: 'aboutUs', component : SobreNosotrosComponent},
   { path: 'registerLogin', component: RegisterLoginComponent},
+  { path: 'favourite-list', component: FavouriteListComponent},
   { path: '', redirectTo: '/sections', pathMatch: 'full'},
   { path: '**', component : PageNotFoundComponent},
 ]

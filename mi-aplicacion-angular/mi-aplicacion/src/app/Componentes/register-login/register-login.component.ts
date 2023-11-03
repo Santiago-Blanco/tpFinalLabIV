@@ -11,31 +11,29 @@ import { LoginRegisterService } from 'src/app/Servicios/LoginRegister/login-regi
   styleUrls: ['./register-login.component.css']
 })
 export class RegisterLoginComponent {
-  constructor(private route: ActivatedRoute, private LogRegService : LoginRegisterService) {  }
+  constructor(private route: ActivatedRoute, private LogRegService: LoginRegisterService) { }
 
   loginVisible = false;
   registerVisible = false;
   menuVisible = true;
-  
+
   users = new Array<User>;
 
-  
-
-  saveUsers(){
+  saveUsers() {
     this.LogRegService.saveUsers(this.users);
   }
-  
-  login(){
+
+  login() {
     this.loginVisible = true;
     this.menuVisible = false;
   }
 
-  register(){
+  register() {
     this.registerVisible = true;
     this.menuVisible = false;
   }
 
-  showMenu(){
+  showMenu() {
     this.menuVisible = !this.menuVisible;
     this.loginVisible = false;
     this.registerVisible = false;
