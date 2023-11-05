@@ -2,8 +2,16 @@
 <div class="teamsContainer">
     <ul>
         <li *ngFor="let team of teamsList" class="team-item">
-            <div class="team-name">
+            <div class="team-name" (click)="showAtributes(team)" style="cursor: pointer;">
                 {{ team.full_name }}
+            </div>
+            <div *ngIf="select==team && atribute">
+
+                <p><strong>Abreviatura:</strong> {{team.abbreviation}}</p>
+                <p><strong>Ciudad:</strong> {{team.city}}</p>
+                <p><strong>Conferencia:</strong> {{team.conference}}</p>
+                <p><strong>División:</strong> {{team.division}}</p>
+                <p><strong>Nombre:</strong> {{team.name}}</p>
             </div>
             <ng-container *ngIf="searchTeam(team); else notFavoriteImage">
                 <img src="../../../assets/EstrellaBlanca.jpg" alt="Agregar lista de favoritos" class="botonfav" (click)="addRemoveTeamList(team)">

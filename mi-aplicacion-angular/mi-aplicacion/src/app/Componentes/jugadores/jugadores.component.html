@@ -1,4 +1,29 @@
 <div class="playersContainer">
-    <p>jugadores works!</p>
+    <ul>
+        <li *ngFor="let player of playersList" class="player-item">
+            <div class="player-name" (click)="showAtributes(player)" style="cursor: pointer;">
+                {{ player.first_name + ' ' + player.last_name }}
+            </div>
+            <div *ngIf="select==player && atribute">
+
+                <p><strong>Posición:</strong> {{player.position}}</p>
+                <p><strong>Altur en pies:</strong> {{player.height_feet}}</p>
+                <p><strong>Altura en pulgadas:</strong> {{player.height_inches}}</p>
+
+                <p><strong>Equipo:</strong> {{player.team.full_name}}</p>
+                <p><strong>Ciudad:</strong> {{player.team.city}}</p>
+                <p><strong>Conferencia:</strong> {{player.team.conference}}</p>
+                <p><strong>División:</strong> {{player.team.division}}</p>
+                <p><strong>Nombre:</strong> {{player.team.name}}</p>
+            </div>
+            <ng-container *ngIf="searchPlayer(player); else notFavoriteImage">
+                <img src="../../../assets/EstrellaBlanca.jpg" alt="Agregar lista de favoritos" class="botonfav" (click)="addRemovePlayerList(player)">
+            </ng-container>
+            <ng-template #notFavoriteImage>
+                <img src="../../../assets/EstrellaNegra.jpg" alt="No en lista de favoritos" class="botonfav" (click)="addRemovePlayerList(player)">
+            </ng-template>
+        </li>
+    </ul>
 </div>
+
 

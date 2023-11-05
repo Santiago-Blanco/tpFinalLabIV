@@ -15,6 +15,8 @@ export class EquiposComponent implements OnInit {
 
   public teamsList: Team[] = [];
   public favoriteList: Team [] = []
+  public select: Team | null=null;
+  public atribute=false;
 
   constructor(private favoriteListService: FavouriteListService,private EquiposService: TeamsService, private route: ActivatedRoute) { }
 
@@ -44,6 +46,19 @@ export class EquiposComponent implements OnInit {
   
   searchTeam(team: Team){
     return this.favoriteList.some(t => t.id == team.id)
+  }
+
+  showAtributes(team: Team){
+
+    if(this.select===team){
+      this.select=null;
+      this.atribute=false;
+    }
+    else{
+      this.select=team;
+      this.atribute=true;
+    }
+
   }
 }
 
