@@ -9,7 +9,8 @@ import { SobreNosotrosComponent } from './Componentes/sobre-nosotros/sobre-nosot
 import { RegisterLoginComponent } from './Componentes/register-login/register-login.component';
 import { LoginComponent } from './Componentes/register-login/login/login.component';
 import { RegisterComponent } from './Componentes/register-login/register/register.component';
-import { FavouriteListComponent } from './Componentes/favourite-list/favourite-list.component';
+import { FavouriteListComponent } from './Componentes/favourite-list-team/favourite-list.component';
+import { FavouriteListPlayerComponent } from './Componentes/favourite-list-player/favourite-list-player.component';
 
 const routes: Routes = [
   { path: 'sections', component: SeccionesComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'registerLogin/login', component : LoginComponent},
   { path: 'registerLogin/register', component: RegisterComponent},
   { path: 'favourite-list', component: FavouriteListComponent},
+  {path: 'favourite-list-pla', component: FavouriteListPlayerComponent},
   { path: '', redirectTo: '/sections', pathMatch: 'full'},
   { path: '**', component : PageNotFoundComponent},
 ]

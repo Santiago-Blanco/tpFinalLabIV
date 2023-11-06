@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
-import { FavouriteListService } from './Servicios/FavouriteList/favourite-list.service';
+import { FavouriteListService } from './Servicios/FavouriteListTeam/favourite-list.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,10 +14,11 @@ import { PageNotFoundComponent } from './Componentes/page-not-found/page-not-fou
 import { EquiposComponent } from './Componentes/equipos/equipos.component';
 import { RegisterLoginComponent } from './Componentes/register-login/register-login.component';
 import { LoginRegisterService } from './Servicios/LoginRegister/login-register.service';
-import { FavouriteListComponent } from './Componentes/favourite-list/favourite-list.component';
+import { FavouriteListComponent } from './Componentes/favourite-list-team/favourite-list.component';
 import { RegisterComponent } from './Componentes/register-login/register/register.component';
 import { LoginComponent } from './Componentes/register-login/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FavouriteListPlayerComponent } from './Componentes/favourite-list-player/favourite-list-player.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegisterLoginComponent,
     FavouriteListComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    FavouriteListPlayerComponent
   ],
   imports: [
     BrowserModule,

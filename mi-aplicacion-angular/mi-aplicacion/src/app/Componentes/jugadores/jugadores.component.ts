@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Player } from 'src/app/types/Players';
 import { PlayersService } from 'src/app/Servicios/Players/players.service';
+import { FavouriteListService } from 'src/app/Servicios/FavouriteListPlayer/favourite-list-pla.service';
 
 @Component({
   selector: 'app-jugadores',
@@ -17,12 +18,13 @@ export class JugadoresComponent implements OnInit {
   
 
 
-  constructor(private JugadoresService: PlayersService,private route: ActivatedRoute) { }
+  constructor(private favoriteListService: FavouriteListService, private JugadoresService: PlayersService, private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {
     this.getAllPlayers();
     console.log(this.route.paramMap)
+    this.favoriteList = this.favoriteListService.getData();
   }
 
   getAllPlayers() {
@@ -46,6 +48,8 @@ export class JugadoresComponent implements OnInit {
       console.log(this.favoriteList)
 
     }
+
+    this.favoriteListService.update(this.favoriteList);
   }
   
 
