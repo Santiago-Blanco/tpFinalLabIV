@@ -10,9 +10,10 @@ import { FavouriteListService } from 'src/app/Servicios/FavouriteList/favourite-
 export class FavouriteListComponent {
   @Input() favoriteList: Team[] = []
 
-  constructor (private favoriteListServive: FavouriteListService){}
+  constructor (private favoriteListServive: FavouriteListService){
+    this.favoriteList = favoriteListServive.getFavoriteList()
+  }
 
-  
 }
   
 

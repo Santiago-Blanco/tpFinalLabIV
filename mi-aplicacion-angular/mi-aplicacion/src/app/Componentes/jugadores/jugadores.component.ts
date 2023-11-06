@@ -14,6 +14,7 @@ export class JugadoresComponent implements OnInit {
   public favoriteList: Player [] = []
   public select: Player| null=null;
   public atribute=false;
+  
 
 
   constructor(private JugadoresService: PlayersService,private route: ActivatedRoute) { }

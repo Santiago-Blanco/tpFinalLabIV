@@ -6,15 +6,15 @@
             </div>
             <div *ngIf="select==player && atribute">
 
-                <p><strong>Posición:</strong> {{player.position}}</p>
-                <p><strong>Altur en pies:</strong> {{player.height_feet}}</p>
-                <p><strong>Altura en pulgadas:</strong> {{player.height_inches}}</p>
+                <p><strong>Posición:</strong> {{player.position ?? "No hay datos"}}</p>
+                <p><strong>Altura en pies:</strong> {{player.height_feet ?? "No hay datos"}}</p>
+                <p><strong>Altura en pulgadas:</strong> {{player.height_inches ?? "No hay datos"}}</p>
 
-                <p><strong>Equipo:</strong> {{player.team.full_name}}</p>
-                <p><strong>Ciudad:</strong> {{player.team.city}}</p>
-                <p><strong>Conferencia:</strong> {{player.team.conference}}</p>
-                <p><strong>División:</strong> {{player.team.division}}</p>
-                <p><strong>Nombre:</strong> {{player.team.name}}</p>
+                <p><strong>Equipo:</strong> {{player.team.full_name ?? "No hay datos"}}</p>
+                <p><strong>Ciudad:</strong> {{player.team.city ?? "No hay datos"}}</p>
+                <p><strong>Conferencia:</strong> {{player.team.conference ?? "No hay datos"}}</p>
+                <p><strong>División:</strong> {{player.team.division ?? "No hay datos"}}</p>
+                <p><strong>Nombre:</strong> {{player.team.name ?? "No hay datos"}}</p>
             </div>
             <ng-container *ngIf="searchPlayer(player); else notFavoriteImage">
                 <img src="../../../assets/EstrellaBlanca.jpg" alt="Agregar lista de favoritos" class="botonfav" (click)="addRemovePlayerList(player)">
