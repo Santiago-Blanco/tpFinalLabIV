@@ -12,12 +12,4 @@ import { LoginRegisterService } from 'src/app/Servicios/LoginRegister/login-regi
 })
 export class RegisterLoginComponent {
   constructor(private route: ActivatedRoute, private LogRegService: LoginRegisterService) { }
-
-  users = new Array<User>;
-
-  
-  saveUsers(){
-    this.LogRegService.saveUsers(this.users);
-  }
-
 }

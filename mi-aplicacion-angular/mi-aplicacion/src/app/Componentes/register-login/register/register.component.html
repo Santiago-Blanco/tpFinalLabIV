@@ -3,7 +3,7 @@
     <button type="button" [routerLink]="['../']" routerLinkActive="true">Back</button>
 
     <div class="registerForm">
-        <form novalidate [formGroup]="registerForm">
+        <form novalidate [formGroup]="registerForm" (ngSubmit)="sendForm()">
             <label>
                 <span>UserName</span>
                 <input type="text" placeholder="username" formControlName="userName">
@@ -24,6 +24,7 @@
                 <input type="password" placeholder="password" formControlName="password">
             </label>
             
+            <input type=button (click)="sendForm()" value="ENVIAR">
         </form>
     </div>
 </div>
