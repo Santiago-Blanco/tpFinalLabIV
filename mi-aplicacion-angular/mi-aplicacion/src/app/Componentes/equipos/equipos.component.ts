@@ -48,10 +48,16 @@ export class EquiposComponent implements OnInit {
     const id = this.favoriteList.findIndex((t) => t.id === team.id);
     if (id !== -1) {
       this.favoriteList.splice(id, 1);
+
+      this.soundOUT.stop();
+      this.soundIN.stop();
       this.soundOUT.play();
     } else {
       this.favoriteList.push(team);
       console.log(this.favoriteList)
+
+      this.soundIN.stop();
+      this.soundOUT.stop();
       this.soundIN.play();
     }
 

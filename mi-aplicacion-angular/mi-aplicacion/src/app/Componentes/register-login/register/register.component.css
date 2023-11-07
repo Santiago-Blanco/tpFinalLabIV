@@ -15,6 +15,11 @@
     align-items: center;
 }
 
+span {
+  color: black;
+  font-weight: bold;
+}
+
 .back{
 position: absolute;
   top: 20px; 

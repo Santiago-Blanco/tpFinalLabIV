@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Howl } from 'howler';
 
@@ -18,6 +18,10 @@ export class PageNotFoundComponent {
 
   imagePath : string = "assets/pageNotFound/enojado.gif";
   imagePathMouseOver : string = "assets/pageNotFound/trippieReddApuntando.gif";
+
+  ngOnInit(): void {
+    this.sound.play();
+  }
 
   changeImage(){
     this.imagePath = this.imagePathMouseOver;

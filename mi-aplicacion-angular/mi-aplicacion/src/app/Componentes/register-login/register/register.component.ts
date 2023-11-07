@@ -12,29 +12,45 @@ export class RegisterComponent {
 
   //https://codingpotions.com/angular-formularios/
 
-  constructor(private service : LoginRegisterService) {}
+  public registerForm : FormGroup;
 
-  registerForm = new FormGroup({
-    userName : new FormControl('', Validators.required),
-    email : new FormControl('', Validators.required),
-    dni : new FormControl('', [Validators.required, Validators.minLength(8)]),
-    password : new FormControl('', [
-      Validators.required, 
-      Validators.minLength(10), 
-      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/) // incluyendo letras mayúsculas, letras minúsculas, al menos un número y al menos un carácter especial
-    ])
-  })
+
+  constructor(private service : LoginRegisterService) {
+
+    this.registerForm = new FormGroup({
+      userName : new FormControl('', Validators.required),
+      email : new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/) // Patrón para un correo electrónico básico
+      ]),
+      dni : new FormControl('', [
+        Validators.required, 
+        Validators.minLength(8),
+        Validators.pattern(/^\d+$/)
+      ]),
+      password : new FormControl('', [
+        Validators.required, 
+        Validators.minLength(10), 
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/) // incluyendo letras mayúsculas, letras minúsculas, al menos un número y al menos un carácter especial
+      ])
+    })
+
+  }
+
+  
 
 
   sendForm(){
     
+
     let user = new User();
     user.userId = this.service.getNextId();
-    user.userName = this.registerForm.get("userName")?.value!;
-    user.email = this.registerForm.get("email")?.value!;
-    user.dni = this.registerForm.get("dni")?.value!;
-    user.password = this.registerForm.get("password")?.value!;
+    user.userName = this.registerForm?.get("userName")?.value!;
+    user.email = this.registerForm?.get("email")?.value!;
+    user.dni = this.registerForm?.get("dni")?.value!;
+    user.password = this.registerForm?.get("password")?.value!;
 
+    
     this.service.addUser(user);
     this.registerForm.reset();
   }

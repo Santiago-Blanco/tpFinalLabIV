@@ -32,7 +32,7 @@ export class LoginComponent {
       this.router.navigate(['../../']);
     } else {
       
-      cartelError.textContent = "ERROR>>>> LAS CREDENCIALES NO COINCIDEN....."
+      cartelError.textContent = "ERROR // LAS CREDENCIALES NO COINCIDEN....."
     }
   }
 
