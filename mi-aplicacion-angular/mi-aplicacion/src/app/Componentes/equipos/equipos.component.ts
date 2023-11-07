@@ -3,6 +3,7 @@ import { TeamsService } from '../../Servicios/Teams/teams.service';
 import { Team } from 'src/app/types/Teams';
 import { ActivatedRoute } from '@angular/router';
 import { FavouriteListService } from 'src/app/Servicios/FavouriteListTeam/favourite-list.service';
+import { Howl } from 'howler';
 
 @Component({
   selector: 'app-equipos',
@@ -13,12 +14,22 @@ import { FavouriteListService } from 'src/app/Servicios/FavouriteListTeam/favour
 
 export class EquiposComponent implements OnInit {
 
+  private soundIN : Howl;
+  private soundOUT : Howl;
   public teamsList: Team[] = [];
   public favoriteList: Team [] = []
   public select: Team | null=null;
   public atribute=false;
 
-  constructor(private favoriteListService: FavouriteListService,private EquiposService: TeamsService, private route: ActivatedRoute) { }
+  constructor(private favoriteListService: FavouriteListService,private EquiposService: TeamsService, private route: ActivatedRoute) { 
+    this.soundIN = new Howl({
+      src: ['/assets/nbaMP3.mp3']
+    })
+
+    this.soundOUT = new Howl({
+      src: ['/assets/nbaMP3out.mp3']
+    })
+  }
 
   ngOnInit(): void {
     this.getAllTeams();
@@ -37,11 +48,11 @@ export class EquiposComponent implements OnInit {
     const id = this.favoriteList.findIndex((t) => t.id === team.id);
     if (id !== -1) {
       this.favoriteList.splice(id, 1);
-      
+      this.soundOUT.play();
     } else {
       this.favoriteList.push(team);
       console.log(this.favoriteList)
-
+      this.soundIN.play();
     }
 
     this.favoriteListService.update(this.favoriteList);
