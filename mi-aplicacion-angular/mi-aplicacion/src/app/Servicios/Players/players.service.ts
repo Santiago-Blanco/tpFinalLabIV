@@ -7,29 +7,30 @@ import { Player } from 'src/app/types/Players';
 })
 export class PlayersService {
 
-  constructor(private httpClient:HttpClient) { }
+  private players: Player[] = []
+  constructor(private httpClient: HttpClient) { }
 
 
-  getAllPlayers(){
+  getAllPlayers() {
 
-    const datos=this.httpClient.get("https://www.balldontlie.io/api/v1/players?page=1")
+    const datos = this.httpClient.get("https://www.balldontlie.io/api/v1/players?page=1")
     return datos;
-
+/*     return this.httpClient.get<Player[]>("https://www.balldontlie.io/api/v1/players?page=1"); */
   }
-  
 }
 
 export class playerService {
   private playerList = new Array<Player>()
-  constructor(){}
+  constructor() { }
 
-  add(player: Player){
+  add(player: Player) {
     this.playerList.push(player)
   }
-  
-  remove(player: Player){
+
+  remove(player: Player) {
     this.playerList;
   }
+
 }
-  
+
 

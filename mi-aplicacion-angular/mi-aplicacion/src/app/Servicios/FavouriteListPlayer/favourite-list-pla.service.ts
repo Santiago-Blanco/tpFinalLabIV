@@ -7,30 +7,35 @@ import { BehaviorSubject, retry } from 'rxjs';
 })
 export class FavouriteListService {
 
-   private favoriteList: Player[] = [];
-  
-   constructor() { 
+  private favoriteList: Player[] = [];
+
+  constructor() {
     this.getFavoriteList();
-   }
- 
-   setItem(){
+  }
+
+  setItem() {
 
     localStorage.setItem('favoriteList', JSON.stringify(this.favoriteList));
 
-   }
-   getFavoriteList() {
-    
-     const stored=localStorage.getItem('favoriteList');
-     this.favoriteList=stored ? JSON.parse(stored) :[]
-     
-   }
+  }
+  getFavoriteList() {
 
-   update(list: Player[]){
-    this.favoriteList=list;
+    const stored = localStorage.getItem('favoriteList');
+    this.favoriteList = stored ? JSON.parse(stored) : []
+
+  }
+
+  update(list: Player[]) {
+    this.favoriteList = list;
     this.setItem();
-   }
- 
-   getData(){
+  }
+
+  getData() {
     return this.favoriteList;
-   }
- }
+  }
+
+  /* getPlayersByTeamId(teamId: number): Player[] {
+    return this.favoriteList.filter(player => player.team.id === teamId);
+  } */
+
+}

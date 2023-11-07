@@ -11,3 +11,44 @@
     flex-wrap: wrap;
     
 }
+
+.favplayer-item {
+    list-style: none;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1200px;
+  }
+  .favplayer-item2 {
+    list-style: none;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 800;
+    color: white;
+  }
+  
+    .favplayer-name {
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+    
+    .favplayer-item div {
+      color: white; 
+    }
+    
+    .favBotonFav {
+  
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+        
+    }

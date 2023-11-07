@@ -11,3 +11,44 @@
     flex-wrap: wrap;
     
 }
+
+.favteam-item {
+    list-style: none;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1200px;
+  }
+  .favteam-item2 {
+    list-style: none;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 800;
+    color: white;
+  }
+  
+    .favteam-name {
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+    
+    .favteam-item div {
+      color: white; 
+    }
+    
+    .favTeamBotonFav {
+  
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+        
+    }

@@ -1,5 +1,9 @@
-
 <div class="teamsContainer">
+    <ul>
+        <li>
+            <button class="favorite-button" [routerLink]="['/favourite-list']" routerLinkActive="active">Lista de favoritos</button>
+        </li>
+    </ul>
     <ul>
         <li *ngFor="let team of teamsList" class="team-item">
             <div class="team-name" (click)="showAtributes(team)" style="cursor: pointer;">
@@ -21,11 +25,11 @@
             </ng-template>
         </li>
     </ul>
-    <ul>
+    <!-- <ul>
         <li>
             <button [routerLink]="['/favourite-list']" routerLinkActive="active">Lista de favoritos</button>
         </li>
-    </ul>
+    </ul> -->
     
 
     </div>
