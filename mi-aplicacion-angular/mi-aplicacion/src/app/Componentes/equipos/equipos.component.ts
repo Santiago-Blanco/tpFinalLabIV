@@ -3,7 +3,7 @@ import { TeamsService } from '../../Servicios/Teams/teams.service';
 import { Team } from 'src/app/types/Teams';
 import { ActivatedRoute } from '@angular/router';
 import { FavouriteListService } from 'src/app/Servicios/FavouriteListTeam/favourite-list.service';
-import { Howl } from 'howler';
+//import { Howl } from 'howler';
 
 @Component({
   selector: 'app-equipos',
