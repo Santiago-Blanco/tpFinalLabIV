@@ -77,4 +77,32 @@
       transition: 0.3s;
     }
   
+    .search-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px;
+    }
+    
+    #search-input {
+      padding: 10px;
+      width: 250px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    
+    .results-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 10px 0 0 0;
+    }
+    
+    .results-list li {
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin-top: -1px;
+      background-color: #f9f9f9;
+    }
+    
   

@@ -4,6 +4,17 @@
             <button class="favorite-button" [routerLink]="['/favourite-list']" routerLinkActive="active">Lista de favoritos</button>
         </li>
     </ul>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Buscar equipos..." onkeyup="searchTeamsFilt()">
+        <ul id="results-list" class="results-list">
+
+
+            
+        </ul>
+      </div>
+      
+  
     <ul>
         <li *ngFor="let team of teamsList" class="team-item">
             <div class="team-name" (click)="showAtributes(team)" style="cursor: pointer;">
@@ -27,12 +38,7 @@
             </ng-template>
         </li>
     </ul>
-    <!-- <ul>
-        <li>
-            <button [routerLink]="['/favourite-list']" routerLinkActive="active">Lista de favoritos</button>
-        </li>
-    </ul> -->
-    
+  
 
     </div>
 
