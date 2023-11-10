@@ -13,7 +13,9 @@ export class JugadoresComponent implements OnInit {
 
   public playersList: Player[] = [];
   public favoriteList: Player [] = []
+  public filList: Player []=[];
   public select: Player| null=null;
+  public searchTerm: string= '';
   public atribute=false;
   public count=1;
 
@@ -50,22 +52,23 @@ export class JugadoresComponent implements OnInit {
 
   getAllPlayers(i : number) {
     return this.JugadoresService.getAllPlayers(i).subscribe((p: Player[] | any) => {
-
-      console.log(p.data);
-      this.playersList = this.filterPlayers(p.data);
+      this.playersList = p.data; 
       console.log(this.playersList);
     })
   }
-  //filtra los jugadores para dejar en el array los jugadores que no tengan atributos vacios
-  filterPlayers(array: Player[]) {
-    return array.filter(player =>
-      Object.values(player).some(value => value !== null)
-    );
-  }
+
 
   searchPlayer(player: Player){
     return this.favoriteList.some(p => p.id == player.id)
   }
+
+  searchPlayerFilt() {
+   
+    this.filList = this.playersList.filter(player =>
+      (player.first_name + ' ' + player.last_name).toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      player.team.full_name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  } 
 
   addRemovePlayerList(player: Player) {
     const id = this.favoriteList.findIndex((p) => p.id === player.id);
