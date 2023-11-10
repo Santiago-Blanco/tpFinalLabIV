@@ -37,6 +37,10 @@ export class RegisterComponent {
 
   }
 
+  ngOnInit(){
+    console.log(this.service.returnUsersFromLocalStorage())
+  }
+
   
 
 

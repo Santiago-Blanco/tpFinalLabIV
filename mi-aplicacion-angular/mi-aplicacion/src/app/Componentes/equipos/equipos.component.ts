@@ -32,13 +32,38 @@ export class EquiposComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllTeams();
+    this.getAllTeams(1);
     console.log(this.route.paramMap)
     this.favoriteList = this.favoriteListService.getData();
   }
 
-  getAllTeams() {
-    return this.EquiposService.getAllTeams().subscribe((t: Team[] | any) => {
+  nextPage(): void {
+    this.getAllTeams(2);
+
+    let [back, next] = this.backNextButtons();
+
+    next.style.display = 'block';
+    back.style.display = 'none';
+  }
+
+  backPage(): void{
+    this.getAllTeams(1);
+
+    let [back, next] = this.backNextButtons();
+
+    next.style.display = 'none';
+    back.style.display = 'block';
+  }
+
+  backNextButtons(){
+    let nextButton = document.querySelector(".next") as HTMLButtonElement;
+    let backButton = document.querySelector(".back") as HTMLButtonElement;
+
+    return [nextButton, backButton]
+  }
+
+  getAllTeams(i : Number) {
+    return this.EquiposService.getAllTeams(i).subscribe((t: Team[] | any) => {
       this.teamsList = t.data;
       console.log(t);
     })

@@ -10,6 +10,7 @@ export class LoginRegisterService {
   
   
   private registeredUsers: User[] = []
+  private activeUser : User = {};
 
   saveUsers(users : Array<User>){
     localStorage.setItem("usuarios", JSON.stringify(users));
@@ -25,6 +26,13 @@ export class LoginRegisterService {
     }
   }
 
+  setActiveUser(user : User){
+    this.activeUser = user;
+  }
+
+  getActiveUser(){
+    return this.activeUser;
+  }
 
   getUser (username : string | undefined | null): User | null{
     this.registeredUsers = this.returnUsersFromLocalStorage();
@@ -36,6 +44,14 @@ export class LoginRegisterService {
     } else {
       return null;
     }
+  }
+
+  updateUser(updatedUser : User){
+    this.registeredUsers = this.returnUsersFromLocalStorage();
+
+    this.registeredUsers = this.registeredUsers.map(user => user.userId === updatedUser.userId ? updatedUser : user);
+
+    this.saveUsers(this.registeredUsers);
   }
 
   addUser(user : User){

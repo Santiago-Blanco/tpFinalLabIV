@@ -13,7 +13,7 @@ export class LoginComponent {
 
   constructor(private service : LoginRegisterService, private router : Router) {}
 
-  private activeUser : User = {};
+
   
   loginForm = new FormGroup({
     userName : new FormControl(''),
@@ -32,8 +32,8 @@ export class LoginComponent {
       const UserFromLocalStorage = this.service.getUser(userName)
 
       if(UserFromLocalStorage){
-        this.activeUser = UserFromLocalStorage;
-        console.log(this.activeUser);
+        this.service.setActiveUser(UserFromLocalStorage);
+        console.log(UserFromLocalStorage);
         this.router.navigate(['../../']);
       } else {
         console.error("Usuario no encontrado en el almacenamiento local.");
@@ -52,5 +52,7 @@ export class LoginComponent {
     let cartelError = document.querySelector("#errorMsg") as HTMLElement;
     cartelError.innerHTML = "";
   }
+
+  
 
 }

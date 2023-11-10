@@ -23,6 +23,47 @@
   color: white;
 }
 
+.back{
+  background-color: #000; 
+  color: #fff; 
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+}
+
+.back:hover {
+  background-color: #fff; 
+  color: #000; 
+  transition: 0.3s;
+}
+
+.next{
+  background-color: #000; 
+  color: #fff; 
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 1125px;
+
+}
+
+.next:hover {
+  background-color: #fff; 
+  color: #000; 
+  transition: 0.3s;
+}
+
   .team-name {
     flex-grow: 1;
     margin-right: 10px;
