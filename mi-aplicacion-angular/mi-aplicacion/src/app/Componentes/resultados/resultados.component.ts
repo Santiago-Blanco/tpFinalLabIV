@@ -54,13 +54,27 @@ export class ResultadosComponent implements OnInit {
       console.log(this.GamesList);
     })
   }
-  //filtra los jugadores para dejar en el array los jugadores que no tengan atributos vacios
+
   filterGames(array:Game[]) {
     return array.filter(game =>
       Object.values(game).some(value => value !== null)
     );
   }
 
+  filterResults(event: Event): void {
+    const searchText = (event.target as HTMLInputElement).value.toLowerCase();
+
+    if (searchText.trim() === '') {
+        this.getAllGames(1);
+        return;
+    }
+
+    this.GamesList = this.GamesList.filter(game =>
+        game.visitor_team.full_name.toLowerCase().includes(searchText) ||
+        game.home_team.full_name.toLowerCase().includes(searchText) ||
+        game.date.toString().includes(searchText)
+    );
+}
 
 
   showAtributes(game:Game){

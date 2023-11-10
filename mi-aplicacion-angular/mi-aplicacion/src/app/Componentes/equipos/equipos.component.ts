@@ -93,6 +93,23 @@ export class EquiposComponent implements OnInit {
     return this.favoriteList.some(t => t.id == team.id)
   }
 
+  filterTeams(event: Event): void {
+    const searchText = (event.target as HTMLInputElement).value.toLowerCase();
+
+    if (searchText.trim() === '') {
+        
+        this.getAllTeams(1);
+        return;
+    }
+
+    this.teamsList = this.teamsList.filter(team =>
+        team.full_name.toLowerCase().includes(searchText) ||
+        team.abbreviation.toLowerCase().includes(searchText) ||
+        team.name.toLowerCase().includes(searchText)
+    );
+}
+
+
   showAtributes(team: Team){
 
     if(this.select===team){

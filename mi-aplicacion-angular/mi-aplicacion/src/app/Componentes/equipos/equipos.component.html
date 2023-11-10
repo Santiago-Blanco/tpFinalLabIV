@@ -6,7 +6,7 @@
     </ul>
 
     <div class="search-container">
-        <input type="text" id="search-input" placeholder="Buscar equipos..." onkeyup="searchTeamsFilt()">
+        <input type="text" id="search-input" placeholder="Buscar equipos..." (input)="filterTeams($event)">
         <ul id="results-list" class="results-list">
 
 

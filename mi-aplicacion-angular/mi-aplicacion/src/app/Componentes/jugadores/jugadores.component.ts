@@ -70,6 +70,22 @@ export class JugadoresComponent implements OnInit {
     );
   } 
 
+  filterPlayers(event: Event): void {
+    const searchText = (event.target as HTMLInputElement).value.toLowerCase();
+
+    if (searchText.trim() === '') {
+        
+        this.getAllPlayers(1);
+        return;
+    }
+
+    this.playersList = this.playersList.filter(player =>
+        player.first_name.toLowerCase().includes(searchText) ||
+        player.last_name.toLowerCase().includes(searchText) ||
+        player.team.full_name.toLowerCase().includes(searchText)
+    );
+}
+
   addRemovePlayerList(player: Player) {
     const id = this.favoriteList.findIndex((p) => p.id === player.id);
     if (id !== -1) {
