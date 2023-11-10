@@ -6,4 +6,111 @@
     position: absolute;
     border: 2px solid white; 
     padding-left: 20px;
+    overflow: scroll;
+    display: flex;
+    flex-wrap: wrap;
 }
+
+.game-item {
+    list-style: none;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1200px;
+  }
+  .game-item2 {
+    list-style: none;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 800;
+    color: white;
+  }
+  
+    .game-name {
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+    
+    .game-item div {
+      color: white; 
+    }
+
+    .back{
+        background-color: #000; 
+        color: #fff; 
+        border: 1px solid white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px;
+      }
+  
+      .back:hover {
+        background-color: #fff; 
+        color: #000; 
+        transition: 0.3s;
+      }
+  
+      .next{
+        background-color: #000; 
+        color: #fff; 
+        border: 1px solid white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-left: 1125px;
+  
+      }
+  
+      .next:hover {
+        background-color: #fff; 
+        color: #000; 
+        transition: 0.3s;
+      }
+    
+      .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px;
+      }
+      
+      #search-input {
+        padding: 10px;
+        width: 250px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+      }
+      
+      .results-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 10px 0 0 0;
+      }
+      
+      .results-list li {
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin-top: -1px;
+        background-color: #f9f9f9;
+      }
+      
+    
