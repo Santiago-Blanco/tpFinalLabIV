@@ -15,12 +15,12 @@ export class FavouriteListService {
 
   setItem() {
 
-    localStorage.setItem('favoriteList', JSON.stringify(this.favoriteList));
+    localStorage.setItem('favoriteListPlayers', JSON.stringify(this.favoriteList));
 
   }
   getFavoriteList() {
 
-    const stored = localStorage.getItem('favoriteList');
+    const stored = localStorage.getItem('favoriteListPlayers');
     this.favoriteList = stored ? JSON.parse(stored) : []
 
   }

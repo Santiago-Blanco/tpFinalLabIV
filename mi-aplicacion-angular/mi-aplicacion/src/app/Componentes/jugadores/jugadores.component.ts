@@ -15,23 +15,52 @@ export class JugadoresComponent implements OnInit {
   public favoriteList: Player [] = []
   public select: Player| null=null;
   public atribute=false;
-  
+  public count=1;
 
 
   constructor(private favoriteListService: FavouriteListService, private JugadoresService: PlayersService, private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {
-    this.getAllPlayers();
+    this.getAllPlayers(1);
     console.log(this.route.paramMap)
     this.favoriteList = this.favoriteListService.getData();
   }
 
-  getAllPlayers() {
-    return this.JugadoresService.getAllPlayers().subscribe((p: Player[] | any) => {
-      this.playersList = p.data;
-      console.log(p);
+  nextPage(): void {
+    if(this.count <= 209){
+      this.count = this.count+1;
+      
+      this.getAllPlayers(this.count);
+      console.log(this.count)
+    }
+    
+  }
+
+  backPage(): void{
+    if(this.count>1){
+      this.count = this.count-1;
+
+      this.getAllPlayers(this.count);
+      console.log(this.count)
+    }
+    
+  }
+  
+
+  getAllPlayers(i : number) {
+    return this.JugadoresService.getAllPlayers(i).subscribe((p: Player[] | any) => {
+
+      console.log(p.data);
+      this.playersList = this.filterPlayers(p.data);
+      console.log(this.playersList);
     })
+  }
+  //filtra los jugadores para dejar en el array los jugadores que no tengan atributos vacios
+  filterPlayers(array: Player[]) {
+    return array.filter(player =>
+      Object.values(player).some(value => value !== null)
+    );
   }
 
   searchPlayer(player: Player){

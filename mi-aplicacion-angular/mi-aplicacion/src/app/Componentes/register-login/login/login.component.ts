@@ -13,6 +13,8 @@ export class LoginComponent {
 
   constructor(private service : LoginRegisterService, private router : Router) {}
 
+  private activeUser : User = {};
+  
   loginForm = new FormGroup({
     userName : new FormControl(''),
     password : new FormControl('')
@@ -21,15 +23,25 @@ export class LoginComponent {
   submitLogin(){
     let cartelError = document.querySelector("#errorMsg") as HTMLElement
 
-    const users = this.service.returnUsersFromLocalStorage() as Array<User>;
-
     const userName = this.loginForm.get('userName')?.value;
     const password = this.loginForm.get('password')?.value;
 
-    const isValidUser = this.service.validateUser(userName!, password!);
+    const isValidUser = this.service.validateUser(userName, password);
 
     if (isValidUser){
-      this.router.navigate(['../../']);
+      const UserFromLocalStorage = this.service.getUser(userName)
+
+      if(UserFromLocalStorage){
+        this.activeUser = UserFromLocalStorage;
+        console.log(this.activeUser);
+        this.router.navigate(['../../']);
+      } else {
+        console.error("Usuario no encontrado en el almacenamiento local.");
+      }
+
+      
+
+      
     } else {
       
       cartelError.textContent = "ERROR // LAS CREDENCIALES NO COINCIDEN....."

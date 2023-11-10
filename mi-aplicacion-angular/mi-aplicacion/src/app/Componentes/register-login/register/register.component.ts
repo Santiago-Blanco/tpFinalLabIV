@@ -49,10 +49,15 @@ export class RegisterComponent {
     user.email = this.registerForm?.get("email")?.value!;
     user.dni = this.registerForm?.get("dni")?.value!;
     user.password = this.registerForm?.get("password")?.value!;
-
+    let cartel = document.querySelector(".userExists") as HTMLParagraphElement;
     
-    this.service.addUser(user);
-    this.registerForm.reset();
+    if(this.service.addUser(user)){
+      this.registerForm.reset();
+      cartel.innerHTML = "";
+    } else {
+      cartel.innerHTML = "No se ha podido registrar el usuario (mail, dni o username repetidos)"
+    }
+    
   }
   
 

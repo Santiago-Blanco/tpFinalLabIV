@@ -6,6 +6,7 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
+    max-width: 50%;
 
 }
 
@@ -13,6 +14,9 @@
 h2 {
     color: white;
     align-items: center;
+    position: fixed;
+    max-width: 50%;
+    bottom: 2rem;
 }
 
 .msg {

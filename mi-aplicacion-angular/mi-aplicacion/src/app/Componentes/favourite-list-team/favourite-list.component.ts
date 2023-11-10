@@ -1,6 +1,6 @@
   import { Component, Input, OnInit } from '@angular/core';
   import { Team } from 'src/app/types/Teams';
-  import { FavouriteListService } from 'src/app/Servicios/FavouriteListTeam/favourite-list.service';
+  import { FavouriteListService } from 'src/app/Servicios/FavouriteListTeam/favourite-list-team.service';
   import { Player } from 'src/app/types/Players';
 
   @Component({

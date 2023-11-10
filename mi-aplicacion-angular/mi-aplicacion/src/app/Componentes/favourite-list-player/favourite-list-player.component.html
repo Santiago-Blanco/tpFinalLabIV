@@ -4,4 +4,6 @@
             {{favoritePlayer.first_name}}
         </li>
     </ul>
+
+    <p *ngIf="favoriteList.length === 0" style="color: white; font-weight: bold; font-size: 1.5rem;">Tu lista de favoritos esta vacia!</p>
 </div>
