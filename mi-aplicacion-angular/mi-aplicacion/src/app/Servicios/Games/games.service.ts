@@ -16,6 +16,10 @@ export class GamesService {
     const datos=this.httpClient.get(`https://www.balldontlie.io/api/v1/games?page=${i}`)
     return datos;
   }
+
+  getGamesOfTeam(){
+    return this.httpClient.get('https://www.balldontlie.io/api/v1/games?team_ids[]=1');
+  }
 }
 
 

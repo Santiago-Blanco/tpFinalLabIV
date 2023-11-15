@@ -111,7 +111,7 @@ export class EquiposComponent implements OnInit {
 
 
   showAtributes(team: Team){
-
+    
     if(this.select===team){
       this.select=null;
       this.atribute=false;

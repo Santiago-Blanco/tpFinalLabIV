@@ -1,16 +1,16 @@
 <div  class="favListContainer"  style="color: white;">
     <ul>
         <li *ngFor="let favoriteTeam of favoriteList" class="favteam-item">
-            <div class="favteam-name" click="" style="cursor: pointer;">
+            <div class="favteam-name" (click)="showAtributesFavTeam(favoriteTeam)" style="cursor: pointer;">
                 {{favoriteTeam.full_name}}
             </div>
-            <!-- <div *ngIf="select==team && atribute">
+            <div *ngIf="select==favoriteTeam && atribute">
 
-                <p><strong>Ciudad:</strong> {{team.city || "No hay datos"}}</p>
-                <p><strong>Conferencia:</strong> {{team.conference || "No hay datos"}}</p>
-                <p><strong>División:</strong> {{team.division || "No hay datos"}}</p>
-
-            </div> -->
+                <p><strong>Ciudad:</strong> {{favoriteTeam.city || "No hay datos"}}</p>
+                <p><strong>Conferencia:</strong> {{favoriteTeam.conference || "No hay datos"}}</p>
+                <p><strong>División:</strong> {{favoriteTeam.division || "No hay datos"}}</p>
+                
+            </div> 
         </li>
     </ul>
 

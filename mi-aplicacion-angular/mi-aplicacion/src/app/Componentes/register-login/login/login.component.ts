@@ -20,6 +20,14 @@ export class LoginComponent {
     password : new FormControl('')
   })
 
+  showActiveUsers(){
+    console.log(this.service.returnUsersFromLocalStorage());
+    console.log("USUARIO ACTIVO...................... ")
+    console.log(this.service.getActiveUser());
+
+    
+  }
+
   submitLogin(){
     let cartelError = document.querySelector("#errorMsg") as HTMLElement
 
