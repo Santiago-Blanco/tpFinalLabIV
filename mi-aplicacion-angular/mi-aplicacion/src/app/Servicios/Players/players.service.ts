@@ -15,7 +15,12 @@ export class PlayersService {
 
     const datos = this.httpClient.get(`https://www.balldontlie.io/api/v1/players?page=${i}`)
     return datos;
-/*     return this.httpClient.get<Player[]>("https://www.balldontlie.io/api/v1/players?page=1"); */
+
+  }
+
+  getPlayersForName(name : string){
+    const datos = this.httpClient.get(`https://www.balldontlie.io/api/v1/players?search=${name}`);
+    return datos;
   }
 }
 

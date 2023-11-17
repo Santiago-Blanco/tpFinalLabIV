@@ -3,7 +3,7 @@ import { TeamsService } from '../../Servicios/Teams/teams.service';
 import { Team } from 'src/app/types/Teams';
 import { ActivatedRoute } from '@angular/router';
 import { FavouriteListService } from 'src/app/Servicios/FavouriteListTeam/favourite-list-team.service';
-//import { Howl } from 'howler';
+import { Howl } from 'howler';
 
 @Component({
   selector: 'app-equipos',
@@ -20,6 +20,7 @@ export class EquiposComponent implements OnInit {
   public favoriteList: Team [] = []
   public select: Team | null=null;
   public atribute=false;
+  private isFirstKeyDown: boolean = true;
 
   constructor(private favoriteListService: FavouriteListService,private EquiposService: TeamsService, private route: ActivatedRoute) { 
     this.soundIN = new Howl({
@@ -38,6 +39,7 @@ export class EquiposComponent implements OnInit {
   }
 
   nextPage(): void {
+    this.teamsList.length = 0;
     this.getAllTeams(2);
 
     let [back, next] = this.backNextButtons();
@@ -47,6 +49,7 @@ export class EquiposComponent implements OnInit {
   }
 
   backPage(): void{
+    this.teamsList.length = 0;
     this.getAllTeams(1);
 
     let [back, next] = this.backNextButtons();
@@ -65,7 +68,7 @@ export class EquiposComponent implements OnInit {
   getAllTeams(i : Number) {
     return this.EquiposService.getAllTeams(i).subscribe((t: Team[] | any) => {
       this.teamsList = t.data;
-      console.log(t);
+      //console.log(this.teamsList);
     })
   }
 
@@ -74,31 +77,57 @@ export class EquiposComponent implements OnInit {
     if (id !== -1) {
       this.favoriteList.splice(id, 1);
 
-      this.soundOUT.stop();
-      this.soundIN.stop();
-      this.soundOUT.play();
+      this.soundsOUT();
     } else {
       this.favoriteList.push(team);
-      console.log(this.favoriteList)
+      console.log(this.favoriteList);
 
-      this.soundIN.stop();
-      this.soundOUT.stop();
-      this.soundIN.play();
+      this.soundsIN();
     }
 
     this.favoriteListService.update(this.favoriteList);
   }
   
+  soundsIN(){
+    this.soundIN.stop();
+    this.soundOUT.stop();
+    this.soundIN.play();
+  }
+
+  soundsOUT(){
+    this.soundOUT.stop();
+    this.soundIN.stop();
+    this.soundOUT.play();
+  }
+
   searchTeam(team: Team){
     return this.favoriteList.some(t => t.id == team.id)
+  }
+
+/////////////////////////////////////////////////////////////////////////
+
+  getAllTeamsForSearch(i : Number) { 
+    return this.EquiposService.getAllTeams(i).subscribe((t: Team[] | any) => {
+      this.teamsList = this.teamsList.concat(t.data);
+      //console.log(this.teamsList);
+    })
+  }
+
+  handleKeyDown(): void {
+    if (this.isFirstKeyDown) {
+      this.fillArray();
+      this.isFirstKeyDown = false;
+    }
   }
 
   filterTeams(event: Event): void {
     const searchText = (event.target as HTMLInputElement).value.toLowerCase();
 
     if (searchText.trim() === '') {
-        
+        this.teamsList.length = 0;
         this.getAllTeams(1);
+        this.isFirstKeyDown = true;
+
         return;
     }
 
@@ -109,6 +138,17 @@ export class EquiposComponent implements OnInit {
     );
 }
 
+  fillArray(){
+    this.teamsList.length = 0;
+
+    for(let i=1; i<3; i++){
+      this.getAllTeamsForSearch(i);
+    }
+
+    console.log("llenando el array ")
+  }
+
+/////////////////////////////////////////////////////////////
 
   showAtributes(team: Team){
     

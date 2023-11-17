@@ -53,10 +53,16 @@ export class JugadoresComponent implements OnInit {
   getAllPlayers(i : number) {
     return this.JugadoresService.getAllPlayers(i).subscribe((p: Player[] | any) => {
       this.playersList = p.data; 
-      console.log(this.playersList);
+      console.log(p.data);
     })
   }
 
+  getPlayersForSearch(name : string) {
+    return this.JugadoresService.getPlayersForName(name).subscribe((p: Player[] | any) => {
+      this.playersList = p.data; 
+
+    })
+  }
 
   searchPlayer(player: Player){
     return this.favoriteList.some(p => p.id == player.id)
@@ -74,16 +80,18 @@ export class JugadoresComponent implements OnInit {
     const searchText = (event.target as HTMLInputElement).value.toLowerCase();
 
     if (searchText.trim() === '') {
-        
+        this.playersList.length = 0;
         this.getAllPlayers(1);
+        
         return;
+    } else {
+      this.getPlayersForSearch(searchText.trim());
     }
 
-    this.playersList = this.playersList.filter(player =>
+    /*this.playersList = this.playersList.filter(player =>
         player.first_name.toLowerCase().includes(searchText) ||
-        player.last_name.toLowerCase().includes(searchText) ||
-        player.team.full_name.toLowerCase().includes(searchText)
-    );
+        player.last_name.toLowerCase().includes(searchText)
+    );*/
 }
 
   addRemovePlayerList(player: Player) {
