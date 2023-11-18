@@ -88,10 +88,6 @@ export class JugadoresComponent implements OnInit {
       this.getPlayersForSearch(searchText.trim());
     }
 
-    /*this.playersList = this.playersList.filter(player =>
-        player.first_name.toLowerCase().includes(searchText) ||
-        player.last_name.toLowerCase().includes(searchText)
-    );*/
 }
 
   addRemovePlayerList(player: Player) {

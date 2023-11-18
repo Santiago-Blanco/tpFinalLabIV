@@ -67,6 +67,7 @@ export class EquiposComponent implements OnInit {
 
   getAllTeams(i : Number) {
     return this.EquiposService.getAllTeams(i).subscribe((t: Team[] | any) => {
+      this.teamsList.length = 0;
       this.teamsList = t.data;
       //console.log(this.teamsList);
     })
@@ -106,17 +107,21 @@ export class EquiposComponent implements OnInit {
 
 /////////////////////////////////////////////////////////////////////////
 
-  getAllTeamsForSearch(i : Number) { 
-    return this.EquiposService.getAllTeams(i).subscribe((t: Team[] | any) => {
-      this.teamsList = this.teamsList.concat(t.data);
-      //console.log(this.teamsList);
-    })
-  }
-
-  handleKeyDown(): void {
+  handleKeyDown(): void { ////si es la primera letra presionada llena el array
     if (this.isFirstKeyDown) {
-      this.fillArray();
       this.isFirstKeyDown = false;
+
+      this.EquiposService.fillArrayOfTeams().then((allTeams)=>{
+        this.teamsList = allTeams;
+        console.log(this.teamsList);
+
+        
+      })
+      .catch((reject)=>{
+        console.log("Msg Error: " + reject);
+      })
+
+      
     }
   }
 
@@ -138,15 +143,9 @@ export class EquiposComponent implements OnInit {
     );
 }
 
-  fillArray(){
-    this.teamsList.length = 0;
 
-    for(let i=1; i<3; i++){
-      this.getAllTeamsForSearch(i);
-    }
 
-    console.log("llenando el array ")
-  }
+  
 
 /////////////////////////////////////////////////////////////
 

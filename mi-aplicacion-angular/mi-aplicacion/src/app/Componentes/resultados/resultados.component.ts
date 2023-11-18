@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/types/Games';
-import { GamesService } from 'src/app/Servicios/Games/games.service';
+import { GamesService, gamesService } from 'src/app/Servicios/Games/games.service';
 
 @Component({
   selector: 'app-resultados',
@@ -55,6 +55,22 @@ export class ResultadosComponent implements OnInit {
     })
   }
 
+  async getGamesForSearch(name : string) {
+    const gamesData = await this.JuegosService.getGamesOfTeam(name);
+
+    if (gamesData && gamesData.data) {
+      console.log(gamesData.data);
+      this.GamesList = this.filterGames(gamesData.data);
+      console.log(this.GamesList);
+    } else {
+      console.log('No se recibió datos válidos de la solicitud.');
+    }
+
+
+  }
+
+
+
   filterGames(array:Game[]) {
     return array.filter(game =>
       Object.values(game).some(value => value !== null)
@@ -67,13 +83,15 @@ export class ResultadosComponent implements OnInit {
     if (searchText.trim() === '') {
         this.getAllGames(1);
         return;
+    } else {
+      this.getGamesForSearch(searchText.trim());
     }
 
-    this.GamesList = this.GamesList.filter(game =>
+    /*this.GamesList = this.GamesList.filter(game =>
         game.visitor_team.full_name.toLowerCase().includes(searchText) ||
         game.home_team.full_name.toLowerCase().includes(searchText) ||
         game.date.toString().includes(searchText)
-    );
+    );*/
 }
 
 
