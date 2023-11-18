@@ -15,7 +15,6 @@
 }
 
 
-
 .player-item {
     list-style: none;
     border: 1px solid #eaeaea;
@@ -57,6 +56,8 @@
         
     }
 
+    
+
     .favorite-button {
       background-color: #000; 
       color: #fff; 
@@ -70,6 +71,7 @@
       font-size: 16px;
       margin: 10px;
     }
+
 
     .favorite-button:hover {
       background-color: #fff; 
@@ -111,7 +113,7 @@
       margin-left: 1125px;
 
     }
-
+    
     .next:hover {
       background-color: #fff; 
       color: #000; 

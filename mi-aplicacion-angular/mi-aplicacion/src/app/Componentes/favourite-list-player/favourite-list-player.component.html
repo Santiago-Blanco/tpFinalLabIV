@@ -1,9 +1,12 @@
 <div  class="favListPlayerContainer"  style="color: white;">
     <ul>
         <li *ngFor="let favoritePlayer of favoriteList" class="favplayer-item">
-            {{favoritePlayer.first_name}}
+            {{favoritePlayer.first_name + ' ' + favoritePlayer.last_name}}
         </li>
     </ul>
 
     <p *ngIf="favoriteList.length === 0" style="color: white; font-weight: bold; font-size: 1.5rem;">Tu lista de favoritos esta vacia!</p>
 </div>
+
+
+
