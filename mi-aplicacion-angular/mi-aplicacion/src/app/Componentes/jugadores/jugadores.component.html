@@ -1,53 +1,67 @@
 <div class="playersContainer">
-    <ul>
-        <li>
-            <button class="favorite-button" [routerLink]="['/favourite-list-pla']" routerLinkActive="active">Lista de favoritos</button>
-        </li> 
-            
-    </ul>
+  <ul>
+    <li>
+      <button class="favorite-button" [routerLink]="['/favourite-list-pla']" routerLinkActive="active">Lista de favoritos</button>
+    </li>
+  </ul>
 
-    <div class="search-container">
-        <input type="text" id="search-input" placeholder="Buscar jugadores..." (input)="filterPlayers($event)" >
-        <ul id="results-list" class="results-list">
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Buscar jugadores..." (input)="filterPlayers($event)">
+    <ul id="results-list" class="results-list"></ul>
+  </div>
 
-
-
-            
-        </ul>
+  <ul>
+    <li *ngFor="let player of playersList" class="player-item">
+      <div class="player-name" (click)="showAtributes(player)" style="cursor: pointer;">
+        {{ player.first_name + ' ' + player.last_name }}
       </div>
+
+      <div *ngIf="select==player && atribute" >
+
+        <div *ngIf="seasonAverages && seasonAverages.data && seasonAverages.data.length > 0 else noData" >
+          <h3>Ultima Temporada: {{ seasonAverages.data[0].season || "No hay datos" }}</h3>
+          <p><strong>Partidos jugados:</strong> {{ seasonAverages.data[0].games_played|| "No hay datos" }}</p>
+          <p><strong>Minutos:</strong> {{ seasonAverages.data[0].min|| "No hay datos" }}</p>
+          <p><strong>Puntos:</strong> {{ seasonAverages.data[0].pts|| "No hay datos" }}</p>
+          <p><strong>Asistencias:</strong> {{ seasonAverages.data[0].ast|| "No hay datos" }}</p>
+          <p><strong>Rebotes:</strong> {{ seasonAverages.data[0].reb|| "No hay datos" }}</p>
+          <p><strong>Bloqueos:</strong> {{ seasonAverages.data[0].stl|| "No hay datos" }}</p>
+        </div>
+
+        <ng-template #noData>
+          <h3>Ultima Temporada: No hay datos</h3>
+          <p><strong>Partidos jugados:</strong> No hay datos</p>
+          <p><strong>Minutos:</strong> No hay datos</p>
+          <p><strong>Puntos:</strong> No hay datos</p>
+          <p><strong>Asistencias:</strong> No hay datos</p>
+          <p><strong>Rebotes:</strong> No hay datos</p>
+          <p><strong>Bloqueos:</strong> No hay datos</p>
+        </ng-template>
+
+  
+          <p><strong>Posición:</strong> {{player.position || "No hay datos"}}</p>
+          <p><strong>Altura en pies:</strong> {{player.height_feet || "No hay datos"}}</p>
+          <p><strong>Altura en pulgadas:</strong> {{player.height_inches || "No hay datos"}}</p>
+          <p><strong>Peso en libras:</strong> {{player.weight_pounds || "No hay datos"}}</p>
+          <p><strong>Equipo:</strong> {{player.team.full_name || "No hay datos"}}</p>
+          <p><strong>Ciudad:</strong> {{player.team.city || "No hay datos"}}</p>
+          <p><strong>Conferencia:</strong> {{player.team.conference || "No hay datos"}}</p>
+          <p><strong>División:</strong> {{player.team.division || "No hay datos"}}</p>
+          <p><strong>Nombre:</strong> {{player.team.name || "No hay datos"}}</p>
+        </div>
       
-    <ul>
-        <li *ngFor="let player of playersList" class="player-item">
-            <div class="player-name" (click)="showAtributes(player)" style="cursor: pointer;">
-                {{ player.first_name + ' ' + player.last_name }}
-            </div>
-            <div *ngIf="select==player && atribute">
 
-                <p><strong>Posición:</strong> {{player.position || "No hay datos"}}</p>
-                <p><strong>Altura en pies:</strong> {{player.height_feet || "No hay datos"}}</p>
-                <p><strong>Altura en pulgadas:</strong> {{player.height_inches || "No hay datos"}}</p>
-                <p><strong>Peso en libras:</strong> {{player.weight_pounds || "No hay datos"}}</p>
+      <ng-container *ngIf="searchPlayer(player); else notFavoriteImage">
+        <img src="../../../assets/EstrellaBlanca.jpg" alt="Agregar lista de favoritos" class="botonfav" (click)="addRemovePlayerList(player)">
+      </ng-container>
+      <ng-template #notFavoriteImage>
+        <img src="../../../assets/EstrellaNegra.jpg" alt="No en lista de favoritos" class="botonfav" (click)="addRemovePlayerList(player)">
+      </ng-template>
+    </li>
+  </ul>
 
-
-                <p><strong>Equipo:</strong> {{player.team.full_name || "No hay datos"}}</p>
-                <p><strong>Ciudad:</strong> {{player.team.city || "No hay datos"}}</p>
-                <p><strong>Conferencia:</strong> {{player.team.conference || "No hay datos"}}</p>
-                <p><strong>División:</strong> {{player.team.division || "No hay datos"}}</p>
-                <p><strong>Nombre:</strong> {{player.team.name || "No hay datos"}}</p>
-            </div>
-            <ng-container *ngIf="searchPlayer(player); else notFavoriteImage">
-                <img src="../../../assets/EstrellaBlanca.jpg" alt="Agregar lista de favoritos" class="botonfav" (click)="addRemovePlayerList(player)">
-            </ng-container>
-            <ng-template #notFavoriteImage>
-                <img src="../../../assets/EstrellaNegra.jpg" alt="No en lista de favoritos" class="botonfav" (click)="addRemovePlayerList(player)">
-            </ng-template>
-        </li>
-    </ul>
-    
-    <div class="backNextContainer">
-        <button class="back" (click)="backPage()">Back</button>
-        <button class="next" (click)="nextPage()">Next</button>
-    </div>
+  <div class="backNextContainer">
+    <button class="back" (click)="backPage()">Back</button>
+    <button class="next" (click)="nextPage()">Next</button>
+  </div>
 </div>
-
-

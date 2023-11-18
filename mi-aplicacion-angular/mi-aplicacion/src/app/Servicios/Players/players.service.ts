@@ -22,6 +22,11 @@ export class PlayersService {
     const datos = this.httpClient.get(`https://www.balldontlie.io/api/v1/players?search=${name}`);
     return datos;
   }
+
+  getSeasonAverages(playerId: number) {
+    const datos = this.httpClient.get(`https://www.balldontlie.io/api/v1/season_averages?player_ids[]=${playerId}`);
+    return datos;
+  }
 }
 
 export class playerService {

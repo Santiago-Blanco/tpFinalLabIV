@@ -128,6 +128,7 @@ export class EquiposComponent implements OnInit {
         this.getAllTeams(1);
         this.isFirstKeyDown = true;
 
+
         return;
     }
 

@@ -12,12 +12,14 @@ export class FavouriteListPlayerComponent {
 
   @Input() favoriteList: Player[] = []
 
+
   constructor (private favoriteListService: FavouriteListService){}
 
   ngOnInit(){
 
     this.favoriteList= this.favoriteListService.getData();
   }
-  
+
+
 
 }

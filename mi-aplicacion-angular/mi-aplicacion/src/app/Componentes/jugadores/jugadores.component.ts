@@ -18,6 +18,7 @@ export class JugadoresComponent implements OnInit {
   public searchTerm: string= '';
   public atribute=false;
   public count=1;
+  public seasonAverages: any;
 
 
   constructor(private favoriteListService: FavouriteListService, private JugadoresService: PlayersService, private route: ActivatedRoute) { }
@@ -62,6 +63,13 @@ export class JugadoresComponent implements OnInit {
       this.playersList = p.data; 
 
     })
+  }
+
+  getSeasonAverages(playerId: number) {
+    this.JugadoresService.getSeasonAverages(playerId).subscribe(data => {
+      this.seasonAverages = data;
+      console.log(this.seasonAverages);
+    });
   }
 
   searchPlayer(player: Player){
@@ -119,6 +127,7 @@ export class JugadoresComponent implements OnInit {
     else{
       this.select=player;
       this.atribute=true;
+      this.getSeasonAverages(player.id);
     }
 
   }
