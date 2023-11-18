@@ -1,12 +1,52 @@
-<div  class="favListPlayerContainer"  style="color: white;">
+<div class="favListPlayerContainer" style="color: white;">
     <ul>
-        <li *ngFor="let favoritePlayer of favoriteList" class="favplayer-item">
-            {{favoritePlayer.first_name + ' ' + favoritePlayer.last_name}}
-        </li>
+      <li *ngFor="let favoritePlayer of favoriteList" class="favplayer-item">
+        <div class="favplayer-name" (click)="showAtributes(favoritePlayer)" style="cursor: pointer;">
+          {{ favoritePlayer.first_name + ' ' + favoritePlayer.last_name }}
+        </div>
+  
+        <div *ngIf="select == favoritePlayer && atribute">
+          <div *ngIf="seasonAverages && seasonAverages.data && seasonAverages.data.length > 0; else noData">
+            <h3>Ultima Temporada: {{ seasonAverages.data[0].season || "No hay datos" }}</h3>
+            <p><strong>Partidos jugados:</strong> {{ seasonAverages.data[0].games_played || "No hay datos" }}</p>
+            <p><strong>Minutos:</strong> {{ seasonAverages.data[0].min || "No hay datos" }}</p>
+            <p><strong>Puntos:</strong> {{ seasonAverages.data[0].pts || "No hay datos" }}</p>
+            <p><strong>Asistencias:</strong> {{ seasonAverages.data[0].ast || "No hay datos" }}</p>
+            <p><strong>Rebotes:</strong> {{ seasonAverages.data[0].reb || "No hay datos" }}</p>
+            <p><strong>Bloqueos:</strong> {{ seasonAverages.data[0].stl || "No hay datos" }}</p>
+          </div>
+          <ng-template #noData>
+            <h3>Ultima Temporada: No hay datos</h3>
+            <p><strong>Partidos jugados:</strong> No hay datos</p>
+            <p><strong>Minutos:</strong> No hay datos</p>
+            <p><strong>Puntos:</strong> No hay datos</p>
+            <p><strong>Asistencias:</strong> No hay datos</p>
+            <p><strong>Rebotes:</strong> No hay datos</p>
+            <p><strong>Bloqueos:</strong> No hay datos</p>
+          </ng-template>
+  
+          <p><strong>Posición:</strong> {{ favoritePlayer.position || "No hay datos" }}</p>
+          <p><strong>Altura en pies:</strong> {{ favoritePlayer.height_feet || "No hay datos" }}</p>
+          <p><strong>Altura en pulgadas:</strong> {{ favoritePlayer.height_inches || "No hay datos" }}</p>
+          <p><strong>Peso en libras:</strong> {{ favoritePlayer.weight_pounds || "No hay datos" }}</p>
+          <p><strong>Equipo:</strong> {{ favoritePlayer.team.full_name || "No hay datos" }}</p>
+          <p><strong>Ciudad:</strong> {{ favoritePlayer.team.city || "No hay datos" }}</p>
+          <p><strong>Conferencia:</strong> {{ favoritePlayer.team.conference || "No hay datos" }}</p>
+          <p><strong>División:</strong> {{ favoritePlayer.team.division || "No hay datos" }}</p>
+          <p><strong>Nombre:</strong> {{ favoritePlayer.team.name || "No hay datos" }}</p>
+        </div>
+  
+        <ng-container *ngIf="searchPlayer(favoritePlayer); else notFavoriteImage">
+     
+          <img src="../../../assets/EstrellaBlanca.jpg" alt="Agregar lista de favoritos" class="favBotonFav" (click)="addRemovePlayerList(favoritePlayer)">
+        </ng-container>
+        <ng-template #notFavoriteImage>
+          
+          <img src="../../../assets/EstrellaNegra.jpg" alt="No en lista de favoritos" class="favBotonFav" (click)="addRemovePlayerList(favoritePlayer)">
+        </ng-template>
+      </li>
     </ul>
-
-    <p *ngIf="favoriteList.length === 0" style="color: white; font-weight: bold; font-size: 1.5rem;">Tu lista de favoritos esta vacia!</p>
-</div>
-
-
-
+  
+    <p *ngIf="favoriteList.length === 0" style="color: white; font-weight: bold; font-size: 1.5rem;">Tu lista de favoritos está vacía!</p>
+  </div>
+  
