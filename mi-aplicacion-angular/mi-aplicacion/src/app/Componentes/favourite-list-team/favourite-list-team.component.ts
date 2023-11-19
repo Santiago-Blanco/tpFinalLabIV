@@ -55,20 +55,16 @@
       } else {
         this.select = team;
         this.atribute = true;
-        //this.selectedPlayer = this.favoriteListService.getPlayersByTeamId(team.id)
-
-        
+  
         const teamData = this.favoriteListService.getTeamById(team.id);
-    
+  
         if (teamData) {
           this.favoriteListService.getRecentResults(teamData.id).subscribe(
             (data) => {
               console.log('Resultados obtenidos:', data);
               if (Array.isArray(data)) {
-                this.recentResults = data;
-              } else {
-                console.error('Los datos de resultados no son un array:', data);
-                this.recentResults = [];
+                // Ordena los resultados por fecha de manera descendente
+                this.recentResults = data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
               }
             },
             (error) => {
@@ -76,7 +72,7 @@
               this.recentResults = [];
             }
           );
-    
+  
           this.favoriteListService.getPlayersForTeam(teamData.id).subscribe(
             (data) => {
               console.log('Jugadores obtenidos:', data);
@@ -99,7 +95,6 @@
         }
       }
     }
-    
     
 
     addRemoveTeamList(team: Team) {
@@ -127,7 +122,3 @@
   
 
   }
-
-
-
-
