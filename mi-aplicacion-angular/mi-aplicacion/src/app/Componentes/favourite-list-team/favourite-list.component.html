@@ -9,7 +9,22 @@
                 <p><strong>Ciudad:</strong> {{favoriteTeam.city || "No hay datos"}}</p>
                 <p><strong>Conferencia:</strong> {{favoriteTeam.conference || "No hay datos"}}</p>
                 <p><strong>División:</strong> {{favoriteTeam.division || "No hay datos"}}</p>
-            
+
+                
+                <h2>Últimos resultados:</h2>
+                <ul *ngIf="recentResults && recentResults.length">
+                  <li *ngFor="let result of recentResults">
+                    {{ result.visitor_team.full_name }} {{ result.visitor_team_score }} - {{ result.home_team.full_name }} {{ result.home_team_score }}
+                  </li>
+                </ul>
+                
+                <h2>Jugadores:</h2>
+                <ul *ngIf="teamPlayers && teamPlayers.length">
+                  <li *ngFor="let player of teamPlayers">
+                    {{ player.first_name }} {{ player.last_name }}
+                  </li>
+                </ul>
+                   
             </div> 
             <ng-container *ngIf="searchTeam(favoriteTeam); else notFavoriteImage">
                 <img src="../../../assets/EstrellaBlanca.jpg" alt="Agregar lista de favoritos" class="favTeamBotonFav" (click)="addRemoveTeamList(favoriteTeam)">
