@@ -4,7 +4,13 @@
         <button class="lobby" [routerLink]="['../../']" routerLinkActive="active" style="background-color: black;"><img src="assets/LogoImagen.jpg" alt="Logo pagina"></button>
         
     </div>
-    <div class="buttons">
-       <button [routerLink]="['registerLogin']" routerLinkActive="active">Registro/Inicio Sesion</button>
-    </div>
+    <ng-container *ngIf="!isActiveUser; else showProfile">
+        <button [routerLink]="['registerLogin']" routerLinkActive="active">Registro/Inicio Sesion</button>
+      </ng-container>
+      <ng-template #showProfile>
+        <button (click)="openProfile()">Otro Botón</button>
+
+        <app-profile *ngIf="isProfileOpen" (closeProfileEvent)="closeProfile()"></app-profile>
+        
+      </ng-template>
 </div>

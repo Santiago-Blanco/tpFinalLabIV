@@ -14,14 +14,14 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class FavouriteListService {
 
-   private favoriteList: Team[] = [];
-   private apiUrl = 'https://www.balldontlie.io/api/v1';
-  
-   constructor(private service : LoginRegisterService, private http: HttpClient) { 
-   }
- 
-   update(list: Team[]){
-    this.favoriteList=list;
+  private favoriteList: Team[] = [];
+  private apiUrl = 'https://www.balldontlie.io/api/v1';
+
+  constructor(private service: LoginRegisterService, private http: HttpClient) {
+  }
+
+  update(list: Team[]) {
+    this.favoriteList = list;
 
     let activeUser = this.service.getActiveUser();
 
@@ -31,15 +31,15 @@ export class FavouriteListService {
 
     console.log("USUARIO ACTIVO:");
     console.log(activeUser);
-   }
- 
-   getData(){
+  }
+
+  getData() {
     const activeUser = this.service.getActiveUser()
 
     return activeUser.teamFavouriteList;
-   }
+  }
 
-   getTeamById(teamId: number): Team | undefined {
+  getTeamById(teamId: number): Team | undefined {
     return this.favoriteList.find((team) => team.id === teamId);
   }
 
@@ -47,10 +47,9 @@ export class FavouriteListService {
     const resultsUrl = `${this.apiUrl}/games?team_ids[]=${teamId}&limit=${limit}`;
     return this.http.get<Game[]>(resultsUrl).pipe(
       map((data: any) => {
-        if (Array.isArray(data)) {
-          return data;
-        } else if (data && data.items && Array.isArray(data.items)) {
-          return data.items;
+        const dataArray = data && data.data ? data.data : [];////////////////////////
+        if (Array.isArray(dataArray)) {
+          return dataArray;
         } else {
           console.error('Los datos de resultados no son un array:', data);
           return [];
@@ -62,15 +61,14 @@ export class FavouriteListService {
       })
     );
   }
-  
+
   getPlayersForTeam(teamId: number): Observable<Player[]> {
     const playersUrl = `${this.apiUrl}/players?teamId=${teamId}`;
     return this.http.get<Player[]>(playersUrl).pipe(
       map((data: any) => {
-        if (Array.isArray(data)) {
-          return data;
-        } else if (data && data.items && Array.isArray(data.items)) {
-          return data.items;
+        const dataArray = data && data.data ? data.data : [];/////////////////////////
+        if (Array.isArray(dataArray)) {
+          return dataArray;
         } else {
           console.error('Los datos de jugadores no son un array:', data);
           return [];
@@ -81,6 +79,6 @@ export class FavouriteListService {
         return [];
       })
     );
-    }
   }
-  
+}
+

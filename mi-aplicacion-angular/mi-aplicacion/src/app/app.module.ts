@@ -14,11 +14,12 @@ import { PageNotFoundComponent } from './Componentes/page-not-found/page-not-fou
 import { EquiposComponent } from './Componentes/equipos/equipos.component';
 import { RegisterLoginComponent } from './Componentes/register-login/register-login.component';
 import { LoginRegisterService } from './Servicios/LoginRegister/login-register.service';
-import { FavouriteListComponent } from './Componentes/favourite-list-team/favourite-list.component';
+import { FavouriteListComponent } from './Componentes/favourite-list-team/favourite-list-team.component';
 import { RegisterComponent } from './Componentes/register-login/register/register.component';
 import { LoginComponent } from './Componentes/register-login/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FavouriteListPlayerComponent } from './Componentes/favourite-list-player/favourite-list-player.component';
+import { ProfileComponent } from './Componentes/header/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FavouriteListPlayerComponent } from './Componentes/favourite-list-playe
     FavouriteListComponent,
     RegisterComponent,
     LoginComponent,
-    FavouriteListPlayerComponent
+    FavouriteListPlayerComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

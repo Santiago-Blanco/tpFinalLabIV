@@ -7,8 +7,8 @@
 
   @Component({
     selector: 'app-favourite-list',
-    templateUrl: './favourite-list.component.html',
-    styleUrls: ['./favourite-list.component.css']
+    templateUrl: './favourite-list-team.component.html',
+    styleUrls: ['./favourite-list-team.component.css']
   })
   export class FavouriteListComponent implements OnInit {
 

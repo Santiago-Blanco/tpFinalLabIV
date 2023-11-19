@@ -9,7 +9,7 @@ import { SobreNosotrosComponent } from './Componentes/sobre-nosotros/sobre-nosot
 import { RegisterLoginComponent } from './Componentes/register-login/register-login.component';
 import { LoginComponent } from './Componentes/register-login/login/login.component';
 import { RegisterComponent } from './Componentes/register-login/register/register.component';
-import { FavouriteListComponent } from './Componentes/favourite-list-team/favourite-list.component';
+import { FavouriteListComponent } from './Componentes/favourite-list-team/favourite-list-team.component';
 import { FavouriteListPlayerComponent } from './Componentes/favourite-list-player/favourite-list-player.component';
 
 const routes: Routes = [
