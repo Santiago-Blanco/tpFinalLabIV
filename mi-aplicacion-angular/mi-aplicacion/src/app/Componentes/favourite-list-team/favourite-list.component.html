@@ -9,8 +9,15 @@
                 <p><strong>Ciudad:</strong> {{favoriteTeam.city || "No hay datos"}}</p>
                 <p><strong>Conferencia:</strong> {{favoriteTeam.conference || "No hay datos"}}</p>
                 <p><strong>División:</strong> {{favoriteTeam.division || "No hay datos"}}</p>
-                
+            
             </div> 
+            <ng-container *ngIf="searchTeam(favoriteTeam); else notFavoriteImage">
+                <img src="../../../assets/EstrellaBlanca.jpg" alt="Agregar lista de favoritos" class="favTeamBotonFav" (click)="addRemoveTeamList(favoriteTeam)">
+            </ng-container>
+
+            <ng-template #notFavoriteImage>
+                <img src="../../../assets/EstrellaNegra.jpg" alt="No en lista de favoritos" class="favTeamBotonFav" (click)="addRemoveTeamList(favoriteTeam)">
+            </ng-template>
         </li>
     </ul>
 
