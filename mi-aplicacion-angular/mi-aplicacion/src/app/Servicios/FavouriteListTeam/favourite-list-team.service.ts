@@ -4,9 +4,9 @@ import { BehaviorSubject, retry } from 'rxjs';
 import { LoginRegisterService } from '../LoginRegister/login-register.service';
 import { Player } from 'src/app/types/Players';
 import { Game } from 'src/app/types/Games';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
+import { catchError, map, concatMap, toArray } from 'rxjs/operators';
 
 
 @Injectable({
@@ -62,11 +62,12 @@ export class FavouriteListService {
     );
   }
 
-  getPlayersForTeam(teamId: number): Observable<Player[]> {
-    const playersUrl = `${this.apiUrl}/players?teamId=${teamId}`;
-    return this.http.get<Player[]>(playersUrl).pipe(
+  private fetchPlayersPage(teamId: number, page: number): Observable<Player[]> {
+    const playersUrl = `${this.apiUrl}/players?teamId=${teamId}&per_page=100&page=${page}`;
+
+    return this.http.get(playersUrl).pipe(
       map((data: any) => {
-        const dataArray = data && data.data ? data.data : [];/////////////////////////
+        const dataArray = data && data.data ? data.data : [];
         if (Array.isArray(dataArray)) {
           return dataArray;
         } else {
@@ -76,9 +77,33 @@ export class FavouriteListService {
       }),
       catchError((error) => {
         console.error('Error al obtener jugadores:', error);
-        return [];
+        return of([] as Player[]); 
+      })
+    );
+  }
+
+  private fetchAllPlayersRecursive(teamId: number, page: number, allPlayers: Player[]): Observable<Player[]> {
+    return this.fetchPlayersPage(teamId, page).pipe(
+      concatMap((players: Player[]) => {
+        if (players.length > 0) {
+          allPlayers = allPlayers.concat(players);
+          return this.fetchAllPlayersRecursive(teamId, page + 1, allPlayers);
+        } else {
+          return of(allPlayers);
+        }
+      })
+    );
+  }
+
+  getPlayersForTeam(teamId: number): Observable<Player[]> {
+    return this.fetchAllPlayersRecursive(teamId, 1, []).pipe(
+      map((players: Player[]) => {
+       
+        return players.filter((player: Player) => player.team.id === teamId);
       })
     );
   }
 }
+  
+
 
