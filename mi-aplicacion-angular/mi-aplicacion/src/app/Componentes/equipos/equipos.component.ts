@@ -35,7 +35,15 @@ export class EquiposComponent implements OnInit {
   ngOnInit(): void {
     this.getAllTeams(1);
     console.log(this.route.paramMap)
-    this.favoriteList = this.favoriteListService.getData();
+
+    const data = this.favoriteListService.getData();
+
+    if (data){
+      this.favoriteList = data;
+    } else {
+      this.favoriteList = [];
+    }
+    
   }
 
   nextPage(): void {

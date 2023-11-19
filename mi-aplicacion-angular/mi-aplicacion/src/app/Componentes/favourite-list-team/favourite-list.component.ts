@@ -18,7 +18,14 @@
 
     ngOnInit() {
 
-      this.favoriteList = this.favoriteListService.getData();
+      const data = this.favoriteListService.getData();
+
+      if (data){
+        this.favoriteList = data;
+      } else {
+        this.favoriteList = [];
+      }
+
     }
 
     showAtributesFavTeam(team: Team) {

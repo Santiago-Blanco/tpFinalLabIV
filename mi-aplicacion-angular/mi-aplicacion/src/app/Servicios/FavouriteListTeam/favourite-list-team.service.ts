@@ -27,6 +27,8 @@ export class FavouriteListService {
    }
  
    getData(){
-    return this.favoriteList;
+    const activeUser = this.service.getActiveUser()
+
+    return activeUser.teamFavouriteList;
    }
  }
