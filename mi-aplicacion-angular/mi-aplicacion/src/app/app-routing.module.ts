@@ -11,18 +11,19 @@ import { LoginComponent } from './Componentes/register-login/login/login.compone
 import { RegisterComponent } from './Componentes/register-login/register/register.component';
 import { FavouriteListComponent } from './Componentes/favourite-list-team/favourite-list-team.component';
 import { FavouriteListPlayerComponent } from './Componentes/favourite-list-player/favourite-list-player.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'sections', component: SeccionesComponent },
-  { path: 'teams', component: EquiposComponent },
-  { path: 'players', component : JugadoresComponent},
-  { path: 'results', component : ResultadosComponent},
+  { path: 'teams', component: EquiposComponent, canActivate: [AuthGuard]},
+  { path: 'players', component : JugadoresComponent, canActivate: [AuthGuard]},
+  { path: 'results', component : ResultadosComponent, canActivate: [AuthGuard]},
   { path: 'aboutUs', component : SobreNosotrosComponent},
   { path: 'registerLogin', component: RegisterLoginComponent},
   { path: 'registerLogin/login', component : LoginComponent},
   { path: 'registerLogin/register', component: RegisterComponent},
-  { path: 'favourite-list', component: FavouriteListComponent},
-  {path: 'favourite-list-pla', component: FavouriteListPlayerComponent},
+  { path: 'favourite-list', component: FavouriteListComponent, canActivate: [AuthGuard]},
+  {path: 'favourite-list-pla', component: FavouriteListPlayerComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: '/sections', pathMatch: 'full'},
   { path: '**', component : PageNotFoundComponent},
 ]

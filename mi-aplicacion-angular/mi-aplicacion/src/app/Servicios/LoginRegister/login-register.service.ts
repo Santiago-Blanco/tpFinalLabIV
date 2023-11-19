@@ -34,6 +34,14 @@ export class LoginRegisterService {
     return this.activeUser;
   }
 
+  isAciveUser(){
+    if(this.activeUser && Object.keys(this.activeUser).length > 0){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   getUser (username : string | undefined | null): User | null{
     this.registeredUsers = this.returnUsersFromLocalStorage();
 

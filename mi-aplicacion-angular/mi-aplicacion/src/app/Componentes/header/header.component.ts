@@ -8,9 +8,15 @@ import { LoginRegisterService } from 'src/app/Servicios/LoginRegister/login-regi
 })
 export class HeaderComponent {
 
-  isActiveUser : boolean = this.activeUser();
+  get isActiveUser(): boolean {
+    return this.activeUser();
+  }
+  isProfileOpen = false;
 
   constructor(private logService : LoginRegisterService){}
+
+  ngOnInit(){
+  }
 
   activeUser(){
 
@@ -22,9 +28,6 @@ export class HeaderComponent {
       return false;
     }
   }
-
-
-  isProfileOpen = false;
 
   openProfile() {
     this.isProfileOpen = true;

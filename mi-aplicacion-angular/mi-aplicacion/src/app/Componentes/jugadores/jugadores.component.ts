@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Player } from 'src/app/types/Players';
 import { PlayersService } from 'src/app/Servicios/Players/players.service';
 import { FavouriteListService } from 'src/app/Servicios/FavouriteListPlayer/favourite-list-pla.service';
+import { Howl } from 'howler';
 
 @Component({
   selector: 'app-jugadores',
@@ -19,9 +20,19 @@ export class JugadoresComponent implements OnInit {
   public atribute=false;
   public count=1;
   public seasonAverages: any;
+  private soundIN : Howl;
+  private soundOUT : Howl;
 
 
-  constructor(private favoriteListService: FavouriteListService, private JugadoresService: PlayersService, private route: ActivatedRoute) { }
+  constructor(private favoriteListService: FavouriteListService, private JugadoresService: PlayersService, private route: ActivatedRoute) { 
+    this.soundIN = new Howl({
+      src: ['/assets/nbaMP3.mp3']
+    })
+
+    this.soundOUT = new Howl({
+      src: ['/assets/nbaMP3out.mp3']
+    })
+  }
 
 
   ngOnInit(): void {
@@ -36,6 +47,18 @@ export class JugadoresComponent implements OnInit {
       this.favoriteList = [];
     }
 
+  }
+
+  soundsIN(){
+    this.soundIN.stop();
+    this.soundOUT.stop();
+    this.soundIN.play();
+  }
+
+  soundsOUT(){
+    this.soundOUT.stop();
+    this.soundIN.stop();
+    this.soundOUT.play();
   }
 
   nextPage(): void {
@@ -111,10 +134,12 @@ export class JugadoresComponent implements OnInit {
     if (id !== -1) {
       this.favoriteList.splice(id, 1);
       
+      this.soundsOUT()  
     } else {
       this.favoriteList.push(player);
       console.log(this.favoriteList)
 
+      this.soundsIN()
     }
 
     this.favoriteListService.update(this.favoriteList);
