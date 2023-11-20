@@ -21,6 +21,8 @@ export class EquiposComponent implements OnInit {
   public select: Team | null=null;
   public atribute=false;
   private isFirstKeyDown: boolean = true;
+  public showNextButton : boolean = true;
+  public showBackButton: boolean = false;
 
   constructor(private favoriteListService: FavouriteListService,private EquiposService: TeamsService, private route: ActivatedRoute) { 
     this.soundIN = new Howl({
@@ -46,33 +48,21 @@ export class EquiposComponent implements OnInit {
     
   }
 
+
+    
   nextPage(): void {
-    this.teamsList.length = 0;
     this.getAllTeams(2);
-
-    let [back, next] = this.backNextButtons();
-
-    next.style.display = 'block';
-    back.style.display = 'none';
+    this.showBackButton = true;
+    this.showNextButton = false;
   }
 
-  backPage(): void{
-    this.teamsList.length = 0;
+  backPage(): void {
     this.getAllTeams(1);
-
-    let [back, next] = this.backNextButtons();
-
-    next.style.display = 'none';
-    back.style.display = 'block';
+    this.showNextButton=true;
+    this.showBackButton=false;
   }
 
-  backNextButtons(){
-    let nextButton = document.querySelector(".next") as HTMLButtonElement;
-    let backButton = document.querySelector(".back") as HTMLButtonElement;
-
-    return [nextButton, backButton]
-  }
-
+  
   getAllTeams(i : Number) {
     return this.EquiposService.getAllTeams(i).subscribe((t: Team[] | any) => {
       this.teamsList.length = 0;

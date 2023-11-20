@@ -16,6 +16,8 @@ export class ResultadosComponent implements OnInit {
   public count = 1;
   private submitClick: boolean = false;
   private submitTeam: string = "";
+  public isFirstPage: boolean = true;
+  public isLastPage: boolean = false;
 
   constructor(private JuegosService: GamesService, private route: ActivatedRoute) { }
 
@@ -27,12 +29,19 @@ export class ResultadosComponent implements OnInit {
   }
 
   nextPage(): void {
-    if (this.count <= 209) {
+    if (this.count <= 1877) {
       this.count = this.count + 1;
 
       this.getAllGames(this.count);
       console.log(this.count)
+      this.updatePageVisibility();
+    } 
+
+    if (this.count === 1877) {
+      this.isLastPage = true;
     }
+  
+    this.isFirstPage = false;
 
   }
 
@@ -42,11 +51,21 @@ export class ResultadosComponent implements OnInit {
 
       this.getAllGames(this.count);
       console.log(this.count)
+      this.updatePageVisibility();
     }
 
+    if (this.count === 1) {
+      this.isFirstPage = true;
+    }
+  
+    this.isLastPage = false;
   }
 
-
+  updatePageVisibility() {
+    this.isFirstPage = this.count === 1;
+    this.isLastPage = this.count === 1877; // O el número máximo de páginas
+  }
+  
   getAllGames(i: number) {
     return this.JuegosService.getAllGames(i).subscribe((g: Game[] | any) => {
 

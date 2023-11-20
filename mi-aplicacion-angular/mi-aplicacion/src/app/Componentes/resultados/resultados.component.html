@@ -25,7 +25,7 @@
     </ul>
 
     <div class="backNextContainer">
-        <button class="back" (click)="backPage()">Back</button>
-        <button class="next" (click)="nextPage()">Next</button>
+        <button class="back" (click)="backPage()" *ngIf="!isFirstPage">Back</button>
+        <button class="next" (click)="nextPage()" *ngIf="!isLastPage">Next</button>
     </div>
 </div>
