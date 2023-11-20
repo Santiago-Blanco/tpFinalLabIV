@@ -22,6 +22,8 @@ export class JugadoresComponent implements OnInit {
   public seasonAverages: any;
   private soundIN : Howl;
   private soundOUT : Howl;
+  public isFirstPage: boolean = true;
+  public isLastPage: boolean = false;
 
 
   constructor(private favoriteListService: FavouriteListService, private JugadoresService: PlayersService, private route: ActivatedRoute) { 
@@ -62,25 +64,37 @@ export class JugadoresComponent implements OnInit {
   }
 
   nextPage(): void {
-    if(this.count <= 209){
-      this.count = this.count+1;
-      
+    if (this.count < 209) {
+      this.count = this.count + 1;
       this.getAllPlayers(this.count);
-      console.log(this.count)
+      this.updatePageVisibility();
     }
-    
-  }
-
-  backPage(): void{
-    if(this.count>1){
-      this.count = this.count-1;
-
-      this.getAllPlayers(this.count);
-      console.log(this.count)
+  
+    if (this.count === 209) {
+      this.isLastPage = true;
     }
-    
+  
+    this.isFirstPage = false;
   }
   
+  backPage(): void {
+    if (this.count > 1) {
+      this.count = this.count - 1;
+      this.getAllPlayers(this.count);
+      this.updatePageVisibility();
+    }
+  
+    if (this.count === 1) {
+      this.isFirstPage = true;
+    }
+  
+    this.isLastPage = false;
+  }
+  
+  updatePageVisibility() {
+    this.isFirstPage = this.count === 1;
+    this.isLastPage = this.count === 209; // O el número máximo de páginas
+  }
 
   getAllPlayers(i : number) {
     return this.JugadoresService.getAllPlayers(i).subscribe((p: Player[] | any) => {

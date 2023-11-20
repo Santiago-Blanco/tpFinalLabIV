@@ -1,31 +1,31 @@
 <div class="resultsContainer">
-
+\
     <div class="search-container">
         <input type="text" id="search-input" placeholder="Buscar partidos..." (input)="filterResults($event)">
-        
-      </div>
+
+        <button type="submit" (click)="submitResults()">BUSCAR</button>
+    </div>
 
 
     <ul>
         <li *ngFor="let game of GamesList" class="game-item">
             <div class="game-name" (click)="showAtributes(game)" style="cursor: pointer;">
-                {{ game.home_team.full_name + ' ' + game.home_team_score + ' ' +  game.visitor_team_score +' ' + game.visitor_team.full_name  }}
+                {{ game.home_team.full_name + ' ' + game.home_team_score + ' ' + game.visitor_team_score +' ' +
+                game.visitor_team.full_name }}
             </div>
             <div *ngIf="select==game && atribute">
 
                 <p><strong>Fecha:</strong> {{game.date | date: 'yyyy-MM-dd' || "No hay datos"}}</p>
                 <p><strong>Temporada:</strong> {{game.season|| "No hay datos"}}</p>
-              
 
-                
+
+
             </div>
         </li>
     </ul>
 
     <div class="backNextContainer">
-        <button class="back" (click)="backPage()">Back</button>
-        <button class="next" (click)="nextPage()">Next</button>
+        <button class="back" (click)="backPage()" *ngIf="!isFirstPage">Back</button>
+        <button class="next" (click)="nextPage()" *ngIf="!isLastPage">Next</button>
     </div>
 </div>
-
-

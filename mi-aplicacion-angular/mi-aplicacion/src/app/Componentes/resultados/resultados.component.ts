@@ -11,43 +11,63 @@ import { GamesService, gamesService } from 'src/app/Servicios/Games/games.servic
 export class ResultadosComponent implements OnInit {
 
   public GamesList: Game[] = [];
-  public select:Game| null=null;
-  public atribute=false;
-  public count=1;
+  public select: Game | null = null;
+  public atribute = false;
+  public count = 1;
+  private submitClick: boolean = false;
+  private submitTeam: string = "";
+  public isFirstPage: boolean = true;
+  public isLastPage: boolean = false;
 
-
-  constructor( private JuegosService: GamesService, private route: ActivatedRoute) { }
+  constructor(private JuegosService: GamesService, private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {
     this.getAllGames(1);
     console.log(this.route.paramMap)
-    
+
   }
 
   nextPage(): void {
-    if(this.count <= 209){
-      this.count = this.count+1;
-      
+    if (this.count <= 1877) {
+      this.count = this.count + 1;
+
       this.getAllGames(this.count);
       console.log(this.count)
+      this.updatePageVisibility();
+    } 
+
+    if (this.count === 1877) {
+      this.isLastPage = true;
     }
-    
+  
+    this.isFirstPage = false;
+
   }
 
-  backPage(): void{
-    if(this.count>1){
-      this.count = this.count-1;
+  backPage(): void {
+    if (this.count > 1) {
+      this.count = this.count - 1;
 
       this.getAllGames(this.count);
       console.log(this.count)
+      this.updatePageVisibility();
     }
-    
+
+    if (this.count === 1) {
+      this.isFirstPage = true;
+    }
+  
+    this.isLastPage = false;
+  }
+
+  updatePageVisibility() {
+    this.isFirstPage = this.count === 1;
+    this.isLastPage = this.count === 1877; // O el número máximo de páginas
   }
   
-
-  getAllGames(i : number) {
-    return this.JuegosService.getAllGames(i).subscribe((g:Game[] | any) => {
+  getAllGames(i: number) {
+    return this.JuegosService.getAllGames(i).subscribe((g: Game[] | any) => {
 
       console.log(g.data);
       this.GamesList = this.filterGames(g.data);
@@ -55,14 +75,16 @@ export class ResultadosComponent implements OnInit {
     })
   }
 
-  async getGamesForSearch(name : string) {
+  async getGamesForSearch(name: string) {
     const gamesData = await this.JuegosService.getGamesOfTeam(name);
+    this.GamesList = gamesData;
 
     if (gamesData && gamesData.data) {
       console.log(gamesData.data);
       this.GamesList = this.filterGames(gamesData.data);
       console.log(this.GamesList);
     } else {
+      this.GamesList = [];
       console.log('No se recibió datos válidos de la solicitud.');
     }
 
@@ -71,39 +93,37 @@ export class ResultadosComponent implements OnInit {
 
 
 
-  filterGames(array:Game[]) {
+  filterGames(array: Game[]) {
     return array.filter(game =>
       Object.values(game).some(value => value !== null)
     );
   }
 
-  filterResults(event: Event): void {
+  filterResults(event: Event) {
     const searchText = (event.target as HTMLInputElement).value.toLowerCase();
 
     if (searchText.trim() === '') {
-        this.getAllGames(1);
-        return;
-    } else {
-      this.getGamesForSearch(searchText.trim());
+      this.getAllGames(1);
     }
+  }
 
-    /*this.GamesList = this.GamesList.filter(game =>
-        game.visitor_team.full_name.toLowerCase().includes(searchText) ||
-        game.home_team.full_name.toLowerCase().includes(searchText) ||
-        game.date.toString().includes(searchText)
-    );*/
-}
+  submitResults() {
+    const searchText = (document.getElementById('search-input') as HTMLInputElement).value.toLowerCase();
 
+    console.log(searchText);
 
-  showAtributes(game:Game){
+    this.getGamesForSearch(searchText)
+  }
 
-    if(this.select===game){
-      this.select=null;
-      this.atribute=false;
+  showAtributes(game: Game) {
+
+    if (this.select === game) {
+      this.select = null;
+      this.atribute = false;
     }
-    else{
-      this.select=game;
-      this.atribute=true;
+    else {
+      this.select = game;
+      this.atribute = true;
     }
 
   }
