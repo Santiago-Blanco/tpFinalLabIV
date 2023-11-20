@@ -15,7 +15,7 @@
             </div>
             <div *ngIf="select==game && atribute">
 
-                <p><strong>Fecha:</strong> {{game.date || "No hay datos"}}</p>
+                <p><strong>Fecha:</strong> {{game.date | date: 'yyyy-MM-dd' || "No hay datos"}}</p>
                 <p><strong>Temporada:</strong> {{game.season|| "No hay datos"}}</p>
 
 
