@@ -91,6 +91,31 @@
         align-items: center;
         margin: 20px;
       }
+
+      .search-container button {
+        margin-left: 10px;
+        padding: 10px 20px;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 0px;
+        cursor: pointer;
+        box-shadow: 2px 2px 4px #888888; 
+        transition: all 0.3s ease; 
+      }
+
+      
+      .search-container button:first-child {
+        margin-left: 0;
+      }
+      
+      .search-container button:hover {
+        background-color: #45a049; 
+      }
+      
+      .search-container button:active {
+        background-color: #3e8e41; 
+      }
       
       #search-input {
         padding: 10px;
