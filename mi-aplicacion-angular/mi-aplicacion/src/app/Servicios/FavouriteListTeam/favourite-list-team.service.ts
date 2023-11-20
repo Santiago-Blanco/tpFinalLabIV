@@ -56,7 +56,7 @@ export class FavouriteListService {
         }
       }),
       catchError((error) => {
-        console.error('Error al obtener resultados:', error);
+        console.error('Error al obtener los resultados:', error);
         return [];
       })
     );
