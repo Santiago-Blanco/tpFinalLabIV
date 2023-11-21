@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamsService } from 'src/app/Servicios/Teams/teams.service';
 import { Team } from 'src/app/types/Teams';
+import { FavouriteListService } from 'src/app/Servicios/FavouriteListTeam/favourite-list-team.service';
 
 @Component({
   selector: 'app-detalle-team',
@@ -12,7 +13,7 @@ export class DetalleTeamComponent {
   public id: number = -1;
   public team : Team = {} as Team;
 
-  constructor(private route: ActivatedRoute, private service : TeamsService, private router : Router){}
+  constructor(private route: ActivatedRoute, private service : TeamsService, private router : Router, private favoriteListService : FavouriteListService){}
 
   ngOnInit() {
     this.id = +this.route.snapshot.paramMap.get('id')!;
@@ -31,6 +32,22 @@ export class DetalleTeamComponent {
       console.log("Error al traer el equipo " + error);
     }
   
+  }
+
+  verifyFavourite(team : Team): boolean {
+
+    const favoriteTeams = this.favoriteListService.getData();
+
+    if(favoriteTeams){
+      return favoriteTeams.some(favoriteTeam => favoriteTeam.id === team.id);
+    }
+
+    console.log("aaaaaaaaaa")
+    console.log(this.favoriteListService.getData())
+    console.log(this.favoriteListService.getData()?.includes(team))///
+    console.log(team);
+
+    return false;
   }
 
   loadImage(){

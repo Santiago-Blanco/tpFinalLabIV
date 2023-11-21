@@ -43,6 +43,15 @@ import { Component, Input, OnInit } from '@angular/core';
 
     }
 
+    loadImage(team : Team){
+      if(team.id < 31){
+        return `../../../assets/teams/${team.id}.webp`
+      } else {
+        return `../../../assets/teams/100.webp`
+      }
+      
+    }
+
     soundsOUT(){
       this.soundOUT.stop();
       this.soundOUT.volume(0.3);

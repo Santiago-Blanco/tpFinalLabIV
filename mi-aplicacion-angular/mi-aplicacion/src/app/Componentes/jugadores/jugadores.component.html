@@ -8,6 +8,7 @@
   <div class="search-container">
     <input type="text" id="search-input" placeholder="Buscar jugadores..." (input)="filterPlayers($event)">
     <ul id="results-list" class="results-list"></ul>
+    <input type="number" placeholder="Buscar pagina:" class="searchPage" [(ngModel)]="pageNumber" (keyup.enter)="searchPage()" >
   </div>
 
   <ul>
@@ -42,8 +43,12 @@
             <p><strong>Posición:</strong> {{player.position || "------------------"}}</p>
             <p><strong>Altura en pies:</strong> {{player.height_feet || "------------------"}}</p>
             <p><strong>Peso en libras:</strong> {{player.weight_pounds || "------------------"}}</p>
+
+     
+
             <button type="button" id="teamNav" (click)="goToTeam(player.team.id)"><strong>Equipo:</strong> {{player.team.full_name || "------------------"}}</button>
            
+
           </div>
           
         </div>
@@ -69,4 +74,6 @@
     <button class="back" (click)="backPage()" *ngIf="!isFirstPage"> Back</button>
     <button class="next" (click)="nextPage()" *ngIf="!isLastPage">Next</button>
   </div>
+
+  <p class="page" style="color: white;">{{count}}</p>
 </div>

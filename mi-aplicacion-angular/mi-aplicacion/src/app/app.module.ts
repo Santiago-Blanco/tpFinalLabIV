@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FavouriteListPlayerComponent } from './Componentes/favourite-list-player/favourite-list-player.component';
 import { ProfileComponent } from './Componentes/header/profile/profile.component';
 import { DetalleTeamComponent } from './Componentes/detalle-team/detalle-team.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { DetalleTeamComponent } from './Componentes/detalle-team/detalle-team.co
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [LoginRegisterService, FavouriteListService],
   bootstrap: [AppComponent]

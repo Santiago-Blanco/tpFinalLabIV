@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/types/Games';
 import { GamesService, gamesService } from 'src/app/Servicios/Games/games.service';
+import { Team } from 'src/app/types/Teams';
 
 @Component({
   selector: 'app-resultados',
@@ -18,6 +19,7 @@ export class ResultadosComponent implements OnInit {
   private submitTeam: string = "";
   public isFirstPage: boolean = true;
   public isLastPage: boolean = false;
+  public pageNumber : number = 1;
 
   constructor(private JuegosService: GamesService, private route: ActivatedRoute) { }
 
@@ -91,6 +93,17 @@ export class ResultadosComponent implements OnInit {
 
   }
 
+  searchPage(){
+    this.count = this.pageNumber;
+    this.getAllGames(this.pageNumber);
+  }
+
+  @HostListener('document:keyup', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.searchPage();
+    }
+  }
 
 
   filterGames(array: Game[]) {
@@ -104,6 +117,11 @@ export class ResultadosComponent implements OnInit {
 
     if (searchText.trim() === '') {
       this.getAllGames(1);
+      this.isLastPage=false;
+
+    } else {
+      this.isFirstPage=true;
+      this.isLastPage=true;
     }
   }
 
@@ -126,6 +144,15 @@ export class ResultadosComponent implements OnInit {
       this.atribute = true;
     }
 
+  }
+
+  loadImage(id : number){
+    if(id < 31){
+      return `../../../assets/teams/${id}.webp`
+    } else {
+      return `../../../assets/teams/100.webp`
+    }
+    
   }
 
 

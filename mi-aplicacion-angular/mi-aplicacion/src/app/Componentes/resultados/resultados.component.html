@@ -4,14 +4,18 @@
         <input type="text" id="search-input" placeholder="Buscar partidos..." (input)="filterResults($event)">
 
         <button type="submit" (click)="submitResults()">BUSCAR</button>
+
+        <input type="number" placeholder="Buscar pagina:" class="searchPage" [(ngModel)]="pageNumber" (keyup.enter)="searchPage()" >
     </div>
 
 
     <ul>
         <li *ngFor="let game of GamesList" class="game-item">
             <div class="game-name" (click)="showAtributes(game)" style="cursor: pointer;">
-                {{ game.home_team.full_name + ' ' + game.home_team_score + ' ' + game.visitor_team_score +' ' +
-                game.visitor_team.full_name }}
+                <img class="teamLogo" [src]="loadImage(game.home_team.id)" alt="imagen Equipo"> 
+                {{ game.home_team.full_name + ' ' + game.home_team_score + ' ' + game.visitor_team_score +' ' + game.visitor_team.full_name }} 
+                <img style="margin-left: 2rem;" class="teamLogo" [src]="loadImage(game.visitor_team.id)" alt="imagen Equipo"> 
+
             </div>
             <div *ngIf="select==game && atribute">
 
@@ -27,5 +31,6 @@
     <div class="backNextContainer">
         <button class="back" (click)="backPage()" *ngIf="!isFirstPage">Back</button>
         <button class="next" (click)="nextPage()" *ngIf="!isLastPage">Next</button>
+        <p class="page" style="color: white;">{{count}}</p>
     </div>
 </div>

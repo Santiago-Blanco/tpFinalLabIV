@@ -2,6 +2,9 @@
   <ul>
     <li *ngFor="let favoriteTeam of favoriteList" class="favteam-item">
       <div class="favteam-name" (click)="showAtributesFavTeam(favoriteTeam)" style="cursor: pointer;">
+
+        <img class="teamLogo" [src]="loadImage(favoriteTeam)" alt="imagen Equipo">
+
         {{favoriteTeam.full_name}}
       </div>
       <div *ngIf="select==favoriteTeam && atribute">
