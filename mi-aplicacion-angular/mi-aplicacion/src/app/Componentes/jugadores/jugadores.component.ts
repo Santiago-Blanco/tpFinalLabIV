@@ -167,6 +167,35 @@ export class JugadoresComponent implements OnInit {
   }
   
 
+  isKnownPlayer(player: Player): boolean {
+   
+    const knownPlayerIds = [237 , 115, 145, 15, 246, 132, 434, 140, 79, 666969, 228, 192];  //lebron, curry, embiid, anteto, jokic, dondic, tautin, durant, buttler , wilson zion, kail irving, harden
+     return knownPlayerIds.some(Element=> player.id === Element);
+  }
+
+  getPlayerImage(player: Player): string {
+  
+    const playerImageMap: { [id: number]: string } = {
+      237: 'ruta/imagen/lebron.jpg',
+      115: 'ruta/imagen/curry.jpg',
+      145: 'ruta/imagen/curry.jpg',
+      15: 'ruta/imagen/curry.jpg',
+      246: 'ruta/imagen/curry.jpg',
+      132: '../../../assets/players/doncic.webp',
+      434: 'ruta/imagen/curry.jpg',
+      140: 'ruta/imagen/curry.jpg',
+      79: 'ruta/imagen/curry.jpg',
+      66969: 'ruta/imagen/curry.jpg',
+      228: 'ruta/imagen/curry.jpg',
+      192: 'ruta/imagen/curry.jpg',
+
+  
+    };
+
+  
+    return this.isKnownPlayer(player) ? playerImageMap[player.id] : '../../../assets/players/imagenJugadores.webp';
+  }
+
 
   showAtributes(player: Player){
 

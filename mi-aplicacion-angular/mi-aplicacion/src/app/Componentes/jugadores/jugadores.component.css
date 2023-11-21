@@ -119,6 +119,13 @@
       color: #000; 
       transition: 0.3s;
     }
+
+    .PlayerLogo {
+      max-width: 10%;
+      height: auto;
+      display: flexbox;
+      margin-right: 2rem;
+    }
   
     .search-container {
       display: flex;

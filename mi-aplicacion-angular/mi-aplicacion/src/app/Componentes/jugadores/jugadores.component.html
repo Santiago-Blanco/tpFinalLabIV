@@ -12,6 +12,15 @@
 
   <ul>
     <li *ngFor="let player of playersList" class="player-item">
+      <ng-container *ngIf="isKnownPlayer(player)">
+        
+        <img class="PlayerLogo" [src]="getPlayerImage(player)" alt="Imagen de jugador" >
+      </ng-container>
+      <ng-container *ngIf="!isKnownPlayer(player)">
+        
+        <img src="../../../assets/players/ImagenJugadoresGene.webp" alt="Imagen genérica" class="PlayerLogo" >
+      </ng-container>
+  
 
       <div class="player-name" (click)="showAtributes(player)" style="cursor: pointer; ">
         {{ player.first_name + ' ' + player.last_name }}
