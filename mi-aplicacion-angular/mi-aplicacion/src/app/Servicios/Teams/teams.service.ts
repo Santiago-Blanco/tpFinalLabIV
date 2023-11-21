@@ -59,6 +59,11 @@ export class TeamsService {
     const datos = this.httpClient.get(`https://www.balldontlie.io/api/v1/teams?page=${i}`)
     return datos
   }
+
+  getTeam(id : Number){
+    const datos = this.httpClient.get(`https://www.balldontlie.io/api/v1/teams/${id}`);
+    return datos;
+  }
 }
 
 

@@ -123,6 +123,15 @@ export class EquiposComponent implements OnInit {
     }
   }
 
+  loadImage(team : Team){
+    if(team.id < 31){
+      return `../../../assets/teams/${team.id}.webp`
+    } else {
+      return `../../../assets/teams/100.webp`
+    }
+    
+  }
+
   filterTeams(event: Event): void {
     const searchText = (event.target as HTMLInputElement).value.toLowerCase();
 

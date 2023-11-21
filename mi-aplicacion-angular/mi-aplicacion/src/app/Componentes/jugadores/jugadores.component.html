@@ -12,20 +12,34 @@
 
   <ul>
     <li *ngFor="let player of playersList" class="player-item">
-      <div class="player-name" (click)="showAtributes(player)" style="cursor: pointer;">
+
+      <div class="player-name" (click)="showAtributes(player)" style="cursor: pointer; ">
         {{ player.first_name + ' ' + player.last_name }}
       </div>
 
       <div *ngIf="select==player && atribute" >
-
         <div *ngIf="seasonAverages && seasonAverages.data && seasonAverages.data.length > 0 else noData" >
-          <h3>Ultima Temporada: {{ seasonAverages.data[0].season || "------------------" }}</h3>
-          <p><strong>Partidos jugados:</strong> {{ seasonAverages.data[0].games_played|| "------------------" }}</p>
-          <p><strong>Minutos:</strong> {{ seasonAverages.data[0].min||"------------------" }}</p>
-          <p><strong>Puntos:</strong> {{ seasonAverages.data[0].pts|| "------------------" }}</p>
-          <p><strong>Asistencias:</strong> {{ seasonAverages.data[0].ast|| "------------------" }}</p>
-          <p><strong>Rebotes:</strong> {{ seasonAverages.data[0].reb|| "------------------" }}</p>
-          <p><strong>Bloqueos:</strong> {{ seasonAverages.data[0].stl|| "------------------" }}</p>
+          <div class="estadisticas">
+            <h3>Ultima Temporada: <span> {{ seasonAverages.data[0].season || "------------------" }}</span></h3>
+            <p><strong>Partidos jugados:</strong> <span>{{ seasonAverages.data[0].games_played|| "------------------" }}</span></p>
+            <p><strong>Minutos:</strong> <span>{{ seasonAverages.data[0].min||"------------------" }}</span></p>
+            <p><strong>Puntos:</strong> <span>{{ seasonAverages.data[0].pts|| "------------------" }}</span></p>
+            <p><strong>Asistencias:</strong> <span>{{ seasonAverages.data[0].ast|| "------------------" }}</span></p>
+            <p><strong>Rebotes:</strong> <span>{{ seasonAverages.data[0].reb|| "------------------" }}</span></p>
+            <p><strong>Bloqueos:</strong> <span>{{ seasonAverages.data[0].stl|| "------------------" }}</span></p>
+          </div>
+          
+          <div class="datosPersonales">
+            <p><strong>Posición:</strong> {{player.position || "------------------"}}</p>
+            <p><strong>Altura en pies:</strong> {{player.height_feet || "------------------"}}</p>
+            <p><strong>Altura en pulgadas:</strong> {{player.height_inches || "------------------"}}</p>
+            <p><strong>Peso en libras:</strong> {{player.weight_pounds || "------------------"}}</p>
+            <button type="button" id="teamNav" (click)="goToTeam(player.team.id)"><strong>Equipo:</strong> {{player.team.full_name || "------------------"}}</button>
+            <p><strong>Ciudad:</strong> {{player.team.city || "------------------"}}</p>
+            <p><strong>Conferencia:</strong> {{player.team.conference || "------------------"}}</p>
+            <p><strong>División:</strong> {{player.team.division || "------------------"}}</p>
+          </div>
+          
         </div>
 
         <ng-template #noData>
@@ -37,6 +51,7 @@
           <p><strong>Altura en pies:</strong> {{player.height_feet || "------------------"}}</p>
           <p><strong>Peso en libras:</strong> {{player.weight_pounds || "------------------"}}</p>
           <p><strong>Equipo:</strong> {{player.team.full_name || "------------------"}}</p>
+
       
         </div>
       

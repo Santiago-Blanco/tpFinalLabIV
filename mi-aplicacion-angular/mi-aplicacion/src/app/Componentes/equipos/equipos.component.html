@@ -18,7 +18,7 @@
     <ul>
         <li *ngFor="let team of teamsList" class="team-item">
             <div class="team-name" (click)="showAtributes(team)" style="cursor: pointer;">
-                {{ team.full_name }}
+                <img class="teamLogo" [src]="loadImage(team)" alt="imagen Equipo">{{ team.full_name }} 
             </div>
             <div *ngIf="select==team && atribute">
 
@@ -39,7 +39,7 @@
         </li>
     </ul>
   
-
+    
     <div class="backNextContainer">
         <button class="back" (click)="backPage()" *ngIf="showBackButton">Back</button>
         <button class="next" (click)="nextPage()" *ngIf="showNextButton">Next</button>
