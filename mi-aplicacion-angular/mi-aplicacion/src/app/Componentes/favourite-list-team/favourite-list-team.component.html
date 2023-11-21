@@ -20,7 +20,7 @@
 
         <h2>Jugadores:</h2>
         <ul *ngIf="teamPlayers && teamPlayers.length">
-          <li *ngFor="let player of teamPlayers">
+          <li *ngFor="let player of teamPlayers.slice(0, 12 )">
             {{ player.first_name }} {{ player.last_name }}
           </li>
         </ul>

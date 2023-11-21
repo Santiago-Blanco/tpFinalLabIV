@@ -43,11 +43,12 @@ export class FavouriteListService {
     return this.favoriteList.find((team) => team.id === teamId);
   }
 
-  getRecentResults(teamId: number, limit: number = 5): Observable<Game[]> {
-    const resultsUrl = `${this.apiUrl}/games?team_ids[]=${teamId}&limit=${limit}`;
+  private fetchResultsPage(teamId: number, page: number, limit: number): Observable<Game[]> {
+    const resultsUrl = `${this.apiUrl}/games?team_ids[]=${teamId}&per_page=100&page=${page}`;
+  
     return this.http.get<Game[]>(resultsUrl).pipe(
       map((data: any) => {
-        const dataArray = data && data.data ? data.data : [];////////////////////////
+        const dataArray = data && data.data ? data.data : [];
         if (Array.isArray(dataArray)) {
           return dataArray;
         } else {
@@ -56,12 +57,38 @@ export class FavouriteListService {
         }
       }),
       catchError((error) => {
-        console.error('Error al obtener los resultados:', error);
-        return [];
+        console.error('Error al obtener resultados:', error);
+        return of([] as Game[]);
+      })
+    );
+  }
+  
+  private fetchAllResultsRecursive(teamId: number, page: number, limit: number, allResults: Game[]): Observable<Game[]> {
+    return this.fetchResultsPage(teamId, page, limit).pipe(
+      concatMap((results: Game[]) => {
+        if (results.length > 0) {
+          allResults = allResults.concat(results);
+          return this.fetchAllResultsRecursive(teamId, page + 1, limit, allResults);
+        } else {
+          return of(allResults);
+        }
+      })
+    );
+  }
+  
+  getRecentResults(teamId: number, limit: number = 5): Observable<Game[]> {
+    return this.fetchAllResultsRecursive(teamId, 1, limit, []).pipe(
+      map((allResultsArray: Game[]) => {
+        const currentDate = new Date(); // Obtener la fecha actual
+        return allResultsArray
+          .filter((result: Game) => new Date(result.date) <= currentDate) // Filtrar por fechas pasadas o actuales
+          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          .slice(0, limit);
       })
     );
   }
 
+  
   private fetchPlayersPage(teamId: number, page: number): Observable<Player[]> {
     const playersUrl = `${this.apiUrl}/players?teamId=${teamId}&per_page=100&page=${page}`;
 
@@ -103,7 +130,11 @@ export class FavouriteListService {
       })
     );
   }
+
+  
 }
+
+
   
 
 
