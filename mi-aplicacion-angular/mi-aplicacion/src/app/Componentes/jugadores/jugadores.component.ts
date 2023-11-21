@@ -155,10 +155,13 @@ export class JugadoresComponent implements OnInit {
     if (searchText.trim() === '') {
         this.playersList.length = 0;
         this.getAllPlayers(1);
+        this.isLastPage = false;
         
         return;
     } else {
       this.getPlayersForSearch(searchText.trim());
+      this.isFirstPage=true;
+      this.isLastPage=true
     }
 
 }

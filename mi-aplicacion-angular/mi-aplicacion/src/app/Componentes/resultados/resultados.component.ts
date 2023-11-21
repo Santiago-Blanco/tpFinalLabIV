@@ -117,6 +117,11 @@ export class ResultadosComponent implements OnInit {
 
     if (searchText.trim() === '') {
       this.getAllGames(1);
+      this.isLastPage=false;
+
+    } else {
+      this.isFirstPage=true;
+      this.isLastPage=true;
     }
   }
 

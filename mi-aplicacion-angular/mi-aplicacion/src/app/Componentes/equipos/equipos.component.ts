@@ -140,8 +140,12 @@ export class EquiposComponent implements OnInit {
         this.getAllTeams(1);
         this.isFirstKeyDown = true;
 
+        this.showNextButton = true;
 
         return;
+    } else {
+      this.showNextButton = false;
+      this.showBackButton = false;
     }
 
     this.teamsList = this.teamsList.filter(team =>
