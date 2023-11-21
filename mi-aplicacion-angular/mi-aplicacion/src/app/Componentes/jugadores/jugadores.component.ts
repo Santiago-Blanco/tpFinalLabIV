@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Player } from 'src/app/types/Players';
 import { PlayersService } from 'src/app/Servicios/Players/players.service';
@@ -26,6 +26,7 @@ export class JugadoresComponent implements OnInit {
   private soundOUT : Howl;
   public isFirstPage: boolean = true;
   public isLastPage: boolean = false;
+  public pageNumber : number = 1;
 
 
   constructor(private router: Router, private favoriteListService: FavouriteListService, private JugadoresService: PlayersService, private route: ActivatedRoute) { 
@@ -51,6 +52,18 @@ export class JugadoresComponent implements OnInit {
       this.favoriteList = [];
     }
 
+  }
+
+  searchPage(){
+    this.count = this.pageNumber;
+    this.getAllPlayers(this.pageNumber);
+  }
+
+  @HostListener('document:keyup', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.searchPage();
+    }
   }
 
   soundsIN(){

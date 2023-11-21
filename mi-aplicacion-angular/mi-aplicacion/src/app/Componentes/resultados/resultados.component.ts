@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/types/Games';
 import { GamesService, gamesService } from 'src/app/Servicios/Games/games.service';
@@ -18,6 +18,7 @@ export class ResultadosComponent implements OnInit {
   private submitTeam: string = "";
   public isFirstPage: boolean = true;
   public isLastPage: boolean = false;
+  public pageNumber : number = 1;
 
   constructor(private JuegosService: GamesService, private route: ActivatedRoute) { }
 
@@ -91,6 +92,17 @@ export class ResultadosComponent implements OnInit {
 
   }
 
+  searchPage(){
+    this.count = this.pageNumber;
+    this.getAllGames(this.pageNumber);
+  }
+
+  @HostListener('document:keyup', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.searchPage();
+    }
+  }
 
 
   filterGames(array: Game[]) {

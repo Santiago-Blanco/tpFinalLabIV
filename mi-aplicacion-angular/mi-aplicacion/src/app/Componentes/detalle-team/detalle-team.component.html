@@ -7,7 +7,7 @@
         <p>Conferencia: <span>{{ team.conference }}</span></p>
         <p>División: <span>{{ team.division }}</span></p>
         <p>Nombre: <span>{{ team.name }}</span></p>
-        <p>¿Es favorito?: <span>{{ team.Favorite ? 'Sí' : 'No' }}</span></p>
+        <p>¿Es favorito?: <span>{{ verifyFavourite(team) ? 'Sí' : 'No' }}</span></p>
     </div>
     
     <div *ngIf="!team" class="loading-container">
