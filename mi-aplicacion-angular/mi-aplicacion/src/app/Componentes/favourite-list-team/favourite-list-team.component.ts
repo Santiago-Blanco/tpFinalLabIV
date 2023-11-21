@@ -63,7 +63,7 @@ import { Component, Input, OnInit } from '@angular/core';
             (data) => {
               console.log('Resultados obtenidos:', data);
               if (Array.isArray(data)) {
-                // Ordena los resultados por fecha de manera descendente
+  
                 this.recentResults = data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
               }
             },
