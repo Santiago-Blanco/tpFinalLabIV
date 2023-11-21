@@ -41,12 +41,9 @@
           <div class="datosPersonales">
             <p><strong>Posición:</strong> {{player.position || "------------------"}}</p>
             <p><strong>Altura en pies:</strong> {{player.height_feet || "------------------"}}</p>
-            <p><strong>Altura en pulgadas:</strong> {{player.height_inches || "------------------"}}</p>
             <p><strong>Peso en libras:</strong> {{player.weight_pounds || "------------------"}}</p>
             <button type="button" id="teamNav" (click)="goToTeam(player.team.id)"><strong>Equipo:</strong> {{player.team.full_name || "------------------"}}</button>
-            <p><strong>Ciudad:</strong> {{player.team.city || "------------------"}}</p>
-            <p><strong>Conferencia:</strong> {{player.team.conference || "------------------"}}</p>
-            <p><strong>División:</strong> {{player.team.division || "------------------"}}</p>
+           
           </div>
           
         </div>
@@ -54,12 +51,6 @@
         <ng-template #noData>
 
         </ng-template>
-
-  
-          <p><strong>Posición:</strong> {{player.position || "------------------"}}</p>
-          <p><strong>Altura en pies:</strong> {{player.height_feet || "------------------"}}</p>
-          <p><strong>Peso en libras:</strong> {{player.weight_pounds || "------------------"}}</p>
-          <p><strong>Equipo:</strong> {{player.team.full_name || "------------------"}}</p>
 
       
         </div>

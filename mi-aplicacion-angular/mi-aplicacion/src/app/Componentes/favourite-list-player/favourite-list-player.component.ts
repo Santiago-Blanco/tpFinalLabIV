@@ -2,6 +2,7 @@ import { Component, Input, OnInit} from '@angular/core';
 import { FavouriteListService } from 'src/app/Servicios/FavouriteListPlayer/favourite-list-pla.service';
 import { Player } from 'src/app/types/Players';
 import { PlayersService } from 'src/app/Servicios/Players/players.service'; 
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class FavouriteListPlayerComponent {
   public seasonAverages: any;
 
 
-  constructor (private favoriteListService: FavouriteListService, private jugadoresServiceFav: PlayersService ){}
+  constructor (private favoriteListService: FavouriteListService, private jugadoresServiceFav: PlayersService, private router: Router ){}
 
   ngOnInit(){
 
@@ -50,6 +51,40 @@ export class FavouriteListPlayerComponent {
     }
 
 
+  }
+
+  goToTeam(id : Number){
+    this.router.navigate(['/team', id]);
+
+  }
+
+  isKnownPlayer(player: Player): boolean {
+   
+    const knownPlayerIds = [237 , 115, 145, 15, 246, 132, 434, 140, 79, 666969, 228, 192];  //lebron, curry, embiid, anteto, jokic, dondic, tautin, durant, buttler , wilson zion, kail irving, harden
+     return knownPlayerIds.some(Element=> player.id === Element);
+  }
+
+  getPlayerImage(player: Player): string {
+  
+    const playerImageMap: { [id: number]: string } = {
+      237: '../../../assets/players/lebron.webp',
+      115: '../../../assets/players/curry.webp',
+      145: '../../../assets/players/embiid.webp',
+      15: '../../../assets/players/anteto.webp',
+      246: '../../../assets/players/jokic.webp',
+      132: '../../../assets/players/doncic.webp',
+      434: '../../../assets/players/tatum.webp',
+      140: '../../../assets/players/durant.webp',
+      79: '../../../assets/players/butlerEmo.webp',
+      666969: '../../../assets/players/zion.webp',
+      228: '../../../assets/players/irving.webp',
+      192: '../../../assets/players/harden.webp',
+
+  
+    };
+
+  
+    return this.isKnownPlayer(player) ? playerImageMap[player.id] : '../../../assets/players/imagenJugadores.webp';
   }
 
   addRemovePlayerList(player: Player) {
