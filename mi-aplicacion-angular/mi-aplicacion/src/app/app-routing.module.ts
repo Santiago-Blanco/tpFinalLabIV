@@ -12,31 +12,33 @@ import { RegisterComponent } from './Componentes/register-login/register/registe
 import { FavouriteListComponent } from './Componentes/favourite-list-team/favourite-list-team.component';
 import { FavouriteListPlayerComponent } from './Componentes/favourite-list-player/favourite-list-player.component';
 import { AuthGuard } from './auth.guard';
+import { DetalleTeamComponent } from './Componentes/detalle-team/detalle-team.component';
 
 const routes: Routes = [
   { path: 'sections', component: SeccionesComponent },
-  { path: 'teams', component: EquiposComponent, /*canActivate: [AuthGuard]*/},
-  { path: 'players', component : JugadoresComponent, /*canActivate: [AuthGuard]*/},
-  { path: 'results', component : ResultadosComponent, /*canActivate: [AuthGuard]*/},
-  { path: 'aboutUs', component : SobreNosotrosComponent},
-  { path: 'registerLogin', component: RegisterLoginComponent},
-  { path: 'registerLogin/login', component : LoginComponent},
-  { path: 'registerLogin/register', component: RegisterComponent},
-  { path: 'favourite-list', component: FavouriteListComponent, /*canActivate: [AuthGuard]*/},
-  {path: 'favourite-list-pla', component: FavouriteListPlayerComponent, /*canActivate: [AuthGuard]*/},
-  { path: '', redirectTo: '/sections', pathMatch: 'full'},
-  { path: '**', component : PageNotFoundComponent},
+  { path: 'teams', component: EquiposComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'players', component: JugadoresComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'results', component: ResultadosComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'team/:id', component: DetalleTeamComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'aboutUs', component: SobreNosotrosComponent },
+  { path: 'registerLogin', component: RegisterLoginComponent },
+  { path: 'registerLogin/login', component: LoginComponent },
+  { path: 'registerLogin/register', component: RegisterComponent },
+  { path: 'favourite-list', component: FavouriteListComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'favourite-list-pla', component: FavouriteListPlayerComponent, /*canActivate: [AuthGuard]*/ },
+  { path: '', redirectTo: '/sections', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent },
 ]
 
 @NgModule({
   imports: [
     RouterModule.forRoot(
       routes
-      )
-    ],
-    exports : [
-      RouterModule
-    ]
+    )
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 
 export class AppRoutingModule {

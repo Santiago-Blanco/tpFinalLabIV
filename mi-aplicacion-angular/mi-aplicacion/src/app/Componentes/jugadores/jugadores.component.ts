@@ -4,6 +4,8 @@ import { Player } from 'src/app/types/Players';
 import { PlayersService } from 'src/app/Servicios/Players/players.service';
 import { FavouriteListService } from 'src/app/Servicios/FavouriteListPlayer/favourite-list-pla.service';
 import { Howl } from 'howler';
+import { Router } from '@angular/router';
+import { Team } from 'src/app/types/Teams';
 
 @Component({
   selector: 'app-jugadores',
@@ -26,7 +28,7 @@ export class JugadoresComponent implements OnInit {
   public isLastPage: boolean = false;
 
 
-  constructor(private favoriteListService: FavouriteListService, private JugadoresService: PlayersService, private route: ActivatedRoute) { 
+  constructor(private router: Router, private favoriteListService: FavouriteListService, private JugadoresService: PlayersService, private route: ActivatedRoute) { 
     this.soundIN = new Howl({
       src: ['/assets/nbaMP3.mp3']
     })
@@ -94,6 +96,11 @@ export class JugadoresComponent implements OnInit {
   updatePageVisibility() {
     this.isFirstPage = this.count === 1;
     this.isLastPage = this.count === 209; // O el número máximo de páginas
+  }
+
+  goToTeam(id : Number){
+    this.router.navigate(['/team', id]);
+
   }
 
   getAllPlayers(i : number) {

@@ -43,6 +43,13 @@
   transition: 0.3s;
 }
 
+.teamLogo {
+  max-width: 5%;
+  height: auto;
+  display: flexbox;
+  margin-right: 2rem;
+}
+
 .next{
   background-color: #000; 
   color: #fff; 

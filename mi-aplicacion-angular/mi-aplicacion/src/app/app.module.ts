@@ -20,6 +20,7 @@ import { LoginComponent } from './Componentes/register-login/login/login.compone
 import { ReactiveFormsModule } from '@angular/forms';
 import { FavouriteListPlayerComponent } from './Componentes/favourite-list-player/favourite-list-player.component';
 import { ProfileComponent } from './Componentes/header/profile/profile.component';
+import { DetalleTeamComponent } from './Componentes/detalle-team/detalle-team.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ProfileComponent } from './Componentes/header/profile/profile.component
     LoginComponent,
     FavouriteListPlayerComponent,
     ProfileComponent,
+    DetalleTeamComponent,
   ],
   imports: [
     BrowserModule,
