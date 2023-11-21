@@ -18,7 +18,7 @@
     <ul>
         <li *ngFor="let team of teamsList" class="team-item">
             <div class="team-name" (click)="showAtributes(team)" style="cursor: pointer;">
-                <img class="teamLogo" [src]="loadImage(team)" alt="imagen Equipo">{{ team.full_name }} 
+                <img class="teamLogo" [src]="loadImage(team)" alt="imagen Equipo"> {{ team.full_name }} 
             </div>
             <div *ngIf="select==team && atribute">
 

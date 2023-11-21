@@ -96,6 +96,13 @@
         box-shadow: 2px 2px 4px #888888; 
         transition: all 0.3s ease; 
       }
+
+      .teamLogo {
+        max-width: 5%;
+        height: auto;
+        display: flexbox;
+        margin-right: 2rem;
+      }
     
       .search-container {
         display: flex;

@@ -12,8 +12,10 @@
     <ul>
         <li *ngFor="let game of GamesList" class="game-item">
             <div class="game-name" (click)="showAtributes(game)" style="cursor: pointer;">
-                {{ game.home_team.full_name + ' ' + game.home_team_score + ' ' + game.visitor_team_score +' ' +
-                game.visitor_team.full_name }}
+                <img class="teamLogo" [src]="loadImage(game.home_team.id)" alt="imagen Equipo"> 
+                {{ game.home_team.full_name + ' ' + game.home_team_score + ' ' + game.visitor_team_score +' ' + game.visitor_team.full_name }} 
+                <img style="margin-left: 2rem;" class="teamLogo" [src]="loadImage(game.visitor_team.id)" alt="imagen Equipo"> 
+
             </div>
             <div *ngIf="select==game && atribute">
 

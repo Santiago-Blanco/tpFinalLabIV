@@ -12,6 +12,13 @@
     
 }
 
+.teamLogo {
+  max-width: 5%;
+  height: auto;
+  display: flexbox;
+  margin-right: 2rem;
+}
+
 .favteam-item {
     list-style: none;
     border: 1px solid #eaeaea;

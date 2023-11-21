@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/types/Games';
 import { GamesService, gamesService } from 'src/app/Servicios/Games/games.service';
+import { Team } from 'src/app/types/Teams';
 
 @Component({
   selector: 'app-resultados',
@@ -138,6 +139,15 @@ export class ResultadosComponent implements OnInit {
       this.atribute = true;
     }
 
+  }
+
+  loadImage(id : number){
+    if(id < 31){
+      return `../../../assets/teams/${id}.webp`
+    } else {
+      return `../../../assets/teams/100.webp`
+    }
+    
   }
 
 
