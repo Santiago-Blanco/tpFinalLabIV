@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
   import { Player } from 'src/app/types/Players';
   import { Howl } from 'howler';
   import { Game } from 'src/app/types/Games';
+  import { Router } from '@angular/router';
 
   @Component({
     selector: 'app-favourite-list',
@@ -21,7 +22,7 @@ import { Component, Input, OnInit } from '@angular/core';
     public recentResults: Game[] = [];
     public teamPlayers: Player[] = [];
 
-    constructor(private favoriteListService: FavouriteListService) { 
+    constructor(private favoriteListService: FavouriteListService, private router: Router) { 
 
   
       this.soundOUT = new Howl({
@@ -104,6 +105,12 @@ import { Component, Input, OnInit } from '@angular/core';
         }
       }
     }
+
+    goToTeam(id : Number){
+      this.router.navigate(['/team', id]);
+  
+    }
+
     
 
     addRemoveTeamList(team: Team) {

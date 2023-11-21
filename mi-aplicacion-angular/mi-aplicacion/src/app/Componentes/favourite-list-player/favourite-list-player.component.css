@@ -35,6 +35,13 @@
     width: 800;
     color: white;
   }
+
+  .PlayerLogoFav {
+    max-width: 10%;
+    height: auto;
+    display: flexbox;
+    margin-right: 2rem;
+  }
   
     .favplayer-name {
       flex-grow: 1;

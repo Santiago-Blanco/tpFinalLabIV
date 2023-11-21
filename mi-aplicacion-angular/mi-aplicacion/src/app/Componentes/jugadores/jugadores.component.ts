@@ -192,18 +192,18 @@ export class JugadoresComponent implements OnInit {
   getPlayerImage(player: Player): string {
   
     const playerImageMap: { [id: number]: string } = {
-      237: 'ruta/imagen/lebron.jpg',
-      115: 'ruta/imagen/curry.jpg',
-      145: 'ruta/imagen/curry.jpg',
-      15: 'ruta/imagen/curry.jpg',
-      246: 'ruta/imagen/curry.jpg',
+      237: '../../../assets/players/lebron.webp',
+      115: '../../../assets/players/curry.webp',
+      145: '../../../assets/players/embiid.webp',
+      15: '../../../assets/players/anteto.webp',
+      246: '../../../assets/players/jokic.webp',
       132: '../../../assets/players/doncic.webp',
-      434: 'ruta/imagen/curry.jpg',
-      140: 'ruta/imagen/curry.jpg',
-      79: 'ruta/imagen/curry.jpg',
-      66969: 'ruta/imagen/curry.jpg',
-      228: 'ruta/imagen/curry.jpg',
-      192: 'ruta/imagen/curry.jpg',
+      434: '../../../assets/players/tatum.webp',
+      140: '../../../assets/players/durant.webp',
+      79: '../../../assets/players/butlerEmo.webp',
+      666969: '../../../assets/players/zion.webp',
+      228: '../../../assets/players/irving.webp',
+      192: '../../../assets/players/harden.webp',
 
   
     };
