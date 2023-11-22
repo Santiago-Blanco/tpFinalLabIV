@@ -10,8 +10,10 @@ html, body {
     padding: 0;
     height: 100%;
     overflow: hidden;
+    font-family: 'Rubik', sans-serif;
   }
 
 app-equipos {
     overflow: scroll;
 }
+

@@ -37,6 +37,7 @@ body {
 }
 
 .imagenesContainer {
+    overflow-x: auto; /* Añade desplazamiento horizontal si es necesario */
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -48,27 +49,23 @@ body {
 }
 
 .imagenesContainer img {
-    width: 35rem; 
-    height: 15rem;
-    object-fit: cover; 
-    border-radius: 10px; 
-    margin: 1px 
+    width: 30rem;
+    height: 12rem;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 1px;
 }
 
-.container { 
-   
+.container {
     left: 0;
     right: 0;
     bottom: 0;
     top: 9rem;
     position: absolute;
-    border: 2px solid white; 
+    border: 2px solid white;
     padding-left: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    
-
 }
+
 
 .integrantes {
     text-align: left; 
