@@ -12,6 +12,19 @@
   border: solid white 2px;
   }
   
+  .imgProfile{
+    position: absolute;
+    margin-left: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+    top: 10px; 
+    right: 10px;
+    max-width: 10%;
+  }
+
   .logo {
     display: flex;
     align-items: center;

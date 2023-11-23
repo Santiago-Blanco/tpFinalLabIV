@@ -8,8 +8,11 @@
         <ng-container *ngIf="!isActiveUser; else showProfile">
             <button [routerLink]="['registerLogin']" routerLinkActive="active" >Registro/Inicio Sesion</button>
         </ng-container>
+
         <ng-template #showProfile>
-            <button (click)="openProfile()">Mostrar Perfil</button>
+            <button *ngIf="isSectionsComponent" (click)="openProfile()">Mostrar Perfil</button>
+
+            <img *ngIf="!isSectionsComponent" class="imgProfile" src="assets/teams/100.webp" alt="nba">
 
             <app-profile *ngIf="isProfileOpen" (closeProfileEvent)="closeProfile()"></app-profile>
 

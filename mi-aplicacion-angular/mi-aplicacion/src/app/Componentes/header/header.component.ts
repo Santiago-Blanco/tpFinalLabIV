@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginRegisterService } from 'src/app/Servicios/LoginRegister/login-register.service';
+import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +13,21 @@ export class HeaderComponent {
     return this.activeUser();
   }
   isProfileOpen = false;
+  isSectionsComponent = true;
 
-  constructor(private logService : LoginRegisterService){}
+  constructor(private logService : LoginRegisterService, private router : Router, private activatedRute : ActivatedRoute){}
 
   ngOnInit(){
+    this.router.events.subscribe((event)=>{
+      if (event instanceof NavigationEnd){
+        this.isSectionsComponent = this.router.url.includes('/sections');
+      }
+    })
+    
+    this.activatedRute.params.subscribe(params => {
+      
+    });
+
   }
 
   activeUser(){
