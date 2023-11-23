@@ -29,6 +29,8 @@ export class FavouriteListService {
 
     activeUser.teamFavouriteList = this.favoriteList;
 
+    localStorage.setItem('user', JSON.stringify(activeUser));
+
     this.service.updateUser(activeUser);  //actualiza el usuario con su nueva lista de favoritos en el localstorage
 
     console.log("USUARIO ACTIVO:");

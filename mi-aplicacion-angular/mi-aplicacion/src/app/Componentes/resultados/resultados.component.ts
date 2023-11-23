@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/types/Games';
 import { GamesService, gamesService } from 'src/app/Servicios/Games/games.service';
 import { Team } from 'src/app/types/Teams';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resultados',
@@ -21,7 +22,7 @@ export class ResultadosComponent implements OnInit {
   public isLastPage: boolean = false;
   public pageNumber : number = 1;
 
-  constructor(private JuegosService: GamesService, private route: ActivatedRoute) { }
+  constructor(private JuegosService: GamesService, private route: ActivatedRoute, private router : Router) { }
 
 
   ngOnInit(): void {
@@ -90,6 +91,11 @@ export class ResultadosComponent implements OnInit {
       console.log('No se recibió datos válidos de la solicitud.');
     }
 
+
+  }
+
+  goToTeam(id : Number){
+    this.router.navigate(['/team', id]);
 
   }
 

@@ -5,16 +5,28 @@
 
         <button type="submit" (click)="submitResults()">BUSCAR</button>
 
-        <input type="number" placeholder="Buscar pagina:" class="searchPage" [(ngModel)]="pageNumber" (keyup.enter)="searchPage()" >
+        <input type="number" placeholder="Buscar pagina:" class="searchPage" [(ngModel)]="pageNumber"
+            (keyup.enter)="searchPage()">
     </div>
 
 
     <ul>
         <li *ngFor="let game of GamesList" class="game-item">
             <div class="game-name" (click)="showAtributes(game)" style="cursor: pointer;">
-                <img class="teamLogo" [src]="loadImage(game.home_team.id)" alt="imagen Equipo"> 
-                {{ game.home_team.full_name + ' ' + game.home_team_score + ' ' + game.visitor_team_score +' ' + game.visitor_team.full_name }} 
-                <img style="margin-left: 2rem;" class="teamLogo" [src]="loadImage(game.visitor_team.id)" alt="imagen Equipo"> 
+
+
+                <button type="button" class="teamNav" (click)="goToTeam(game.home_team.id)">
+                    <img class="teamLogo" [src]="loadImage(game.home_team.id)" alt="imagen Equipo">
+                </button>
+
+                {{ game.home_team.full_name + ' ' + game.home_team_score + ' ' + game.visitor_team_score +' ' +
+                game.visitor_team.full_name }}
+
+                <button type="button" class="teamNav" (click)="goToTeam(game.visitor_team.id)">
+                    <img style="margin-left: 2rem;" class="teamLogo" [src]="loadImage(game.visitor_team.id)"
+                        alt="imagen Equipo">
+                </button>
+
 
             </div>
             <div *ngIf="select==game && atribute">

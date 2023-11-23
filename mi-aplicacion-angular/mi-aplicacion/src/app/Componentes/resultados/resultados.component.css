@@ -98,10 +98,18 @@
       }
 
       .teamLogo {
-        max-width: 5%;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .teamNav{
+        max-width: 7%;
         height: auto;
         display: flexbox;
-        margin-right: 2rem;
+        background-color: black;
+        border: none;
+        padding: 10px;
+        outline: none;
       }
     
       .search-container {

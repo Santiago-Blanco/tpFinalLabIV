@@ -70,7 +70,6 @@ export class EquiposComponent implements OnInit {
     return this.EquiposService.getAllTeams(i).subscribe((t: Team[] | any) => {
       this.teamsList.length = 0;
       this.teamsList = t.data;
-      //console.log(this.teamsList);
     })
   }
 
@@ -82,7 +81,6 @@ export class EquiposComponent implements OnInit {
       this.soundsOUT();
     } else {
       this.favoriteList.push(team);
-      console.log(this.favoriteList);
 
       this.soundsIN();
     }

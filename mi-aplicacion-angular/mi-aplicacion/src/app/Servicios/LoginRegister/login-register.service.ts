@@ -38,6 +38,8 @@ export class LoginRegisterService {
     if (userString) {
       const user: User = JSON.parse(userString);
       this.activeUser = user;
+      console.log('usuario activo')
+      console.log(user)
     }
 
     return this.activeUser;
