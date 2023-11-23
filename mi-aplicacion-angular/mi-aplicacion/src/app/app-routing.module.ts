@@ -16,16 +16,16 @@ import { DetalleTeamComponent } from './Componentes/detalle-team/detalle-team.co
 
 const routes: Routes = [
   { path: 'sections', component: SeccionesComponent },
-  { path: 'teams', component: EquiposComponent, /*canActivate: [AuthGuard]*/ },
-  { path: 'players', component: JugadoresComponent, /*canActivate: [AuthGuard]*/ },
-  { path: 'results', component: ResultadosComponent, /*canActivate: [AuthGuard]*/ },
-  { path: 'team/:id', component: DetalleTeamComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'teams', component: EquiposComponent, canActivate: [AuthGuard] },
+  { path: 'players', component: JugadoresComponent, canActivate: [AuthGuard] },
+  { path: 'results', component: ResultadosComponent, canActivate: [AuthGuard] },
+  { path: 'team/:id', component: DetalleTeamComponent, canActivate: [AuthGuard] },
   { path: 'aboutUs', component: SobreNosotrosComponent },
   { path: 'registerLogin', component: RegisterLoginComponent },
   { path: 'registerLogin/login', component: LoginComponent },
   { path: 'registerLogin/register', component: RegisterComponent },
-  { path: 'favourite-list', component: FavouriteListComponent, /*canActivate: [AuthGuard]*/ },
-  { path: 'favourite-list-pla', component: FavouriteListPlayerComponent, /*canActivate: [AuthGuard]*/ },
+  { path: 'favourite-list', component: FavouriteListComponent, canActivate: [AuthGuard] },
+  { path: 'favourite-list-pla', component: FavouriteListPlayerComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/sections', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ]
