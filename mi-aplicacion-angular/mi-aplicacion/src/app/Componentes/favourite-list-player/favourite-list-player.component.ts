@@ -3,7 +3,7 @@ import { FavouriteListService } from 'src/app/Servicios/FavouriteListPlayer/favo
 import { Player } from 'src/app/types/Players';
 import { PlayersService } from 'src/app/Servicios/Players/players.service'; 
 import { Router } from '@angular/router';
-
+import { Howl } from 'howler';
 
 @Component({
   selector: 'app-favourite-list-player',
@@ -12,14 +12,19 @@ import { Router } from '@angular/router';
 })
 export class FavouriteListPlayerComponent {
 
-
+  private soundOUT : Howl;
   @Input() favoriteList: Player[] = []
   public select: Player | null = null;
   public atribute = false;
   public seasonAverages: any;
 
 
-  constructor (private favoriteListService: FavouriteListService, private jugadoresServiceFav: PlayersService, private router: Router ){}
+  constructor (private favoriteListService: FavouriteListService, private jugadoresServiceFav: PlayersService, private router: Router ){
+
+    this.soundOUT = new Howl({
+      src: ['/assets/nbaMP3out.mp3']
+    })
+  }
 
   ngOnInit(){
 
@@ -37,6 +42,13 @@ export class FavouriteListPlayerComponent {
       this.seasonAverages = data;
       console.log(this.seasonAverages);
     });
+  }
+
+      
+  soundsOUT(){
+    this.soundOUT.stop();
+    this.soundOUT.volume(0.3);
+    this.soundOUT.play();
   }
 
   showAtributes(player: Player) {
@@ -91,6 +103,7 @@ export class FavouriteListPlayerComponent {
     const id = this.favoriteList.findIndex((p) => p.id === player.id);
     if (id !== -1) {
       this.favoriteList.splice(id, 1);
+      this.soundsOUT();
       
     } else {
       this.favoriteList.push(player);
