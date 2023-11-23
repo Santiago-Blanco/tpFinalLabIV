@@ -14,19 +14,33 @@
         <p><strong>División:</strong> {{favoriteTeam.division || "No hay datos"}}</p>
 
         <h2>Últimos 5 partidos:</h2>
-<ul *ngIf="recentResults && recentResults.length">
-  <li *ngFor="let result of recentResults.slice(0, 5)">
-    {{ result.visitor_team.full_name }} {{ result.visitor_team_score }} - {{ result.home_team.full_name }} {{
-    result.home_team_score }} ({{ result.date | date: 'yyyy-MM-dd' }})
-  </li>
-</ul>
+        <ul *ngIf="recentResults && recentResults.length; else loadingResults">
+          <li *ngFor="let result of recentResults.slice(0, 5)">
+            {{ result.visitor_team.full_name }} {{ result.visitor_team_score }} - {{ result.home_team.full_name }} {{
+            result.home_team_score }} ({{ result.date | date: 'yyyy-MM-dd' }})
+          </li>
+        </ul>
+
+
+        
+     <ng-template #loadingResults>
+    <p class="loading-message">Cargando resultados<span class="loading-dots"></span></p>
+    </ng-template>
+
+   <ng-template #loadingPlayers>
+    <p class="loading-message">Cargando jugadores<span class="loading-dots"></span></p>
+   </ng-template>
 
         <h2>Jugadores:</h2>
-        <ul *ngIf="teamPlayers && teamPlayers.length">
+        <ul *ngIf="teamPlayers && teamPlayers.length; else loadingPlayers">
           <li *ngFor="let player of teamPlayers.slice(-12 )">
             {{ player.first_name }} {{ player.last_name }}
           </li>
         </ul>
+
+        <ng-template #loadingPlayers>
+          <p class="loading-message">Cargando jugadores<span class="loading-dots"></span></p>
+        </ng-template>
 
       </div>
       <ng-container *ngIf="searchTeam(favoriteTeam); else notFavoriteImage">

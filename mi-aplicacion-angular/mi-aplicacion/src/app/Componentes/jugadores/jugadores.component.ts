@@ -54,10 +54,17 @@ export class JugadoresComponent implements OnInit {
 
   }
 
-  searchPage(){
+  searchPage() {
+    
+    if (this.pageNumber <= 0) {
+      this.pageNumber = 1;
+    }
+  
+
     this.count = this.pageNumber;
     this.getAllPlayers(this.pageNumber);
   }
+  
 
   @HostListener('document:keyup', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {

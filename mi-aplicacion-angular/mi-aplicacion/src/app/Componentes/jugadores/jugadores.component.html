@@ -1,15 +1,21 @@
 <div class="playersContainer">
-  <ul>
+
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Buscar jugadores..." (input)="filterPlayers($event)">
+    <ul id="results-list" class="results-list"></ul>
+   
+  </div>
+
+  <div class="search-container">
+  <input type="number" placeholder="Buscar pagina:" class="searchPage" [(ngModel)]="pageNumber" (keyup.enter)="searchPage()">
+</div>
+  <ul class="favorite-list-container">
     <li>
       <button class="favorite-button" [routerLink]="['/favourite-list-pla']" routerLinkActive="active">Lista de favoritos</button>
     </li>
   </ul>
 
-  <div class="search-container">
-    <input type="text" id="search-input" placeholder="Buscar jugadores..." (input)="filterPlayers($event)">
-    <ul id="results-list" class="results-list"></ul>
-    <input type="number" placeholder="Buscar pagina:" class="searchPage" [(ngModel)]="pageNumber" (keyup.enter)="searchPage()" >
-  </div>
+  
 
   <ul>
     <li *ngFor="let player of playersList" class="player-item">

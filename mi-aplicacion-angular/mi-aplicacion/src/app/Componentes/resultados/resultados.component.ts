@@ -93,10 +93,17 @@ export class ResultadosComponent implements OnInit {
 
   }
 
-  searchPage(){
+  searchPage() {
+    
+    if (this.pageNumber <= 0) {
+      this.pageNumber = 1;
+    }
+  
+
     this.count = this.pageNumber;
     this.getAllGames(this.pageNumber);
   }
+  
 
   @HostListener('document:keyup', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
