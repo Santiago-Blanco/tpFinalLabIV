@@ -34,6 +34,9 @@ export class EquiposComponent implements OnInit {
     })
   }
 
+  isNullOrWhitespace(value: string | null): boolean {
+    return value == null || value.trim() === '';
+  }
   ngOnInit(): void {
     this.getAllTeams(1);
     console.log(this.route.paramMap)

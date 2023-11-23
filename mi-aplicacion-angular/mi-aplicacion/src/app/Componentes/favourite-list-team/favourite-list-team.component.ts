@@ -52,6 +52,10 @@ import { Component, Input, OnInit } from '@angular/core';
       
     }
 
+    isNullOrWhitespace(value: string | null): boolean {
+      return value == null || value.trim() === '';
+    }
+    
     soundsOUT(){
       this.soundOUT.stop();
       this.soundOUT.volume(0.3);

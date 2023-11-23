@@ -10,7 +10,7 @@
       <div *ngIf="select==favoriteTeam && atribute">
 
         <p><strong>Ciudad:</strong> {{favoriteTeam.city || "No hay datos"}}</p>
-        <p><strong>Conferencia:</strong> {{favoriteTeam.conference || "No hay datos"}}</p>
+        <p><strong>Conferencia:</strong> {{ isNullOrWhitespace(favoriteTeam.conference) ? "No hay datos" : favoriteTeam.conference }}</p>
         <p><strong>División:</strong> {{favoriteTeam.division || "No hay datos"}}</p>
 
         <h2>Últimos 5 partidos:</h2>
