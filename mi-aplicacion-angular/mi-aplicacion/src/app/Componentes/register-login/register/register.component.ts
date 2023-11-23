@@ -58,6 +58,7 @@ export class RegisterComponent {
     if(this.service.addUser(user)){
       this.registerForm.reset();
       cartel.innerHTML = "";
+      alert('Registro exitoso');
     } else {
       cartel.innerHTML = "No se ha podido registrar el usuario (mail, dni o username repetidos)"
     }
