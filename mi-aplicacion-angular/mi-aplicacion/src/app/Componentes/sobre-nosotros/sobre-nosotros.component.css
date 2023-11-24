@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif; /* Cambia la fuente según tus preferencias */
+    font-family: 'Arial', sans-serif; 
 }
 
 .aboutUsContainer {
@@ -10,11 +10,11 @@ body {
     right: 0;
     bottom: 10rem;
     margin: auto;
-    width: 80%; /* Ajusta el ancho según tus preferencias */
-    height: 80%; /* Ajusta la altura según tus preferencias */
+    width: 80%; 
+    height: 80%; 
     text-align: center;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para resaltar el contenedor */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
 }
 
 .aboutUsContainer img {
@@ -37,7 +37,7 @@ body {
 }
 
 .imagenesContainer {
-    overflow-x: auto; /* Añade desplazamiento horizontal si es necesario */
+    overflow-x: auto;
     display: flex;
     justify-content: space-around;
     align-items: center;
