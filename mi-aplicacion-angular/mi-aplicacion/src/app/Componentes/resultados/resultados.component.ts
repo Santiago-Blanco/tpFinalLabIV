@@ -159,6 +159,14 @@ export class ResultadosComponent implements OnInit {
 
   }
 
+  displayScore(homeScore: number, visitorScore: number): string {
+    if (homeScore === 0 && visitorScore === 0) {
+      return 'Próximamente';
+    } else {
+      return homeScore + ' ' + visitorScore;
+    }
+  }
+  
   loadImage(id : number){
     if(id < 31){
       return `../../../assets/teams/${id}.webp`
