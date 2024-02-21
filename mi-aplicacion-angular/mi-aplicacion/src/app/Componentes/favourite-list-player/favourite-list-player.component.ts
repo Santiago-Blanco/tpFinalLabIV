@@ -38,12 +38,14 @@ export class FavouriteListPlayerComponent {
   }
 
   getSeasonAverages(playerId: number) {
-    this.jugadoresServiceFav.getSeasonAverages(playerId).subscribe(data => {
+    
+    this.jugadoresServiceFav.getSeasonAverages(playerId, 2024).subscribe(data => {
       this.seasonAverages = data;
       console.log(this.seasonAverages);
     });
   }
-
+  
+  
       
   soundsOUT(){
     this.soundOUT.stop();

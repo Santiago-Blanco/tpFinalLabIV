@@ -52,26 +52,14 @@ export class EquiposComponent implements OnInit {
   }
 
 
-    
-  nextPage(): void {
-    this.getAllTeams(2);
-    this.showBackButton = true;
-    this.showNextButton = false;
-  }
 
-  backPage(): void {
-    this.getAllTeams(1);
-    this.showNextButton=true;
-    this.showBackButton=false;
-  }
-
-  
-  getAllTeams(i : Number) {
+  getAllTeams(i: number) {
     return this.EquiposService.getAllTeams(i).subscribe((t: Team[] | any) => {
-      this.teamsList.length = 0;
+      this.teamsList.length = 0; 
       this.teamsList = t.data;
-    })
+    });
   }
+  
 
   addRemoveTeamList(team: Team) {
     const id = this.favoriteList.findIndex((t) => t.id === team.id);
@@ -106,23 +94,26 @@ export class EquiposComponent implements OnInit {
 
 /////////////////////////////////////////////////////////////////////////
 
-  handleKeyDown(): void { ////si es la primera letra presionada llena el array
-    if (this.isFirstKeyDown) {
-      this.isFirstKeyDown = false;
+handleKeyDown(): void {
+  if (this.isFirstKeyDown) {
+    this.isFirstKeyDown = false;
 
-      this.EquiposService.fillArrayOfTeams().then((allTeams)=>{
-        this.teamsList = allTeams;
-        console.log(this.teamsList);
-
-        
-      })
-      .catch((reject)=>{
-        console.log("Msg Error: " + reject);
-      })
-
+    this.EquiposService.fillArrayOfTeams()
+      .then(allTeams => {
       
-    }
+        allTeams.forEach(team => {
+          if (!this.teamsList.some(existingTeam => existingTeam.id === team.id)) {
+            this.teamsList.push(team);
+          }
+        });
+        console.log(this.teamsList);
+      })
+      .catch(reject => {
+        console.log("Msg Error: " + reject);
+      });
   }
+}
+
 
   loadImage(team : Team){
     if(team.id < 31){

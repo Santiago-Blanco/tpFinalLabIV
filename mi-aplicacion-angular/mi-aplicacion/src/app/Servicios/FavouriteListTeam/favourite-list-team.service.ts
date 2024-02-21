@@ -15,7 +15,7 @@ import { catchError, map, concatMap, toArray, throttleTime } from 'rxjs/operator
 export class FavouriteListService {
 
   private favoriteList: Team[] = [];
-  private apiUrl = 'https://www.balldontlie.io/api/v1';
+  private apiUrl = 'https://api.balldontlie.io/v1';
   private playersCache: { [teamId: number]: Player[] } = {};
   private recentResultsCache: { [teamId: number]: Game[] } = {};
 
@@ -48,7 +48,8 @@ export class FavouriteListService {
   }
 
   private fetchResultsPage(teamId: number, page: number, limit: number): Observable<Game[]> {
-    const resultsUrl = `${this.apiUrl}/games?team_ids[]=${teamId}&per_page=100&page=${page}`;
+    const resultsUrl = `${this.apiUrl}/games?team_ids[]=${teamId}&per_page=100&page=${page}&start_date=<start_date>&end_date=<end_date>`;
+
   
     return this.http.get<Game[]>(resultsUrl).pipe(
       map((data: any) => {
@@ -113,7 +114,8 @@ export class FavouriteListService {
 
   
   private fetchPlayersPage(teamId: number, page: number): Observable<Player[]> {
-    const playersUrl = `${this.apiUrl}/players?teamId=${teamId}&per_page=100&page=${page}`;
+    const playersUrl = `${this.apiUrl}/players?team_ids[]=${teamId}&per_page=100&page=${page}`;
+
   
     return this.http.get(playersUrl).pipe(
       map((data: any) => {

@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/types/Games';
-import { GamesService, gamesService } from 'src/app/Servicios/Games/games.service';
+import { GamesService} from 'src/app/Servicios/Games/games.service';
 import { Team } from 'src/app/types/Teams';
 import { Router } from '@angular/router';
 
@@ -16,83 +16,89 @@ export class ResultadosComponent implements OnInit {
   public select: Game | null = null;
   public atribute = false;
   public count = 1;
+  public allGamesList: Game[] = [];
+   public currentPage: number = 1;
+   public itemsPerPage: number = 25;
   private submitClick: boolean = false;
   private submitTeam: string = "";
   public isFirstPage: boolean = true;
   public isLastPage: boolean = false;
   public pageNumber : number = 1;
+  private nextCursor: number | null = null;
+  private prevCursor: number | null = null;
+
+
 
   constructor(private JuegosService: GamesService, private route: ActivatedRoute, private router : Router) { }
 
 
   ngOnInit(): void {
-    this.getAllGames(1);
-    console.log(this.route.paramMap)
+    this.getAllGames();
+    
 
   }
 
-  nextPage(): void {
-    if (this.count <= 1877) {
-      this.count = this.count + 1;
-
-      this.getAllGames(this.count);
-      console.log(this.count)
-      this.updatePageVisibility();
-    } 
-
-    if (this.count === 1877) {
-      this.isLastPage = true;
-    }
+  paginateGames(games: Game[], page: number): Game[] {
+    const startIndex = (page - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return games.slice(startIndex, endIndex);
+  }
   
-    this.isFirstPage = false;
-
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.GamesList = this.paginateGames(this.allGamesList, this.currentPage);
+    }
   }
-
-  backPage(): void {
-    if (this.count > 1) {
-      this.count = this.count - 1;
-
-      this.getAllGames(this.count);
-      console.log(this.count)
-      this.updatePageVisibility();
-    }
-
-    if (this.count === 1) {
-      this.isFirstPage = true;
-    }
   
-    this.isLastPage = false;
+  nextPage() {
+    if (this.currentPage * this.itemsPerPage < this.allGamesList.length) {
+      this.currentPage++;
+      this.GamesList = this.paginateGames(this.allGamesList, this.currentPage);
+    }
   }
 
+  
   updatePageVisibility() {
     this.isFirstPage = this.count === 1;
-    this.isLastPage = this.count === 1877; // O el número máximo de páginas
+    this.isLastPage = this.count === 1877; 
+  }
+
+
+  getAllGames(cursor: number = 1) {
+    this.JuegosService.getAllGames(cursor).subscribe((response: any) => {
+      const newGames = response.data || [];
+      this.allGamesList = this.allGamesList.concat(newGames);
+  
+      if (!this.nextCursor) { 
+        this.allGamesList.sort((a, b) => {
+          const dateA = new Date(a.date).getTime();
+          const dateB = new Date(b.date).getTime();
+          return dateB - dateA;
+        });
+      }
+  
+      this.GamesList = this.paginateGames(this.allGamesList, this.currentPage);
+    });
   }
   
-  getAllGames(i: number) {
-    return this.JuegosService.getAllGames(i).subscribe((g: Game[] | any) => {
-
-      console.log(g.data);
-      this.GamesList = this.filterGames(g.data);
-      console.log(this.GamesList);
-    })
-  }
-
+  
+  
   async getGamesForSearch(name: string) {
     const gamesData = await this.JuegosService.getGamesOfTeam(name);
     this.GamesList = gamesData;
-
+  
     if (gamesData && gamesData.data) {
       console.log(gamesData.data);
-      this.GamesList = this.filterGames(gamesData.data);
+      const filteredGames = this.filterGames(gamesData.data);
+      this.GamesList = filteredGames;
       console.log(this.GamesList);
     } else {
       this.GamesList = [];
       console.log('No se recibió datos válidos de la solicitud.');
     }
-
-
   }
+  
 
   goToTeam(id : Number){
     this.router.navigate(['/team', id]);

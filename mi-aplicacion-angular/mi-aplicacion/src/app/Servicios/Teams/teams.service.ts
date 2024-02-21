@@ -7,16 +7,17 @@ import { Team } from 'src/app/types/Teams';
 })
 export class TeamsService {
 
+  private readonly apiUrl = 'https://api.balldontlie.io/v1/teams';
+  private readonly apiKey = '3dce770b-c605-4400-9d66-5c63b8cbaf97';
+
   private allTeams: Team[] = [];
 
   constructor(private httpClient: HttpClient) {  
   }
 
-  async getAllTeamsForSearch(i : Number) { 
+  async getAllTeamsForSearch(i: number) { 
     return new Promise<void>((resolve, reject) => {
       this.getAllTeams(i).subscribe((t: Team[] | any) => {
-
-      
         this.allTeams = this.allTeams.concat(t.data);
         resolve();
       },
@@ -25,20 +26,17 @@ export class TeamsService {
     });
   }
 
-  async fillArrayOfTeams(): Promise<Team[]>{
-
+  async fillArrayOfTeams(): Promise<Team[]> {
     this.resetArray();
 
-    for(let i=1; i<3; i++){
+    for (let i = 1; i < 3; i++) {
       await this.getAllTeamsForSearch(i);
-      //2
     }
-
     
     return this.allTeams;
   }
 
-  resetArray(){
+  resetArray() {
     this.allTeams.length = 0;
   }
 
@@ -54,16 +52,16 @@ export class TeamsService {
     return teamIDs;
   }
 
-
-  getAllTeams(i : Number) {
-    const datos = this.httpClient.get(`https://www.balldontlie.io/api/v1/teams?page=${i}`)
-    return datos
+  getAllTeams(i: Number) {
+    const url = `${this.apiUrl}?page=${i}`;
+    const headers = { 'Authorization': `${this.apiKey}` };
+    return this.httpClient.get(url, { headers });
   }
 
-  getTeam(id : Number){
-    const datos = this.httpClient.get(`https://www.balldontlie.io/api/v1/teams/${id}`);
-    return datos;
+  getTeam(id: number) {
+    const url = `${this.apiUrl}/${id}`;
+    const headers = { 'Authorization': `${this.apiKey}` };
+    return this.httpClient.get(url, { headers });
   }
 }
-
 

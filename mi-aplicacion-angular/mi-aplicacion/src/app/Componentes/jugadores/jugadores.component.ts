@@ -19,14 +19,18 @@ export class JugadoresComponent implements OnInit {
   public filList: Player []=[];
   public select: Player| null=null;
   public searchTerm: string= '';
+  public allPlayersList: Player[] = [];
+  public currentPage: number = 1;
   public atribute=false;
   public count=1;
   public seasonAverages: any;
   private soundIN : Howl;
+  public itemsPerPage: number = 25;
   private soundOUT : Howl;
   public isFirstPage: boolean = true;
   public isLastPage: boolean = false;
   public pageNumber : number = 1;
+
 
 
   constructor(private router: Router, private favoriteListService: FavouriteListService, private JugadoresService: PlayersService, private route: ActivatedRoute) { 
@@ -54,17 +58,52 @@ export class JugadoresComponent implements OnInit {
 
   }
 
-  searchPage() {
-    
-    if (this.pageNumber <= 0) {
-      this.pageNumber = 1;
-    }
-  
-
-    this.count = this.pageNumber;
-    this.getAllPlayers(this.pageNumber);
+  paginatePlayers(players: Player[], page: number): Player[] {
+    const startIndex = (page - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return players.slice(startIndex, endIndex);
   }
   
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.playersList = this.paginatePlayers(this.allPlayersList, this.currentPage);
+      this.updatePageVisibility();
+    }
+  }
+  
+  nextPage() {
+    if (this.currentPage * this.itemsPerPage < this.allPlayersList.length) {
+      this.currentPage++;
+      this.playersList = this.paginatePlayers(this.allPlayersList, this.currentPage);
+      this.updatePageVisibility();
+    }
+  }
+
+  updatePageVisibility() {
+    this.isFirstPage = this.currentPage === 1;
+    this.isLastPage = this.currentPage * this.itemsPerPage >= this.allPlayersList.length;
+  }
+
+  getAllPlayers(cursor: number = 1) {
+    this.JugadoresService.getAllPlayers(cursor).subscribe((response: any) => {
+      this.allPlayersList = response.data || [];
+      this.playersList = this.paginatePlayers(this.allPlayersList, this.currentPage);
+      this.updatePageVisibility();
+    });
+  }
+  
+
+  searchPage() {
+    if (this.count <= 0) {
+      this.count = 1;
+    }
+  
+    this.currentPage = this.count;
+    this.playersList = this.paginatePlayers(this.allPlayersList, this.currentPage);
+    this.updatePageVisibility();
+  }
+ 
 
   @HostListener('document:keyup', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -85,50 +124,13 @@ export class JugadoresComponent implements OnInit {
     this.soundOUT.play();
   }
 
-  nextPage(): void {
-    if (this.count < 209) {
-      this.count = this.count + 1;
-      this.getAllPlayers(this.count);
-      this.updatePageVisibility();
-    }
   
-    if (this.count === 209) {
-      this.isLastPage = true;
-    }
-  
-    this.isFirstPage = false;
-  }
-  
-  backPage(): void {
-    if (this.count > 1) {
-      this.count = this.count - 1;
-      this.getAllPlayers(this.count);
-      this.updatePageVisibility();
-    }
-  
-    if (this.count === 1) {
-      this.isFirstPage = true;
-    }
-  
-    this.isLastPage = false;
-  }
-  
-  updatePageVisibility() {
-    this.isFirstPage = this.count === 1;
-    this.isLastPage = this.count === 209; // O el número máximo de páginas
-  }
-
   goToTeam(id : Number){
     this.router.navigate(['/team', id]);
 
   }
 
-  getAllPlayers(i : number) {
-    return this.JugadoresService.getAllPlayers(i).subscribe((p: Player[] | any) => {
-      this.playersList = p.data; 
-      console.log(p.data);
-    })
-  }
+ 
 
   getPlayersForSearch(name : string) {
     return this.JugadoresService.getPlayersForName(name).subscribe((p: Player[] | any) => {
@@ -138,7 +140,7 @@ export class JugadoresComponent implements OnInit {
   }
 
   getSeasonAverages(playerId: number) {
-    this.JugadoresService.getSeasonAverages(playerId).subscribe(data => {
+    this.JugadoresService.getSeasonAverages(playerId, 2024).subscribe(data => {
       this.seasonAverages = data;
       console.log(this.seasonAverages);
     });

@@ -35,8 +35,6 @@ export class FavouriteListService {
     return activeUser.playersFavouriteList;
   }
 
-  /* getPlayersByTeamId(teamId: number): Player[] {
-    return this.favoriteList.filter(player => player.team.id === teamId);
-  } */
+ 
 
 }

@@ -8,32 +8,52 @@ import { TeamsService } from '../Teams/teams.service';
 })
 export class GamesService {
 
-  private games: Game[] = []
+  private readonly apiUrl = 'https://api.balldontlie.io/v1/games';
+  private readonly apiKey = '3dce770b-c605-4400-9d66-5c63b8cbaf97';
+
+  private games: Game[] = [];
 
   constructor(private httpClient: HttpClient, private serviceTeam: TeamsService) { }
 
-  getAllGames(i: Number) {
+  getAllGames(cursor?: number) {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
 
-    const datos = this.httpClient.get(`https://www.balldontlie.io/api/v1/games?page=${i}`)
-    return datos;
+    const startDate = new Date(currentYear, 0, 1); 
+
+    const formattedStartDate = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}-${startDate.getDate().toString().padStart(2, '0')}`;
+    const formattedEndDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+
+    let url = `${this.apiUrl}?start_date=${formattedStartDate}&end_date=${formattedEndDate}&per_page=100&sort=-date`;
+
+    if (cursor) {
+      url += `&cursor=${cursor}`;
+    }
+
+    const headers = { 'Authorization': `${this.apiKey}` };
+
+    return this.httpClient.get(url, { headers });
   }
 
-  async getGamesOfTeam(name: string): Promise<any> {
 
+
+
+
+  async getGamesOfTeam(name: string): Promise<any> {
     const arrayIds = await this.serviceTeam.getTeamIDsByName(name);
 
     if (arrayIds.length > 0) {
-
       const currentDate = new Date(new Date().getFullYear(), 0, 1);
-      const lastDayOfYear = new Date(new Date().getFullYear(), 11, 31)
+      const lastDayOfYear = new Date(new Date().getFullYear(), 11, 31);
 
       const dateS = currentDate.toISOString().split('T')[0];
       const endDate = lastDayOfYear.toISOString().split('T')[0];
 
-      const url = `https://www.balldontlie.io/api/v1/games?team_ids[]=${arrayIds.join('&team_ids[]=')}&start_date=${dateS}&end_date=${endDate}&per_page=100&status=Final`;
+      const url = `${this.apiUrl}?team_ids[]=${arrayIds.join('&team_ids[]=')}&start_date=${dateS}&end_date=${endDate}&per_page=100&status=Final`;
 
       try {
-        const gamesData: any = await this.httpClient.get(url).toPromise();
+        const headers = { 'Authorization': `${this.apiKey}` };
+        const gamesData: any = await this.httpClient.get(url, { headers }).toPromise();
 
         gamesData.data.sort((a: any, b: any) => {
           const dateA = new Date(a.date);
@@ -47,31 +67,10 @@ export class GamesService {
         console.error('Error al realizar la solicitud a la API.', error);
         return null;
       }
+      
     } else {
       console.log('No se encontraron IDs de equipos.');
       return null;
     }
   }
-
-
-
-
-
 }
-
-
-export class gamesService {
-  private gamesList = new Array<Game>()
-  constructor() { }
-
-  add(game: Game) {
-    this.gamesList.push(game)
-  }
-
-  remove(game: Game) {
-    this.gamesList;
-  }
-
-}
-
-

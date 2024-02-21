@@ -40,8 +40,8 @@
     </ul>
 
     <div class="backNextContainer">
-        <button class="back" (click)="backPage()" *ngIf="!isFirstPage">Back</button>
-        <button class="next" (click)="nextPage()" *ngIf="!isLastPage">Next</button>
+        <button class="back" (click)="previousPage()" [disabled]="currentPage === 1 ">Back</button>
+        <button class="next" (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= allGamesList.length">Next</button>
         <p class="page" style="color: white;">{{count}}</p>
     </div>
 </div>
