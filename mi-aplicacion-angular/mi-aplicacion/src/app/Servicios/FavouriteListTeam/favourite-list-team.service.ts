@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, map, concatMap, retry } from 'rxjs/operators';
 import { Team } from 'src/app/types/Teams';
-import { BehaviorSubject, retry } from 'rxjs';
-import { LoginRegisterService } from '../LoginRegister/login-register.service';
 import { Player } from 'src/app/types/Players';
 import { Game } from 'src/app/types/Games';
-import { Observable, of, throwError  } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { catchError, map, concatMap, toArray, throttleTime } from 'rxjs/operators';
-
+import { LoginRegisterService } from '../LoginRegister/login-register.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,42 +14,47 @@ export class FavouriteListService {
 
   private favoriteList: Team[] = [];
   private apiUrl = 'https://api.balldontlie.io/v1';
-  private playersCache: { [teamId: number]: Player[] } = {};
-  private recentResultsCache: { [teamId: number]: Game[] } = {};
+  private apiKey = '3dce770b-c605-4400-9d66-5c63b8cbaf97';
 
-  constructor(private service: LoginRegisterService, private http: HttpClient) {
-  }
+  private headers: HttpHeaders = new HttpHeaders({
+    'Authorization': `${this.apiKey}`
+  });
+
+  private recentResultsCache: { [teamId: number]: Game[] } = {};
+  private playersCache: { [teamId: number]: Player[] } = {};
+
+  constructor(private service: LoginRegisterService, private http: HttpClient) {}
 
   update(list: Team[]) {
     this.favoriteList = list;
-
     let activeUser = this.service.getActiveUser();
-
     activeUser.teamFavouriteList = this.favoriteList;
-
     localStorage.setItem('user', JSON.stringify(activeUser));
-
-    this.service.updateUser(activeUser);  //actualiza el usuario con su nueva lista de favoritos en el localstorage
-
-    console.log("USUARIO ACTIVO:");
-    console.log(activeUser);
+    this.service.updateUser(activeUser);
+    console.log('Lista de equipos actualizada:', list); 
   }
 
-  getData() {
-    const activeUser = this.service.getActiveUser()
-
-    return activeUser.teamFavouriteList;
+  getData(): Team[] {
+    const activeUser = this.service.getActiveUser();
+    const teamFavouriteList = activeUser.teamFavouriteList;
+    console.log('Datos del usuario activo:', activeUser); 
+    console.log('Lista de equipos favoritos:', teamFavouriteList); 
+    return teamFavouriteList || [];
   }
 
   getTeamById(teamId: number): Team | undefined {
+    if (!this.favoriteList || this.favoriteList.length === 0) return undefined;
     return this.favoriteList.find((team) => team.id === teamId);
   }
 
   private fetchResultsPage(teamId: number, page: number, limit: number): Observable<Game[]> {
-    const resultsUrl = `${this.apiUrl}/games?team_ids[]=${teamId}&per_page=100&page=${page}&start_date=<start_date>&end_date=<end_date>`;
+    const startDate = '<start_date>';
+    const endDate = '<end_date>';
+    const resultsUrl = `${this.apiUrl}?team_ids[]=${teamId}&per_page=100&page=${page}&start_date=${startDate}&end_date=${endDate}`;
+    
 
   
-    return this.http.get<Game[]>(resultsUrl).pipe(
+    return this.http.get<Game[]>(resultsUrl, { headers: this.headers }).pipe(
       map((data: any) => {
         const dataArray = data && data.data ? data.data : [];
         if (Array.isArray(dataArray)) {
@@ -82,14 +85,16 @@ export class FavouriteListService {
   }
   
   getRecentResults(teamId: number, limit: number = 5): Observable<Game[]> {
-   
+    console.log('Obteniendo resultados recientes para el equipo con ID:', teamId); 
     if (this.recentResultsCache[teamId]) {
       const cachedResults = this.recentResultsCache[teamId];
       if (this.resultsCacheValid(cachedResults)) {
+        console.log('Utilizando resultados en caché para el equipo con ID:', teamId); // Agregamos un log para verificar si se están utilizando los resultados en caché
         return of(cachedResults);
       }
     }
   
+    console.log('Obteniendo resultados del servidor para el equipo con ID:', teamId); // Agregamos un log para verificar si se está obteniendo resultados del servidor
     return this.fetchAllResultsRecursive(teamId, 1, limit, []).pipe(
       map((allResultsArray: Game[]) => {
         const currentDate = new Date(); 
@@ -98,26 +103,23 @@ export class FavouriteListService {
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
           .slice(0, limit);
   
-        
         this.recentResultsCache[teamId] = filteredResults;
-  
+        console.log('Resultados obtenidos para el equipo con ID:', teamId, filteredResults); // Agregamos un log para verificar los resultados obtenidos
         return filteredResults;
       }),
-      retry(3), 
+      retry(3)
     );
   }
   
+  
   private resultsCacheValid(results: Game[]): boolean {
-    
     return true; 
   }
 
-  
   private fetchPlayersPage(teamId: number, page: number): Observable<Player[]> {
     const playersUrl = `${this.apiUrl}/players?team_ids[]=${teamId}&per_page=100&page=${page}`;
-
   
-    return this.http.get(playersUrl).pipe(
+    return this.http.get(playersUrl, { headers: this.headers }).pipe(
       map((data: any) => {
         const dataArray = data && data.data ? data.data : [];
         if (Array.isArray(dataArray)) {
@@ -157,17 +159,14 @@ export class FavouriteListService {
   
     return this.fetchAllPlayersRecursive(teamId, 1, []).pipe(
       map((players: Player[]) => {
-     
         this.playersCache[teamId] = players;
-  
         return players.filter((player: Player) => player.team.id === teamId);
       }),
       retry(3) 
     );
   }
-
-  
 }
+
 
 
   

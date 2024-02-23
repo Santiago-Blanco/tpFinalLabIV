@@ -20,7 +20,7 @@ export class JugadoresComponent implements OnInit {
   public select: Player| null=null;
   public searchTerm: string= '';
   public allPlayersList: Player[] = [];
-  public currentPage: number = 1;
+  public currentPage: number = 0;
   public atribute=false;
   public count=1;
   public seasonAverages: any;
@@ -46,7 +46,6 @@ export class JugadoresComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllPlayers(1);
-    console.log(this.route.paramMap)
 
     const data = this.favoriteListService.getData();
 
@@ -65,30 +64,32 @@ export class JugadoresComponent implements OnInit {
   }
   
   previousPage() {
-    if (this.currentPage > 1) {
+    if (this.currentPage > 0) {
       this.currentPage--;
-      this.playersList = this.paginatePlayers(this.allPlayersList, this.currentPage);
+      this.getAllPlayers(this.currentPage*25);
       this.updatePageVisibility();
     }
   }
   
   nextPage() {
-    if (this.currentPage * this.itemsPerPage < this.allPlayersList.length) {
+    if (this.currentPage * this.itemsPerPage < 25000) {
       this.currentPage++;
-      this.playersList = this.paginatePlayers(this.allPlayersList, this.currentPage);
+      this.getAllPlayers(this.currentPage*25);
       this.updatePageVisibility();
     }
   }
 
-  updatePageVisibility() {
+  updatePageVisibility() { ///comprueba que sea la primer o ultima pagina
     this.isFirstPage = this.currentPage === 1;
     this.isLastPage = this.currentPage * this.itemsPerPage >= this.allPlayersList.length;
   }
 
   getAllPlayers(cursor: number = 1) {
     this.JugadoresService.getAllPlayers(cursor).subscribe((response: any) => {
-      this.allPlayersList = response.data || [];
-      this.playersList = this.paginatePlayers(this.allPlayersList, this.currentPage);
+      this.playersList = response.data || [];
+
+      console.log(this.playersList);
+      console.log(cursor);
       this.updatePageVisibility();
     });
   }
@@ -237,5 +238,3 @@ export class JugadoresComponent implements OnInit {
   }
 
 }
-
-

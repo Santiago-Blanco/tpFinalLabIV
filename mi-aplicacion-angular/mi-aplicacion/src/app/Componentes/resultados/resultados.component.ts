@@ -44,10 +44,33 @@ export class ResultadosComponent implements OnInit {
     return games.slice(startIndex, endIndex);
   }
   
+  getAllGames(cursor: number = 1) {
+    this.JuegosService.getAllGames(cursor).subscribe((response: any) => {
+      const newGames = response.data || [];
+  
+      this.allGamesList = this.allGamesList.concat(newGames);
+  
+     
+      this.allGamesList.sort((a, b) => {
+        const dateA = new Date(a.date).getTime();
+        const dateB = new Date(b.date).getTime();
+        return dateB - dateA;
+      });
+  
+      
+      this.GamesList = this.paginateGames(this.allGamesList, this.currentPage);
+  
+      this.updatePageVisibility();
+    });
+  }
+  
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
       this.GamesList = this.paginateGames(this.allGamesList, this.currentPage);
+  
+      
+      this.count = this.currentPage;
     }
   }
   
@@ -55,31 +78,16 @@ export class ResultadosComponent implements OnInit {
     if (this.currentPage * this.itemsPerPage < this.allGamesList.length) {
       this.currentPage++;
       this.GamesList = this.paginateGames(this.allGamesList, this.currentPage);
+  
+      
+      this.count = this.currentPage;
     }
   }
-
   
   updatePageVisibility() {
-    this.isFirstPage = this.count === 1;
-    this.isLastPage = this.count === 1877; 
-  }
-
-
-  getAllGames(cursor: number = 1) {
-    this.JuegosService.getAllGames(cursor).subscribe((response: any) => {
-      const newGames = response.data || [];
-      this.allGamesList = this.allGamesList.concat(newGames);
-  
-      if (!this.nextCursor) { 
-        this.allGamesList.sort((a, b) => {
-          const dateA = new Date(a.date).getTime();
-          const dateB = new Date(b.date).getTime();
-          return dateB - dateA;
-        });
-      }
-  
-      this.GamesList = this.paginateGames(this.allGamesList, this.currentPage);
-    });
+    
+    this.isFirstPage = this.currentPage === 1;
+    this.isLastPage = this.currentPage * this.itemsPerPage >= this.allGamesList.length;
   }
   
   

@@ -1,47 +1,41 @@
 import { Component, Input, OnInit } from '@angular/core';
-  import { Team } from 'src/app/types/Teams';
-  import { FavouriteListService } from 'src/app/Servicios/FavouriteListTeam/favourite-list-team.service';
-  import { Player } from 'src/app/types/Players';
-  import { Howl } from 'howler';
-  import { Game } from 'src/app/types/Games';
-  import { Router } from '@angular/router';
+import { Team } from 'src/app/types/Teams';
+import { FavouriteListService } from 'src/app/Servicios/FavouriteListTeam/favourite-list-team.service';
+import { Player } from 'src/app/types/Players';
+import { Howl } from 'howler';
+import { Game } from 'src/app/types/Games';
+import { Router } from '@angular/router';
 
-  @Component({
-    selector: 'app-favourite-list',
-    templateUrl: './favourite-list-team.component.html',
-    styleUrls: ['./favourite-list-team.component.css']
-  })
-  export class FavouriteListComponent implements OnInit {
+@Component({
+  selector: 'app-favourite-list',
+  templateUrl: './favourite-list-team.component.html',
+  styleUrls: ['./favourite-list-team.component.css']
+})
+export class FavouriteListComponent implements OnInit {
 
+  private soundOUT : Howl;
+  @Input() favoriteList: Team[] = []
+  public select: Team | null=null;
+  public atribute=false;
+  public selectedPlayer: Player | null = null;
+  public recentResults: Game[] = [];
+  public teamPlayers: Player[] = [];
 
-    private soundOUT : Howl;
-    @Input() favoriteList: Team[] = []
-    public select: Team | null=null;
-    public atribute=false;
-    public selectedPlayer: Player | null = null;
-    public recentResults: Game[] = [];
-    public teamPlayers: Player[] = [];
+  constructor(private favoriteListService: FavouriteListService, private router: Router) { 
+    this.soundOUT = new Howl({
+      src: ['/assets/nbaMP3out.mp3']
+    })
+  }
 
-    constructor(private favoriteListService: FavouriteListService, private router: Router) { 
-
-  
-      this.soundOUT = new Howl({
-        src: ['/assets/nbaMP3out.mp3']
-      })
+  ngOnInit() {
+    const data = this.favoriteListService.getData();
+    console.log('Datos obtenidos del servicio:', data); // Agregamos un log para verificar los datos obtenidos del servicio
+    if (data){
+      this.favoriteList = data;
+    } else {
+      this.favoriteList = [];
     }
-
-
-    ngOnInit() {
-
-      const data = this.favoriteListService.getData();
-
-      if (data){
-        this.favoriteList = data;
-      } else {
-        this.favoriteList = [];
-      }
-
-    }
+  }
 
     loadImage(team : Team){
       if(team.id < 31){

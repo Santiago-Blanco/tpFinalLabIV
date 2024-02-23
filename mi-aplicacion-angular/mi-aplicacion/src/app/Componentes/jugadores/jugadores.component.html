@@ -58,10 +58,10 @@
 
  
   <div class="backNextContainer">
-    <button class="back" (click)="previousPage()" [disabled]="currentPage === 1"> Back</button>
-    <button class="next" (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= allPlayersList.length" >Next</button>
+    <button class="back" (click)="previousPage()" [disabled]="currentPage === 0"> Back</button>
+    <button class="next" (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= 25000" >Next</button>
   </div>
 
  
-  <p class="page" style="color: white;">{{ count }}</p>
+  <p class="page" style="color: white;">{{ currentPage }}</p>
 </div>

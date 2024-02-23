@@ -13,12 +13,14 @@ export class PlayersService {
   constructor(private httpClient: HttpClient) { }
 
   getAllPlayers(page: number) {
-    const url = `${this.apiUrl}/players?page=${page}`;
+    const url = `${this.apiUrl}/players?cursor=${page}`;
+
     return this.httpClient.get<Player[]>(url, { headers: this.getHeaders() });
   }
 
   getPlayersForName(name: string) {
     const url = `${this.apiUrl}/players?search=${name}`;
+
     return this.httpClient.get<Player[]>(url, { headers: this.getHeaders() });
   }
 
@@ -28,11 +30,11 @@ export class PlayersService {
 
   getSeasonAverages(playerId: number, season: number) {
     const url = `${this.apiUrl}/season_averages?player_ids[]=${playerId}&season=${season}`;
+
     return this.httpClient.get(url, { headers: this.getHeaders() });
   }
   
 
 }
-
 
 
