@@ -89,12 +89,11 @@ export class FavouriteListService {
     if (this.recentResultsCache[teamId]) {
       const cachedResults = this.recentResultsCache[teamId];
       if (this.resultsCacheValid(cachedResults)) {
-        console.log('Utilizando resultados en caché para el equipo con ID:', teamId); // Agregamos un log para verificar si se están utilizando los resultados en caché
-        return of(cachedResults);
+        console.log('Utilizando resultados en caché para el equipo con ID:', teamId); 
       }
     }
   
-    console.log('Obteniendo resultados del servidor para el equipo con ID:', teamId); // Agregamos un log para verificar si se está obteniendo resultados del servidor
+    console.log('Obteniendo resultados del servidor para el equipo con ID:', teamId); 
     return this.fetchAllResultsRecursive(teamId, 1, limit, []).pipe(
       map((allResultsArray: Game[]) => {
         const currentDate = new Date(); 
@@ -104,7 +103,7 @@ export class FavouriteListService {
           .slice(0, limit);
   
         this.recentResultsCache[teamId] = filteredResults;
-        console.log('Resultados obtenidos para el equipo con ID:', teamId, filteredResults); // Agregamos un log para verificar los resultados obtenidos
+        console.log('Resultados obtenidos para el equipo con ID:', teamId, filteredResults);
         return filteredResults;
       }),
       retry(3)

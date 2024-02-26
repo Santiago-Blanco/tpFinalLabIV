@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamsService } from 'src/app/Servicios/Teams/teams.service';
-import { Team } from 'src/app/types/Teams';
+import { TeamDetalle } from 'src/app/types/TeamDetalle';
 import { FavouriteListService } from 'src/app/Servicios/FavouriteListTeam/favourite-list-team.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { FavouriteListService } from 'src/app/Servicios/FavouriteListTeam/favour
 })
 export class DetalleTeamComponent {
   public id: number = -1;
-  public team : Team = {} as Team;
+  public team : TeamDetalle = {} as TeamDetalle;
 
   constructor(private route: ActivatedRoute, private service : TeamsService, private router : Router, private favoriteListService : FavouriteListService){}
 
@@ -34,18 +34,15 @@ export class DetalleTeamComponent {
   
   }
 
-  verifyFavourite(team : Team): boolean {
+  verifyFavourite(team : TeamDetalle): boolean {
 
     const favoriteTeams = this.favoriteListService.getData();
 
     if(favoriteTeams){
-      return favoriteTeams.some(favoriteTeam => favoriteTeam.id === team.id);
+      return favoriteTeams.some(favoriteTeam => favoriteTeam.id === team.data.id);
     }
 
-    console.log("aaaaaaaaaa")
-    console.log(this.favoriteListService.getData())
-    console.log(this.favoriteListService.getData()?.includes(team))///
-    console.log(team);
+    
 
     return false;
   }
