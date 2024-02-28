@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/types/Games';
-import { GamesService} from 'src/app/Servicios/Games/games.service';
+import { GamesService } from 'src/app/Servicios/Games/games.service';
 import { Team } from 'src/app/types/Teams';
 import { Router } from '@angular/router';
 
@@ -17,25 +17,17 @@ export class ResultadosComponent implements OnInit {
   public atribute = false;
   public count = 1;
   public allGamesList: Game[] = [];
-   public currentPage: number = 1;
-   public itemsPerPage: number = 25;
-  private submitClick: boolean = false;
-  private submitTeam: string = "";
+  public currentPage: number = 1;
+  public itemsPerPage: number = 25;
   public isFirstPage: boolean = true;
   public isLastPage: boolean = false;
-  public pageNumber : number = 1;
-  private nextCursor: number | null = null;
-  private prevCursor: number | null = null;
+  private submitClick: boolean = false;
+  private submitTeam: string = "";
 
-
-
-  constructor(private JuegosService: GamesService, private route: ActivatedRoute, private router : Router) { }
-
+  constructor(private JuegosService: GamesService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllGames();
-    
-
   }
 
   paginateGames(games: Game[], page: number): Game[] {
@@ -50,14 +42,12 @@ export class ResultadosComponent implements OnInit {
   
       this.allGamesList = this.allGamesList.concat(newGames);
   
-     
       this.allGamesList.sort((a, b) => {
         const dateA = new Date(a.date).getTime();
         const dateB = new Date(b.date).getTime();
         return dateB - dateA;
       });
   
-      
       this.GamesList = this.paginateGames(this.allGamesList, this.currentPage);
   
       this.updatePageVisibility();
@@ -69,7 +59,6 @@ export class ResultadosComponent implements OnInit {
       this.currentPage--;
       this.GamesList = this.paginateGames(this.allGamesList, this.currentPage);
   
-      
       this.count = this.currentPage;
     }
   }
@@ -79,18 +68,14 @@ export class ResultadosComponent implements OnInit {
       this.currentPage++;
       this.GamesList = this.paginateGames(this.allGamesList, this.currentPage);
   
-      
       this.count = this.currentPage;
     }
   }
   
   updatePageVisibility() {
-    
     this.isFirstPage = this.currentPage === 1;
     this.isLastPage = this.currentPage * this.itemsPerPage >= this.allGamesList.length;
   }
-  
-  
   
   async getGamesForSearch(name: string) {
     const gamesData = await this.JuegosService.getGamesOfTeam(name);
@@ -108,12 +93,9 @@ export class ResultadosComponent implements OnInit {
   }
   
 
-  goToTeam(id : Number){
+  goToTeam(id: number) {
     this.router.navigate(['/team', id]);
-
   }
-
-
 
   filterGames(array: Game[]) {
     return array.filter(game =>
@@ -126,11 +108,11 @@ export class ResultadosComponent implements OnInit {
 
     if (searchText.trim() === '') {
       this.getAllGames(1);
-      this.isLastPage=false;
-
+      this.isLastPage = false;
+      this.isFirstPage = true;
     } else {
-      this.isFirstPage=true;
-      this.isLastPage=true;
+      this.isFirstPage = true;
+      this.isLastPage = true;
     }
   }
 
@@ -140,24 +122,18 @@ export class ResultadosComponent implements OnInit {
     console.log(searchText);
 
     this.getGamesForSearch(searchText);
-
-
     this.isFirstPage = true;
     this.isLastPage = true;
-}
-
+  }
 
   showAtributes(game: Game) {
-
     if (this.select === game) {
       this.select = null;
       this.atribute = false;
-    }
-    else {
+    } else {
       this.select = game;
       this.atribute = true;
     }
-
   }
 
   displayScore(homeScore: number, visitorScore: number): string {
@@ -168,17 +144,15 @@ export class ResultadosComponent implements OnInit {
     }
   }
   
-  loadImage(id : number){
-    if(id < 31){
+  loadImage(id: number){
+    if (id < 31) {
       return `../../../assets/teams/${id}.webp`
     } else {
       return `../../../assets/teams/100.webp`
     }
-    
   }
-
-
 }
+
 
 
 

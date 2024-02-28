@@ -163,7 +163,8 @@ handleKeyDown(): void {
       this.select=team;
       this.atribute=true;
     }
-
+    console.log("SELECTT")
+    console.log(this.select, this.atribute)
   }
 }
 
