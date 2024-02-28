@@ -40,7 +40,7 @@ export class ResultadosComponent implements OnInit {
     this.JuegosService.getAllGames(cursor).subscribe((response: any) => {
       const newGames = response.data || [];
   
-      this.allGamesList = this.allGamesList.concat(newGames);
+      this.allGamesList = newGames;
   
       this.allGamesList.sort((a, b) => {
         const dateA = new Date(a.date).getTime();
@@ -60,6 +60,7 @@ export class ResultadosComponent implements OnInit {
       this.GamesList = this.paginateGames(this.allGamesList, this.currentPage);
   
       this.count = this.currentPage;
+      this.updatePageVisibility();
     }
   }
   
@@ -69,6 +70,7 @@ export class ResultadosComponent implements OnInit {
       this.GamesList = this.paginateGames(this.allGamesList, this.currentPage);
   
       this.count = this.currentPage;
+      this.updatePageVisibility();
     }
   }
   

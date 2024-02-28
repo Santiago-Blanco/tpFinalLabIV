@@ -53,8 +53,8 @@
 
  
   <div class="backNextContainer">
-    <button class="back" (click)="previousPage()" [disabled]="currentPage === 1"> Back</button>
-    <button class="next" (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= 25000" >Next</button>
+    <button class="back" (click)="previousPage()" [disabled]="isFirstPage"> Back</button>
+    <button class="next" (click)="nextPage()" [disabled]="isLastPage" >Next</button>
   </div>
 
  

@@ -80,8 +80,8 @@ export class JugadoresComponent implements OnInit {
   }
 
   updatePageVisibility() { ///comprueba que sea la primer o ultima pagina
-    this.isFirstPage = this.currentPage === 1;
-    this.isLastPage = this.currentPage * this.itemsPerPage >= this.allPlayersList.length;
+    this.isFirstPage = this.currentPage === 0;
+    this.isLastPage = this.currentPage * this.itemsPerPage >= 30*this.playersList.length;
   }
 
   getAllPlayers(cursor: number = 1) {
@@ -118,16 +118,12 @@ export class JugadoresComponent implements OnInit {
   getPlayersForSearch(name : string) {
     return this.JugadoresService.getPlayersForName(name).subscribe((p: Player[] | any) => {
       this.playersList = p.data; 
-
+      this.isFirstPage = true;
+      this.isLastPage = true;
     })
   }
 
-  getSeasonAverages(playerId: number) {
-    this.JugadoresService.getSeasonAverages(playerId, 2024).subscribe(data => {
-      this.seasonAverages = data;
-      console.log(this.seasonAverages);
-    });
-  }
+
 
   searchPlayer(player: Player){
     return this.favoriteList.some(p => p.id == player.id)
@@ -212,7 +208,6 @@ export class JugadoresComponent implements OnInit {
     else{
       this.select=player;
       this.atribute=true;
-      this.getSeasonAverages(player.id);
     }
 
   }
