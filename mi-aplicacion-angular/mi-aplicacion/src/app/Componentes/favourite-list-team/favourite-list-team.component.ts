@@ -20,6 +20,8 @@ export class FavouriteListComponent implements OnInit {
   public selectedPlayer: Player | null = null;
   public recentResults: Game[] = [];
   public teamPlayers: Player[] = [];
+  public resultsLoaded: boolean = false;
+
 
   constructor(private favoriteListService: FavouriteListService, private router: Router) { 
     this.soundOUT = new Howl({
@@ -71,15 +73,17 @@ export class FavouriteListComponent implements OnInit {
             (data) => {
               console.log('Resultados obtenidos:', data);
               if (Array.isArray(data)) {
-  
                 this.recentResults = data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                this.resultsLoaded = true;
               }
             },
             (error) => {
               console.error('No hay resultados:', error);
               this.recentResults = [];
+              this.resultsLoaded = true; 
             }
           );
+          
   
           this.favoriteListService.getPlayersForTeam(teamData.id).subscribe(
             (data) => {
