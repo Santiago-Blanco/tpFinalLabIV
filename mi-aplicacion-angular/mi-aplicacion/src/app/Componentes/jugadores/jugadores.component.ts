@@ -20,7 +20,7 @@ export class JugadoresComponent implements OnInit {
   public select: Player| null=null;
   public searchTerm: string= '';
   public allPlayersList: Player[] = [];
-  public currentPage: number = 1;
+  public currentPage: number = 0;
   public atribute=false;
   public count=1;
   public seasonAverages: any;
@@ -30,7 +30,7 @@ export class JugadoresComponent implements OnInit {
   public isFirstPage: boolean = true;
   public isLastPage: boolean = false;
   public pageNumber : number = 1;
-  public searchPerformed: boolean = false;
+
 
 
   constructor(private router: Router, private favoriteListService: FavouriteListService, private JugadoresService: PlayersService, private route: ActivatedRoute) { 
@@ -45,7 +45,7 @@ export class JugadoresComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getAllPlayers();
+    this.getAllPlayers(1);
 
     const data = this.favoriteListService.getData();
 
@@ -64,43 +64,22 @@ export class JugadoresComponent implements OnInit {
   }
   
   previousPage() {
-    if (this.currentPage > 1) {
+    if (this.currentPage > 0) {
       this.currentPage--;
-      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-      const endIndex = startIndex + this.itemsPerPage;
-      this.playersList = this.allPlayersList.slice(startIndex, endIndex);
+      this.getAllPlayers(this.currentPage*25);
       this.updatePageVisibility();
-    }
-  }
-  
-  filterPlayers(event: Event): void {
-    const searchText = (event.target as HTMLInputElement).value.toLowerCase();
-  
-    // Realiza la búsqueda de jugadores y establece searchPerformed en true
-    if (searchText.trim() !== '') {
-      this.getPlayersForSearch(searchText.trim());
-      this.searchPerformed = true;
-      // Además, podrías deshabilitar el botón de "Back" si se realiza una búsqueda
-      this.isFirstPage = true;
-    } else {
-      this.getAllPlayers(1);
-      this.isFirstPage = false;
-      this.isLastPage = false;
-      this.searchPerformed = false;
     }
   }
   
   nextPage() {
-    if (!this.searchPerformed && !this.isLastPage) {
+    if (this.currentPage * this.itemsPerPage < 25000) {
       this.currentPage++;
-      this.getAllPlayers(this.currentPage);
+      this.getAllPlayers(this.currentPage*25);
       this.updatePageVisibility();
     }
   }
-  
-  
 
-  updatePageVisibility() { 
+  updatePageVisibility() { ///comprueba que sea la primer o ultima pagina
     this.isFirstPage = this.currentPage === 1;
     this.isLastPage = this.currentPage * this.itemsPerPage >= this.allPlayersList.length;
   }
@@ -129,7 +108,7 @@ export class JugadoresComponent implements OnInit {
   }
 
   
-  goToTeam(id : number){
+  goToTeam(id : Number){
     this.router.navigate(['/team', id]);
 
   }
@@ -162,7 +141,18 @@ export class JugadoresComponent implements OnInit {
     );
   } 
 
- 
+ filterPlayers(event: Event): void {
+  const searchText = (event.target as HTMLInputElement).value.toLowerCase();
+
+  if (searchText.trim() === '') {
+    this.getAllPlayers(1);
+    this.isFirstPage = true;
+    this.isLastPage = false;
+    return;
+  } else {
+    this.getPlayersForSearch(searchText.trim());
+  }
+}
 
 
   addRemovePlayerList(player: Player) {
