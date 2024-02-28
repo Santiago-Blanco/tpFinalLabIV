@@ -10,7 +10,6 @@ import { LoginRegisterService } from 'src/app/Servicios/LoginRegister/login-regi
 })
 export class RegisterComponent {
 
-  //https://codingpotions.com/angular-formularios/
 
   public registerForm : FormGroup;
 
@@ -21,7 +20,7 @@ export class RegisterComponent {
       userName : new FormControl('', Validators.required),
       email : new FormControl('', [
         Validators.required,
-        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/) // Patrón para un correo electrónico básico
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/) 
       ]),
       dni : new FormControl('', [
         Validators.required, 
@@ -31,7 +30,7 @@ export class RegisterComponent {
       password : new FormControl('', [
         Validators.required,
         Validators.minLength(10), 
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/) // incluyendo letras mayúsculas, letras minúsculas, al menos un número y al menos un carácter especial
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/) 
       ])
     })
 

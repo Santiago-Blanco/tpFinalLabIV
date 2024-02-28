@@ -23,7 +23,7 @@ export class FavouriteListService {
 
     localStorage.setItem('user', JSON.stringify(activeUser));
 
-    this.service.updateUser(activeUser);  //actualiza el usuario con su nueva lista de favoritos en el localstorage
+    this.service.updateUser(activeUser);  
 
     console.log("USUARIO ACTIVO:");
     console.log(activeUser);

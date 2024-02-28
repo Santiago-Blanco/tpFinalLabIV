@@ -213,10 +213,10 @@
 
      
     .backNextContainer button:disabled {
-      background-color: #ccc; /* Cambia el color de fondo cuando el botón está deshabilitado */
-      color: #666; /* Cambia el color del texto cuando el botón está deshabilitado */
-      border-color: #ccc; /* Cambia el color del borde cuando el botón está deshabilitado */
-      cursor: not-allowed; /* Cambia el cursor cuando el botón está deshabilitado */
+      background-color: #ccc; 
+      color: #666; 
+      border-color: #ccc; 
+      cursor: not-allowed; 
     }
     
   

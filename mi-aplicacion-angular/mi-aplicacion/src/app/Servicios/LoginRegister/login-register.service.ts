@@ -93,7 +93,7 @@ export class LoginRegisterService {
 
   validateRegister(user: User) {
     this.registeredUsers = this.returnUsersFromLocalStorage();
-    //retorna true si existen usuarios con mismo mail, dni o username iguales, retorna false si no hay users con coincidencias
+    //retorna true si existen usuarios con mismo mail, dni o username iguales
     return this.registeredUsers.some(userRegistrado => userRegistrado.email == user.email || userRegistrado.dni == user.dni || userRegistrado.userName == user.userName)
   }
 

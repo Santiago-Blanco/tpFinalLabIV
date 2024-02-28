@@ -140,7 +140,7 @@ export class ResultadosComponent implements OnInit {
 
   displayScore(homeScore: number, visitorScore: number): string {
     if (homeScore === 0 && visitorScore === 0) {
-      return 'Próximamente';
+      return '  - PRÓXIMAMENTE - ';
     } else {
       return homeScore + ' ' + visitorScore;
     }
