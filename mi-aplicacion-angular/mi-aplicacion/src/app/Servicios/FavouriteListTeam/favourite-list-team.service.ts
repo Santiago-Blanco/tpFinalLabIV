@@ -48,11 +48,12 @@ export class FavouriteListService {
   }
 
   private fetchResultsPage(teamId: number, page: number, limit: number): Observable<Game[]> {
-    const startDate = '<start_date>';
-    const endDate = '<end_date>';
-    const resultsUrl = `${this.apiUrl}?team_ids[]=${teamId}&per_page=100&page=${page}&start_date=${startDate}&end_date=${endDate}`;
+    const endDate = new Date().toISOString().split('T')[0]; 
+    const startDate = new Date(); 
+    startDate.setDate(startDate.getDate() - 7); 
+    const startDateString = startDate.toISOString().split('T')[0];
     
-
+    const resultsUrl = `${this.apiUrl}/games?team_ids[]=${teamId}&per_page=100&page=${page}&start_date=${startDateString}&end_date=${endDate}`;
   
     return this.http.get<Game[]>(resultsUrl, { headers: this.headers }).pipe(
       map((data: any) => {
@@ -83,33 +84,49 @@ export class FavouriteListService {
       })
     );
   }
-  
+
   getRecentResults(teamId: number, limit: number = 5): Observable<Game[]> {
     console.log('Obteniendo resultados recientes para el equipo con ID:', teamId); 
     if (this.recentResultsCache[teamId]) {
       const cachedResults = this.recentResultsCache[teamId];
       if (this.resultsCacheValid(cachedResults)) {
         console.log('Utilizando resultados en caché para el equipo con ID:', teamId); 
+        return of(cachedResults.slice(0, limit)); 
       }
     }
-  
+
     console.log('Obteniendo resultados del servidor para el equipo con ID:', teamId); 
-    return this.fetchAllResultsRecursive(teamId, 1, limit, []).pipe(
-      map((allResultsArray: Game[]) => {
-        const currentDate = new Date(); 
-        const filteredResults = allResultsArray
-          .filter((result: Game) => new Date(result.date) <= currentDate) 
-          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-          .slice(0, limit);
+    
+    const endDate = new Date().toISOString().split('T')[0]; 
+    const startDate = new Date(); 
+    startDate.setDate(startDate.getDate() - 7); 
+    const startDateString = startDate.toISOString().split('T')[0];
+
+    const resultsUrl = `${this.apiUrl}/games?team_ids[]=${teamId}&per_page=${limit}&start_date=${startDateString}&end_date=${endDate}&order=-date`;
   
-        this.recentResultsCache[teamId] = filteredResults;
-        console.log('Resultados obtenidos para el equipo con ID:', teamId, filteredResults);
-        return filteredResults;
+    return this.http.get<Game[]>(resultsUrl, { headers: this.headers }).pipe( 
+      map((data: any) => {
+        const dataArray = data && data.data ? data.data : [];
+        if (Array.isArray(dataArray)) {
+          return dataArray;
+        } else {
+          console.error('Los datos de resultados no son un array:', data);
+          return [];
+        }
+      }),
+      catchError((error) => {
+        console.error('Error al obtener resultados:', error);
+        return of([] as Game[]);
+      }),
+      map((results: Game[]) => {
+        this.recentResultsCache[teamId] = results;
+        console.log('Resultados obtenidos para el equipo con ID:', teamId, results);
+        return results; 
       }),
       retry(3)
     );
   }
-  
+
   
   private resultsCacheValid(results: Game[]): boolean {
     return true; 
@@ -165,6 +182,7 @@ export class FavouriteListService {
     );
   }
 }
+
 
 
 

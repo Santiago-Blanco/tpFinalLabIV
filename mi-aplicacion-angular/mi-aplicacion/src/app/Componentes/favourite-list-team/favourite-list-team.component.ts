@@ -29,7 +29,7 @@ export class FavouriteListComponent implements OnInit {
 
   ngOnInit() {
     const data = this.favoriteListService.getData();
-    console.log('Datos obtenidos del servicio:', data); // Agregamos un log para verificar los datos obtenidos del servicio
+    console.log('Datos obtenidos del servicio:', data); 
     if (data){
       this.favoriteList = data;
     } else {

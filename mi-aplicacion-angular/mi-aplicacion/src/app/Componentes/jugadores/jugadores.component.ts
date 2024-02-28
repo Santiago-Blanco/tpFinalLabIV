@@ -95,24 +95,6 @@ export class JugadoresComponent implements OnInit {
   }
   
 
-  searchPage() {
-    if (this.count <= 0) {
-      this.count = 1;
-    }
-  
-    this.currentPage = this.count;
-    this.playersList = this.paginatePlayers(this.allPlayersList, this.currentPage);
-    this.updatePageVisibility();
-  }
- 
-
-  @HostListener('document:keyup', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      this.searchPage();
-    }
-  }
-
   soundsIN(){
     this.soundIN.stop();
     this.soundOUT.stop();
@@ -159,22 +141,19 @@ export class JugadoresComponent implements OnInit {
     );
   } 
 
-  filterPlayers(event: Event): void {
-    const searchText = (event.target as HTMLInputElement).value.toLowerCase();
+ filterPlayers(event: Event): void {
+  const searchText = (event.target as HTMLInputElement).value.toLowerCase();
 
-    if (searchText.trim() === '') {
-        this.playersList.length = 0;
-        this.getAllPlayers(1);
-        this.isLastPage = false;
-        
-        return;
-    } else {
-      this.getPlayersForSearch(searchText.trim());
-      this.isFirstPage=true;
-      this.isLastPage=true
-    }
-
+  if (searchText.trim() === '') {
+    this.getAllPlayers(1);
+    this.isFirstPage = true;
+    this.isLastPage = false;
+    return;
+  } else {
+    this.getPlayersForSearch(searchText.trim());
+  }
 }
+
 
   addRemovePlayerList(player: Player) {
     const id = this.favoriteList.findIndex((p) => p.id === player.id);
@@ -199,6 +178,7 @@ export class JugadoresComponent implements OnInit {
      return knownPlayerIds.some(Element=> player.id === Element);
   }
 
+ 
   getPlayerImage(player: Player): string {
   
     const playerImageMap: { [id: number]: string } = {

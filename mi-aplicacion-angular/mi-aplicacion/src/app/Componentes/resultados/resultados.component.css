@@ -11,6 +11,14 @@
     flex-wrap: wrap;
 }
 
+.upcoming-score {
+  background-color: white;
+  color: black;
+  padding: 5px 10px; /* Ajusta el relleno según sea necesario */
+  border-radius: 5px; /* Ajusta el radio del borde según sea necesario */
+}
+
+
 .game-item {
     list-style: none;
     border: 1px solid #eaeaea;

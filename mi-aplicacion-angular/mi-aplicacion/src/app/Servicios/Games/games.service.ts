@@ -19,7 +19,7 @@ export class GamesService {
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
 
-    const startDate = new Date(currentYear, 0, 1); 
+    const startDate = new Date(currentYear, 0,40); 
 
     const formattedStartDate = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}-${startDate.getDate().toString().padStart(2, '0')}`;
     const formattedEndDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;

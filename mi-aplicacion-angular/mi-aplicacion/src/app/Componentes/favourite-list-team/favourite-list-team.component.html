@@ -13,19 +13,23 @@
         <p><strong>Conferencia:</strong> {{ isNullOrWhitespace(favoriteTeam.conference) ? "No hay datos" : favoriteTeam.conference }}</p>
         <p><strong>División:</strong> {{favoriteTeam.division || "No hay datos"}}</p>
 
-        <h2>Últimos 5 partidos:</h2>
-        <ul *ngIf="recentResults && recentResults.length; else loadingResults">
-          <li *ngFor="let result of recentResults.slice(0, 5)">
-            {{ result.visitor_team.full_name }} {{ result.visitor_team_score }} - {{ result.home_team.full_name }} {{
-            result.home_team_score }} ({{ result.date | date: 'yyyy-MM-dd' }})
-          </li>
+        <h2>Últimos partidos:</h2>
+        <ul *ngIf="recentResults; else loadingResults">
+          <ng-container *ngIf="recentResults.length > 0; else noRecentResults">
+            <li *ngFor="let result of recentResults.slice(0, 5)">
+              {{ result.visitor_team.full_name }} {{ result.visitor_team_score }} - {{ result.home_team.full_name }} {{ result.home_team_score }} ({{ result.date | date: 'yyyy-MM-dd' }})
+            </li>
+          </ng-container>
         </ul>
-
-
         
-     <ng-template #loadingResults>
-    <p class="loading-message">Cargando resultados<span class="loading-dots"></span></p>
-    </ng-template>
+        <ng-template #loadingResults>
+          <p class="loading-message">Cargando resultados<span class="loading-dots"></span></p>
+        </ng-template>
+        
+        <ng-template #noRecentResults>
+          <p class="loading-message">No hay resultados recientes</p>
+        </ng-template>
+        
 
    <ng-template #loadingPlayers>
     <p class="loading-message">Cargando jugadores<span class="loading-dots"></span></p>

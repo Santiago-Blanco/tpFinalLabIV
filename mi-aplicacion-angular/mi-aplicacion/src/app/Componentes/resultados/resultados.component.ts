@@ -113,24 +113,6 @@ export class ResultadosComponent implements OnInit {
 
   }
 
-  searchPage() {
-    
-    if (this.pageNumber <= 0) {
-      this.pageNumber = 1;
-    }
-  
-
-    this.count = this.pageNumber;
-    this.getAllGames(this.pageNumber);
-  }
-  
-
-  @HostListener('document:keyup', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      this.searchPage();
-    }
-  }
 
 
   filterGames(array: Game[]) {
@@ -157,8 +139,13 @@ export class ResultadosComponent implements OnInit {
 
     console.log(searchText);
 
-    this.getGamesForSearch(searchText)
-  }
+    this.getGamesForSearch(searchText);
+
+
+    this.isFirstPage = true;
+    this.isLastPage = true;
+}
+
 
   showAtributes(game: Game) {
 
